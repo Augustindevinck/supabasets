@@ -52,3 +52,19 @@ Main configuration is in `config.ts` including:
 
 ## Deployment
 The app is configured for deployment on Replit with autoscaling support.
+
+## Code Conventions & ESLint Rules
+
+### French Text & Apostrophes
+- ESLint rule `react/no-unescaped-entities` is **disabled globally** in `.eslintrc.json`
+- You can write French text with apostrophes directly in JSX: `Appel à l'action`, `Que fais l'app`, etc.
+- No need to escape apostrophes with `{`'`}` or `&apos;` - use plain text
+
+### JSX Text Guidelines
+- Direct apostrophes in JSX text are allowed: ✅ `"Appel à l'action"`
+- HTML entities in JSX text are not needed: ✅ Use plain apostrophe, not `&apos;`
+- Keep spacing consistent and use template strings for dynamic content
+
+### Future Development
+- Maintain these ESLint settings for all French language content
+- If modifying `.eslintrc.json`, keep `"react/no-unescaped-entities": "off"`
