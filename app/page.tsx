@@ -1,15 +1,13 @@
 import Link from "next/link";
-import ButtonSignin from "@/components/ButtonSignin";
+import FloatingHeader from "@/components/FloatingHeader";
 
 export default function Page() {
   return (
     <>
-      <header className="p-4 flex justify-end max-w-7xl mx-auto">
-        <ButtonSignin text="Login" />
-      </header>
+      <FloatingHeader />
 
       <main>
-        <section className="flex flex-col items-center justify-center text-center gap-12 px-8 py-24">
+        <section className="flex flex-col items-center justify-center text-center gap-12 px-4 sm:px-6 lg:px-8 py-24 pt-32 mx-auto w-11/12 sm:w-9/12 lg:w-4/5">
           <h1 className="text-3xl font-extrabold">Template</h1>
 
           <p className="text-lg opacity-80">
