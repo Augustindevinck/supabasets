@@ -1,5 +1,7 @@
 import Link from "next/link";
 import FloatingHeader from "@/components/FloatingHeader";
+import WhatAppDoes from "@/components/WhatAppDoes";
+import FAQ from "@/components/FAQ";
 
 export default function Page() {
   return (
@@ -28,6 +30,9 @@ export default function Page() {
             Fancy a blog?
           </Link>
         </section>
+
+        <WhatAppDoes />
+        <FAQ />
       </main>
     </>
   );

@@ -13,22 +13,27 @@ interface FAQItemProps {
 
 const faqList: FAQItemProps[] = [
   {
-    question: "What do I get exactly?",
-    answer: <div className="space-y-2 leading-relaxed">Loreum Ipseum</div>,
+    question: "Remplacer par votre première question",
+    answer: <div className="space-y-2 leading-relaxed">Ajouter la réponse à cette question. Soyez clair et concis pour aider vos utilisateurs à comprendre.</div>,
   },
   {
-    question: "Can I get a refund?",
+    question: "Remplacer par votre deuxième question",
     answer: (
       <p>
-        Yes! You can request a refund within 7 days of your purchase. Reach out
-        by email.
+        Ajouter la réponse à cette question. Soyez clair et concis pour aider vos utilisateurs à comprendre.
       </p>
     ),
   },
   {
-    question: "I have another question",
+    question: "Remplacer par votre troisième question",
     answer: (
-      <div className="space-y-2 leading-relaxed">Cool, contact us by email</div>
+      <div className="space-y-2 leading-relaxed">Ajouter la réponse à cette question. Soyez clair et concis pour aider vos utilisateurs à comprendre.</div>
+    ),
+  },
+  {
+    question: "Remplacer par votre quatrième question",
+    answer: (
+      <div className="space-y-2 leading-relaxed">Ajouter la réponse à cette question. Soyez clair et concis pour aider vos utilisateurs à comprendre.</div>
     ),
   },
 ];
@@ -95,21 +100,21 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
 
 const FAQ = () => {
   return (
-    <section className="bg-base-200" id="faq">
-      <div className="py-24 px-8 max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
-        <div className="flex flex-col text-left basis-1/2">
-          <p className="inline-block font-semibold text-primary mb-4">FAQ</p>
-          <p className="sm:text-4xl text-3xl font-extrabold text-base-content">
-            Frequently Asked Questions
-          </p>
-        </div>
-
-        <ul className="basis-1/2">
-          {faqList.map((item, i) => (
-            <FaqItem key={i} item={item} />
-          ))}
-        </ul>
+    <section id="faq" className="py-24 px-4 sm:px-6 lg:px-8 mx-auto w-11/12 sm:w-9/12 lg:w-4/5">
+      <div className="text-center mb-16">
+        <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">
+          Questions Fréquemment Posées
+        </h2>
+        <p className="text-lg opacity-80">
+          Trouvez les réponses aux questions les plus communes
+        </p>
       </div>
+
+      <ul className="max-w-3xl mx-auto">
+        {faqList.map((item, i) => (
+          <FaqItem key={i} item={item} />
+        ))}
+      </ul>
     </section>
   );
 };
