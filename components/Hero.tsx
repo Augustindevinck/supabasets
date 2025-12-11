@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import TestimonialsAvatars from "./TestimonialsAvatars";
 import config from "@/config";
 
@@ -28,9 +29,9 @@ const Hero = () => {
           The NextJS boilerplate with all you need to build your SaaS, AI tool,
           or any other web app. From idea to production in 5 minutes.
         </p>
-        <button className="btn btn-primary btn-wide">
+        <Link href="/signup" className="btn btn-primary btn-wide">
           Get {config.appName}
-        </button>
+        </Link>
 
         <TestimonialsAvatars priority={true} />
       </div>
