@@ -100,21 +100,23 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
 
 const FAQ = () => {
   return (
-    <section id="faq" className="py-24 px-4 sm:px-6 lg:px-8 mx-auto w-11/12 sm:w-9/12 lg:w-4/5 bg-gradient-to-b from-slate-200 to-slate-100">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">
-          Questions Fréquemment Posées
-        </h2>
-        <p className="text-lg opacity-80">
-          Trouvez les réponses aux questions les plus communes
-        </p>
-      </div>
+    <section id="faq" className="w-full bg-gradient-to-b from-slate-200 to-slate-100 py-24 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-11/12 sm:w-9/12 lg:w-4/5">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">
+            Questions Fréquemment Posées
+          </h2>
+          <p className="text-lg opacity-80">
+            Trouvez les réponses aux questions les plus communes
+          </p>
+        </div>
 
-      <ul className="max-w-3xl mx-auto">
-        {faqList.map((item, i) => (
-          <FaqItem key={i} item={item} />
-        ))}
-      </ul>
+        <ul className="max-w-3xl mx-auto">
+          {faqList.map((item, i) => (
+            <FaqItem key={i} item={item} />
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };
