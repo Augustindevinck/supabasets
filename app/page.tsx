@@ -1,4 +1,3 @@
-import Link from "next/link";
 import FloatingHeader from "@/components/FloatingHeader";
 import WhatAppDoes from "@/components/WhatAppDoes";
 import FAQ from "@/components/FAQ";
@@ -24,7 +23,7 @@ export default function Page() {
               href="/blog"
               target="_blank"
             >
-              CTA (Appel à l'action)
+              CTA (Appel à l&apos;action)
             </a>
           </div>
         </section>

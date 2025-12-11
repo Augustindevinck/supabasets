@@ -10,17 +10,17 @@ const features: Feature[] = [
   {
     icon: "⚡",
     title: "Remplacer par titre de fonctionnalité",
-    description: "Ajouter une brève description de ce que fait cette fonctionnalité et comment elle aide l'utilisateur.",
+    description: "Ajouter une brève description de ce que fait cette fonctionnalité et comment elle aide l&apos;utilisateur.",
   },
   {
     icon: "🎯",
     title: "Remplacer par titre de fonctionnalité",
-    description: "Ajouter une brève description de ce que fait cette fonctionnalité et comment elle aide l'utilisateur.",
+    description: "Ajouter une brève description de ce que fait cette fonctionnalité et comment elle aide l&apos;utilisateur.",
   },
   {
     icon: "🔒",
     title: "Remplacer par titre de fonctionnalité",
-    description: "Ajouter une brève description de ce que fait cette fonctionnalité et comment elle aide l'utilisateur.",
+    description: "Ajouter une brève description de ce que fait cette fonctionnalité et comment elle aide l&apos;utilisateur.",
   },
 ];
 
@@ -30,7 +30,7 @@ const WhatAppDoes = () => {
       <div className="mx-auto w-[98%] sm:w-[85%] lg:w-[70%]">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">
-            Que fais l'app
+            Que fais l&apos;app
           </h2>
           <p className="text-lg opacity-80">
             Expliquez les fonctionnalités principales et les bénéfices pour vos utilisateurs
