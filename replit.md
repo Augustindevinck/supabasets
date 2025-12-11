@@ -56,15 +56,15 @@ The app is configured for deployment on Replit with autoscaling support.
 ## Code Conventions & ESLint Rules
 
 ### French Text & Apostrophes
-- ESLint rule `react/no-unescaped-entities` is **disabled globally** in `.eslintrc.json`
-- You can write French text with apostrophes directly in JSX: `Appel à l'action`, `Que fais l'app`, etc.
-- No need to escape apostrophes with `{`'`}` or `&apos;` - use plain text
+- Escape apostrophes with HTML entity `&apos;` in JSX: `Appel à l&apos;action`, `Que fais l&apos;app`
+- This prevents ESLint `react/no-unescaped-entities` errors during deployment
 
-### JSX Text Guidelines
-- Direct apostrophes in JSX text are allowed: ✅ `"Appel à l'action"`
-- HTML entities in JSX text are not needed: ✅ Use plain apostrophe, not `&apos;`
-- Keep spacing consistent and use template strings for dynamic content
+### Utility Functions
+- `cn()` function in `lib/utils.ts` uses clsx for conditional class merging
+- Import: `import { cn } from "@/lib/utils"`
+- Usage: `className={cn("base-class", condition && "conditional-class")}`
 
-### Future Development
-- Maintain these ESLint settings for all French language content
-- If modifying `.eslintrc.json`, keep `"react/no-unescaped-entities": "off"`
+### Design Components
+- **GridBackground** (`components/GridBackground.tsx`): Animated grid background with radial fade
+  - Used in hero sections for modern aesthetic
+  - Adapts to light/dark mode automatically
