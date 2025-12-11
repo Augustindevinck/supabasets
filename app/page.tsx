@@ -23,7 +23,7 @@ export default function Page() {
               href="/blog"
               target="_blank"
             >
-              CTA (Appel à l&apos;action)
+              CTA (Appel à l'action)
             </a>
           </div>
         </section>
