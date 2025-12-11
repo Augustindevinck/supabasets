@@ -101,7 +101,7 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
 const FAQ = () => {
   return (
     <section id="faq" className="w-full bg-gradient-to-b from-slate-200 to-slate-100 py-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto w-11/12 sm:w-9/12 lg:w-4/5">
+      <div className="mx-auto w-[98%] sm:w-[85%] lg:w-[70%]">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">
             Questions Fréquemment Posées

@@ -10,7 +10,7 @@ export default function Page() {
 
       <main>
         <section className="w-full min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 flex flex-col items-center justify-center">
-          <div className="flex flex-col items-center justify-center text-center gap-12 px-4 sm:px-6 lg:px-8 mx-auto w-11/12 sm:w-9/12 lg:w-4/5">
+          <div className="flex flex-col items-center justify-center text-center gap-12 px-4 sm:px-6 lg:px-8 mx-auto w-[98%] sm:w-[85%] lg:w-[70%]">
             <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
               Proposition de valeur clair et directe
             </h1>
