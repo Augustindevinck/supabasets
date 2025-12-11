@@ -10,7 +10,7 @@ export default function Page() {
 
       <main>
         <section className="flex flex-col items-center justify-center text-center gap-12 px-8 py-24">
-          <h1 className="text-3xl font-extrabold">Ship Fast ⚡️</h1>
+          <h1 className="text-3xl font-extrabold">Template</h1>
 
           <p className="text-lg opacity-80">
             The start of your new startup... What are you gonna build?
@@ -18,7 +18,7 @@ export default function Page() {
 
           <a
             className="btn btn-primary"
-            href="https://shipfa.st/docs"
+            href="/blog"
             target="_blank"
           >
             Documentation & tutorials{" "}

@@ -1,7 +1,7 @@
-# ShipFast - Next.js SaaS Boilerplate
+# Template - Next.js SaaS Boilerplate
 
 ## Overview
-ShipFast is a Next.js 15 boilerplate for building SaaS applications, AI tools, and web apps. It includes authentication via Supabase, Stripe payments, and a modern UI built with Tailwind CSS 4 and DaisyUI.
+Template is a Next.js 15 boilerplate for building SaaS applications, AI tools, and web apps. It includes authentication via Supabase, Stripe payments, and a modern UI built with Tailwind CSS 4 and DaisyUI.
 
 ## Project Structure
 ```
