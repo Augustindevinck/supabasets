@@ -22,8 +22,7 @@ export default function Page() {
 
             <a
               className="btn btn-primary"
-              href="/blog"
-              target="_blank"
+              href="/signin"
             >
               CTA (Appel à l&apos;action)
             </a>
