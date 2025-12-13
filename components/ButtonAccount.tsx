@@ -6,6 +6,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/libs/supabase/client";
 import apiClient from "@/libs/api";
+import { useSidebar } from "@/components/ui/sidebar";
 
 // A button to show user some account actions
 //  1. Billing: open a Stripe Customer Portal to manage their billing (cancel subscription, update payment method, etc.).
@@ -18,6 +19,14 @@ const ButtonAccount = () => {
         const [isLoading, setIsLoading] = useState<boolean>(false);
         const [user, setUser] = useState<User>(null);
         const [isAdminUser, setIsAdminUser] = useState<boolean>(false);
+        
+        let sidebarOpen = true;
+        try {
+                const sidebar = useSidebar();
+                sidebarOpen = sidebar.open;
+        } catch {
+                // Hook not used in sidebar context
+        }
 
         useEffect(() => {
                 const getUser = async () => {
@@ -85,9 +94,13 @@ const ButtonAccount = () => {
                                                         </span>
                                                 )}
 
-                                                {user?.user_metadata?.name ||
-                                                        user?.email?.split("@")[0] ||
-                                                        "Account"}
+                                                {sidebarOpen && (
+                                                        <span className="text-sm whitespace-nowrap">
+                                                                {user?.user_metadata?.name ||
+                                                                        user?.email?.split("@")[0] ||
+                                                                        "Account"}
+                                                        </span>
+                                                )}
 
                                                 {isLoading ? (
                                                         <span className="loading loading-spinner loading-xs"></span>
