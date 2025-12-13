@@ -60,10 +60,9 @@ interface NavbarLogoProps {
 // ========================================
 
 const SCROLL_THRESHOLD = 50;
-const SCROLL_THROTTLE_MS = 100;
 
 const NAVBAR_STYLES = {
-  base: "mx-auto flex items-center justify-between rounded-full px-4 py-2 transition-all duration-300 ease-in-out backdrop-blur-md",
+  base: "mx-auto flex items-center justify-between rounded-full px-4 py-2 transition-all duration-200 ease-out backdrop-blur-md",
   scrolled: "mt-4 w-[94%] sm:w-[90%] lg:w-[75%] bg-white/80 shadow-lg dark:bg-black/80",
   notScrolled: "mt-6 w-[98%] sm:w-[94%] lg:w-[85%] bg-white/60 dark:bg-black/60",
 } as const;
@@ -76,20 +75,15 @@ const useScrollDetection = (threshold: number = SCROLL_THRESHOLD) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
     const handleScroll = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setIsScrolled(window.scrollY > threshold);
-      }, SCROLL_THROTTLE_MS);
+      const shouldBeScrolled = window.scrollY > threshold;
+      setIsScrolled(shouldBeScrolled);
     };
 
     handleScroll(); // Initial check
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      clearTimeout(timeoutId);
       window.removeEventListener("scroll", handleScroll);
     };
   }, [threshold]);
