@@ -222,36 +222,23 @@ export const MobileNavMenu = memo(({ children, className, isOpen, onClose }: Mob
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
-            aria-hidden="true"
-          />
-
-          {/* Menu */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className={cn(
-              "absolute inset-x-0 top-20 z-50 flex w-full flex-col items-start justify-start gap-4",
-              "rounded-xl bg-base-100 px-6 py-6 backdrop-blur-sm dark:bg-neutral-950",
-              "mx-[2%] sm:mx-[7.5%] lg:mx-[15%] shadow-lg",
-              className
-            )}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation menu"
-          >
-            {children}
-          </motion.div>
-        </>
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+          className={cn(
+            "absolute inset-x-0 top-20 z-50 flex w-full flex-col items-start justify-start gap-4",
+            "rounded-xl bg-base-100 px-6 py-6 backdrop-blur-sm dark:bg-neutral-950",
+            "mx-[2%] sm:mx-[7.5%] lg:mx-[15%] shadow-lg",
+            className
+          )}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation menu"
+        >
+          {children}
+        </motion.div>
       )}
     </AnimatePresence>
   );
