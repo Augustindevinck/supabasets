@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  allowedDevOrigins: [
-    process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : '',
-    'http://127.0.0.1',
-    'http://localhost',
-  ].filter(Boolean),
+  experimental: {
+    allowedDevOrigins: ['localhost', '127.0.0.1'],
+  },
   images: {
     remotePatterns: [
       {
