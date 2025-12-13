@@ -116,6 +116,20 @@ The app is configured for deployment on Replit with autoscaling support.
 - API route `/api/user/check-admin` verifies admin status server-side
 - ButtonAccount shows "Admin" button only for verified admins
 
+### Gestion des Utilisateurs (Admin)
+L'interface admin (`/admin`) permet de:
+- Voir tous les utilisateurs inscrits (nom, email, provider, date d'inscription, dernière connexion)
+- Supprimer des utilisateurs (avec confirmation)
+
+#### APIs Admin:
+- `GET /api/admin/users` - Récupère la liste des utilisateurs
+- `DELETE /api/admin/users` - Supprime un utilisateur (body: `{ userId: string }`)
+
+#### Fichiers clés:
+- `libs/supabase/admin.ts` - Client Supabase avec service role key
+- `components/admin/UsersTable.tsx` - Composant table des utilisateurs
+- `app/api/admin/users/route.ts` - API routes admin
+
 ### Adding New Admins
 Edit `libs/admin.ts` and add email to `ADMIN_EMAILS` array:
 ```typescript
