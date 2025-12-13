@@ -241,14 +241,16 @@ export const SidebarLink = React.memo(({
 
       <motion.span
         animate={{
-          display: animate ? (open ? "inline-block" : "none") : "inline-block",
+          width: animate ? (open ? "auto" : "0px") : "auto",
           opacity: animate ? (open ? 1 : 0) : 1,
+          marginLeft: animate ? (open ? "8px" : "0px") : "8px",
         }}
         transition={{
-          opacity: { duration: 0.3, delay: open ? 0.1 : 0 },
-          display: { delay: open ? 0 : 0.3 }
+          width: { duration: 0.3 },
+          opacity: { duration: 0.3 },
+          marginLeft: { duration: 0.3 }
         }}
-        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre overflow-hidden !p-0 !m-0"
       >
         {link.label}
       </motion.span>
