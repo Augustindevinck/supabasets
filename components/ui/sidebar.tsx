@@ -154,6 +154,10 @@ export const MobileSidebar = ({
   );
 };
 
+/**
+ * SidebarLink component - Individual navigation link with icon and label
+ * Automatically collapses mobile menu on click
+ */
 export const SidebarLink = ({
   link,
   className,
@@ -162,13 +166,22 @@ export const SidebarLink = ({
   link: Links;
   className?: string;
 }) => {
-  const { open, animate } = useSidebar();
+  const { open, animate, setOpen } = useSidebar();
+  
+  const handleClick = () => {
+    // Close mobile menu on link click
+    if (window.innerWidth < 768) {
+      setOpen(false);
+    }
+  };
+  
   return (
     <a
       href={link.href}
+      onClick={handleClick}
       className={cn(
-        "flex items-center gap-2 group/sidebar py-2",
-        open ? "justify-start" : "justify-center",
+        "flex items-center gap-2 group/sidebar py-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition",
+        open ? "justify-start px-3" : "justify-center",
         className
       )}
       {...props}

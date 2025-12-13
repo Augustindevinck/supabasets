@@ -1,12 +1,11 @@
+
 "use client";
 import { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import SidebarProfile from "@/components/SidebarProfile";
-import {
-  IconLayoutDashboard,
-} from "@tabler/icons-react";
+import { IconLayoutDashboard } from "@tabler/icons-react";
 import { motion } from "framer-motion";
-import { createClient } from "@/libs/supabase/client";
+import Link from "next/link";
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
@@ -27,11 +26,11 @@ export default function Dashboard() {
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
             <Logo />
-            <div className="mt-8 flex flex-col gap-2">
+            <nav className="mt-8 flex flex-col gap-2" aria-label="Main navigation">
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
-            </div>
+            </nav>
           </div>
           <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4">
             <SidebarProfile />
@@ -49,6 +48,7 @@ export default function Dashboard() {
         <main className="flex-1 overflow-y-auto">
           <section className="p-8">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {/* Dashboard content */}
             </div>
           </section>
         </main>
@@ -57,9 +57,9 @@ export default function Dashboard() {
   );
 }
 
-const Logo = () => {
+function Logo() {
   return (
-    <a
+    <Link
       href="/"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black dark:text-white"
     >
@@ -71,6 +71,6 @@ const Logo = () => {
       >
         Template
       </motion.span>
-    </a>
+    </Link>
   );
-};
+}
