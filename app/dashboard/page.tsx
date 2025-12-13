@@ -4,19 +4,11 @@ import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import SidebarProfile from "@/components/SidebarProfile";
 import {
   IconLayoutDashboard,
-  IconLogout,
 } from "@tabler/icons-react";
-import { motion } from "framer-motion";
 import { createClient } from "@/libs/supabase/client";
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
-  const supabase = createClient();
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    window.location.href = "/";
-  };
 
   const links = [
     {
@@ -40,20 +32,8 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
-          <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4 space-y-2">
+          <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4">
             <SidebarProfile />
-            <button
-              onClick={handleLogout}
-              className={`w-full flex items-center gap-2 group/sidebar py-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition ${open ? 'justify-start px-3' : 'justify-center'}`}
-            >
-              <IconLogout className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-              <motion.span
-                animate={{ opacity: open ? 1 : 0, display: open ? "inline-block" : "none" }}
-                className="text-neutral-700 dark:text-neutral-200 text-sm whitespace-pre"
-              >
-                Logout
-              </motion.span>
-            </button>
           </div>
         </SidebarBody>
       </Sidebar>
