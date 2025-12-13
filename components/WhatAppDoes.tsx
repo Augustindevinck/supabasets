@@ -26,7 +26,7 @@ const features: Feature[] = [
 
 const WhatAppDoes = () => {
   return (
-    <section className="w-full bg-gradient-to-b from-slate-100 to-slate-200 py-24 px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-base-100 py-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto w-[98%] sm:w-[85%] lg:w-[70%]">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">

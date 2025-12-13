@@ -3,8 +3,18 @@
   themes: light --default;
 }
 
+:root {
+  /* Couleur de thème principal - changez cette valeur pour mettre à jour la couleur partout */
+  --theme-color-hue: 259;
+  --theme-color-sat: 83%;
+  --theme-color-light: 50%;
+  --theme-color: hsl(var(--theme-color-hue), var(--theme-color-sat), var(--theme-color-light));
+}
+
 @theme {
   --font-display: "Satoshi", "sans-serif";
+  
+  --color-theme: hsl(var(--theme-color-hue), var(--theme-color-sat), var(--theme-color-light));
   
   --animate-shimmer: shimmer 3s ease-out infinite alternate;
   --animate-opacity: opacity 0.25s ease-in-out;
@@ -73,4 +83,17 @@ progress::-webkit-progress-value {
 
 .btn {
   text-transform: capitalize !important;
+}
+
+/* Classes de couleur centralisées basées sur la couleur de thème */
+.icon-theme-bg {
+  background-color: hsl(var(--theme-color-hue), var(--theme-color-sat), calc(var(--theme-color-light) + 40%));
+}
+
+.icon-theme-bg-subtle {
+  background-color: hsl(var(--theme-color-hue), var(--theme-color-sat), calc(var(--theme-color-light) + 45%));
+}
+
+.icon-theme-text {
+  color: hsl(var(--theme-color-hue), var(--theme-color-sat), calc(var(--theme-color-light) - 20%));
 }

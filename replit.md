@@ -50,6 +50,36 @@ Main configuration is in `config.ts` including:
 - Authentication URLs
 - Theme colors
 
+## Couleur de Thème Centralisée
+
+La couleur de thème est maintenant centralisée pour faciliter les modifications futures.
+
+### Où changer la couleur de thème:
+**Fichier:** `app/globals.css`
+
+Modifier les variables CSS au début du fichier (section `:root`):
+```css
+:root {
+  --theme-color-hue: 259;        /* Teinte (0-360) */
+  --theme-color-sat: 83%;        /* Saturation (0-100%) */
+  --theme-color-light: 50%;      /* Luminosité (0-100%) */
+}
+```
+
+### Exemples de couleurs (HSL):
+- **Bleu:** hue: 217, sat: 100%, light: 50%
+- **Rouge:** hue: 0, sat: 100%, light: 50%
+- **Vert:** hue: 120, sat: 100%, light: 50%
+- **Orange:** hue: 39, sat: 100%, light: 50%
+- **Violet:** hue: 280, sat: 100%, light: 50%
+
+### Classes CSS centralisées (dans globals.css):
+- `.icon-theme-bg` - Arrière-plan léger de la couleur de thème
+- `.icon-theme-bg-subtle` - Arrière-plan très léger pour les icônes
+- `.icon-theme-text` - Texte dans la couleur de thème
+
+Ces classes sont utilisées dans les composants qui affichent des icônes colorées (ButtonPopover, BetterIcon, etc.) et s'updateront automatiquement quand vous changerez les variables de thème.
+
 ## Deployment
 The app is configured for deployment on Replit with autoscaling support.
 
