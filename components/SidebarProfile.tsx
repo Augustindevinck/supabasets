@@ -27,7 +27,7 @@ export default function SidebarProfile() {
         <img
           src={user?.user_metadata?.avatar_url}
           alt={"Profile picture"}
-          className="w-8 h-8 rounded-full shrink-0"
+          className="w-8 h-8 rounded-full shrink-0 object-cover"
           referrerPolicy="no-referrer"
           width={32}
           height={32}
