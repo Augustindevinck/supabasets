@@ -66,10 +66,10 @@ const ButtonAccount = () => {
         };
 
         return (
-                <Popover className="relative z-10">
+                <Popover className="relative z-10 w-full">
                         {({ open }) => (
                                 <>
-                                        <Popover.Button className="btn">
+                                        <Popover.Button className="btn w-full justify-start overflow-hidden">
                                                 {user?.user_metadata?.avatar_url ? (
                                                         <img
                                                                 src={user?.user_metadata?.avatar_url}
