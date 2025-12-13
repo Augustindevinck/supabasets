@@ -8,6 +8,7 @@ import SidebarProfile from "@/components/SidebarProfile";
 import SidebarLogo from "@/components/SidebarLogo";
 import { IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
 import toast from "react-hot-toast";
+import AdminLinks from "@/components/AdminLinks";
 
 export default function Settings() {
   const [open, setOpen] = useState(false);
@@ -107,6 +108,8 @@ export default function Settings() {
                 <SidebarLink key={idx} link={link} />
               ))}
             </nav>
+
+            <AdminLinks open={open} />
           </div>
           <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4">
             <SidebarProfile />

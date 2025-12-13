@@ -5,6 +5,7 @@ import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import SidebarProfile from "@/components/SidebarProfile";
 import SidebarLogo from "@/components/SidebarLogo";
 import { IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
+import AdminLinks from "@/components/AdminLinks";
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
@@ -37,6 +38,8 @@ export default function Dashboard() {
                 <SidebarLink key={idx} link={link} />
               ))}
             </nav>
+            
+            <AdminLinks open={open} />
           </div>
           <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4">
             <SidebarProfile />
