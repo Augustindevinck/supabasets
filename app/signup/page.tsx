@@ -8,13 +8,13 @@ import { Provider } from "@supabase/supabase-js";
 import toast from "react-hot-toast";
 import config from "@/config";
 
-export default function Login() {
+export default function Signup() {
   const supabase = createClient();
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const handleSignup = async (
     e: any,
@@ -38,27 +38,27 @@ export default function Login() {
             redirectTo: redirectURL,
           },
         });
-      } else if (type === "magic_link") {
-        await supabase.auth.signInWithOtp({
-          email,
-          options: {
-            emailRedirectTo: redirectURL,
-          },
-        });
-
-        toast.success("Vérifiez vos emails !");
-
-        setIsDisabled(true);
       } else if (type === "password") {
-        const { error } = await supabase.auth.signInWithPassword({
+        if (password.length < 6) {
+          toast.error("Le mot de passe doit contenir au moins 6 caractères");
+          setIsLoading(false);
+          return;
+        }
+
+        const { error } = await supabase.auth.signUp({
           email,
           password,
+          options: {
+            data: {
+              name: name || email.split("@")[0],
+            },
+          },
         });
 
         if (error) {
           toast.error(error.message);
         } else {
-          toast.success("Connexion réussie !");
+          toast.success("Compte créé avec succès !");
           router.push(config.auth.callbackUrl);
         }
       }
@@ -90,7 +90,7 @@ export default function Login() {
         </Link>
       </div>
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-center mb-12">
-        Connexion à {config.appName}
+        Créer un compte
       </h1>
 
       <div className="space-y-8 max-w-xl mx-auto">
@@ -139,6 +139,15 @@ export default function Login() {
           onSubmit={(e) => handleSignup(e, { type: "password" })}
         >
           <input
+            type="text"
+            value={name}
+            autoComplete="name"
+            placeholder="Nom (optionnel)"
+            className="input input-bordered w-full placeholder:opacity-60"
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <input
             required
             type="email"
             value={email}
@@ -152,52 +161,32 @@ export default function Login() {
             required
             type="password"
             value={password}
-            autoComplete="current-password"
-            placeholder="Mot de passe"
+            autoComplete="new-password"
+            placeholder="Mot de passe (min. 6 caractères)"
             className="input input-bordered w-full placeholder:opacity-60"
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <button
             className="btn btn-primary btn-block"
-            disabled={isLoading || isDisabled}
+            disabled={isLoading}
             type="submit"
           >
             {isLoading && (
               <span className="loading loading-spinner loading-xs"></span>
             )}
-            Se connecter
+            Créer mon compte
           </button>
         </form>
 
         <div className="text-center">
           <p className="text-base-content/70">
-            Pas encore de compte ?{" "}
-            <Link href="/signup" className="link link-primary font-semibold">
-              Créer un compte
+            Déjà un compte ?{" "}
+            <Link href="/signin" className="link link-primary font-semibold">
+              Se connecter
             </Link>
           </p>
         </div>
-
-        <div className="divider text-xs text-base-content/50 font-medium">
-          OU
-        </div>
-
-        <form
-          className="form-control w-full space-y-4"
-          onSubmit={(e) => handleSignup(e, { type: "magic_link" })}
-        >
-          <button
-            className="btn btn-outline btn-block"
-            disabled={isLoading || isDisabled}
-            type="submit"
-          >
-            {isLoading && (
-              <span className="loading loading-spinner loading-xs"></span>
-            )}
-            Recevoir un lien magique par email
-          </button>
-        </form>
       </div>
     </main>
   );
