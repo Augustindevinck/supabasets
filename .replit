@@ -23,7 +23,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "bun run dev"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
@@ -35,5 +35,5 @@ externalPort = 80
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["npm", "start"]
-build = ["npm", "run", "build"]
+run = ["bun", "start"]
+build = ["bun", "run", "build"]
