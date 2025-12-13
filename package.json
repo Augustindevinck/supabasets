@@ -45,7 +45,7 @@
     "@types/mdx": "^2.0.13",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.10.5",
-    "@types/react": "^19.0.2",
+    "@types/react": "^19.2.7",
     "@types/react-dom": "^19.0.2",
     "@types/react-syntax-highlighter": "^15.5.13",
     "autoprefixer": "^10.4.20",

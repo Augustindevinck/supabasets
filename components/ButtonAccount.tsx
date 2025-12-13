@@ -15,11 +15,11 @@ import { useSidebar } from "@/components/ui/sidebar";
 //  2. Logout: sign out and go back to homepage
 // See more at https://shipfa.st/docs/components/buttonAccount
 const ButtonAccount = () => {
-        const supabase = createClient();
+        const [supabase] = useState(() => createClient());
         const [isLoading, setIsLoading] = useState<boolean>(false);
         const [user, setUser] = useState<User>(null);
         const [isAdminUser, setIsAdminUser] = useState<boolean>(false);
-        
+
         let sidebarOpen = true;
         try {
                 const sidebar = useSidebar();
@@ -35,7 +35,7 @@ const ButtonAccount = () => {
                         } = await supabase.auth.getUser();
 
                         setUser(user);
-                        
+
                         if (user) {
                                 try {
                                         const res = await fetch("/api/user/check-admin");

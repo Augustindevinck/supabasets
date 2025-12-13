@@ -1,6 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: true,
+  
+  // Optimize production builds
+  swcMinify: true,
+  
+  experimental: {
+    optimizePackageImports: ['@headlessui/react', 'lucide-react'],
+  },
+  
   images: {
     remotePatterns: [
       {
