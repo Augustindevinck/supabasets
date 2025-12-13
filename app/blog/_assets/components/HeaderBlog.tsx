@@ -5,11 +5,20 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
-import Image from "next/image";
-import logo from "@/app/icon.png";
 import config from "@/config";
 import { categories } from "../content";
 import ButtonSignin from "@/components/ButtonSignin";
+
+const Lightning = () => (
+  <svg
+    className="w-8"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+  </svg>
+);
 
 const links: {
   href: string;
@@ -162,14 +171,7 @@ const HeaderBlog = () => {
             href="/"
             title={`${config.appName} homepage`}
           >
-            <Image
-              src={logo}
-              alt={`${config.appName} logo`}
-              className="w-8"
-              priority={true}
-              width={32}
-              height={32}
-            />
+            <Lightning />
             <span className="font-extrabold text-lg">{config.appName}</span>
           </Link>
         </div>

@@ -1,10 +1,19 @@
 import Link from "next/link";
-import Image from "next/image";
 import config from "@/config";
-import logo from "@/app/icon.png";
 
 // Add the Footer to the bottom of your landing page and more.
 // The support link is connected to the config.js file. If there's no config.resend.supportEmail, the link won't be displayed.
+
+const Lightning = () => (
+  <svg
+    className="w-6 h-6"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+  </svg>
+);
 
 const Footer = () => {
   return (
@@ -17,14 +26,7 @@ const Footer = () => {
               aria-current="page"
               className="flex gap-2 justify-center md:justify-start items-center"
             >
-              <Image
-                src={logo}
-                alt={`${config.appName} logo`}
-                priority={true}
-                className="w-6 h-6"
-                width={24}
-                height={24}
-              />
+              <Lightning />
               <strong className="font-extrabold tracking-tight text-base md:text-lg">
                 {config.appName}
               </strong>

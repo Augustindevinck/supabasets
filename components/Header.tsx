@@ -4,10 +4,19 @@ import { useState, useEffect } from "react";
 import type { JSX } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import ButtonSignin from "./ButtonSignin";
-import logo from "@/app/icon.png";
 import config from "@/config";
+
+const Lightning = () => (
+  <svg
+    className="w-8"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+  </svg>
+);
 
 const links: {
   href: string;
@@ -53,15 +62,7 @@ const Header = () => {
             href="/"
             title={`${config.appName} homepage`}
           >
-            <Image
-              src={logo}
-              alt={`${config.appName} logo`}
-              className="w-8"
-              placeholder="blur"
-              priority={true}
-              width={32}
-              height={32}
-            />
+            <Lightning />
             <span className="font-extrabold text-lg">{config.appName}</span>
           </Link>
         </div>
@@ -120,15 +121,7 @@ const Header = () => {
               title={`${config.appName} homepage`}
               href="/"
             >
-              <Image
-                src={logo}
-                alt={`${config.appName} logo`}
-                className="w-8"
-                placeholder="blur"
-                priority={true}
-                width={32}
-                height={32}
-              />
+              <Lightning />
               <span className="font-extrabold text-lg">{config.appName}</span>
             </Link>
             <button
