@@ -75,29 +75,11 @@ export const Navbar = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const NavBody = ({ children, className, visible }: NavBodyProps) => {
+export const NavBody = ({ children, className }: NavBodyProps) => {
   return (
-    <motion.div
-      animate={{
-        backdropFilter: visible ? "blur(10px)" : "blur(4px)",
-        width: visible ? "85%" : "98%",
-        paddingRight: visible ? "32px" : "32px",
-        paddingLeft: visible ? "32px" : "32px",
-        borderRadius: visible ? "12px" : "24px",
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
-      className={cn(
-        "relative z-[60] hidden w-[98%] flex-row items-center justify-between self-start bg-base-100/80 px-8 py-4 lg:flex dark:bg-neutral-950/80 sm:w-[85%] lg:w-[70%]",
-        visible && "bg-base-100/95 dark:bg-neutral-950/95",
-        className,
-      )}
-    >
+    <div className={cn("hidden lg:flex items-center justify-between w-full", className)}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -133,25 +115,11 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   );
 };
 
-export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
+export const MobileNav = ({ children, className }: MobileNavProps) => {
   return (
-    <motion.div
-      animate={{
-        backdropFilter: visible ? "blur(10px)" : "blur(4px)",
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
-      className={cn(
-        "relative z-50 flex w-[98%] flex-col items-center justify-between bg-base-100/80 px-6 py-4 rounded-3xl lg:hidden dark:bg-neutral-950/80",
-        visible && "bg-base-100/95 dark:bg-neutral-950/95",
-        className,
-      )}
-    >
+    <div className={cn("flex lg:hidden items-center justify-between w-full", className)}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 
