@@ -39,6 +39,12 @@ export default function Signup() {
           },
         });
       } else if (type === "password") {
+        if (!name.trim()) {
+          toast.error("Le nom est obligatoire");
+          setIsLoading(false);
+          return;
+        }
+
         if (password.length < 6) {
           toast.error("Le mot de passe doit contenir au moins 6 caractères");
           setIsLoading(false);
@@ -50,7 +56,7 @@ export default function Signup() {
           password,
           options: {
             data: {
-              name: name || email.split("@")[0],
+              name,
             },
           },
         });
@@ -139,10 +145,11 @@ export default function Signup() {
           onSubmit={(e) => handleSignup(e, { type: "password" })}
         >
           <input
+            required
             type="text"
             value={name}
             autoComplete="name"
-            placeholder="Nom (optionnel)"
+            placeholder="Nom"
             className="input input-bordered w-full placeholder:opacity-60"
             onChange={(e) => setName(e.target.value)}
           />

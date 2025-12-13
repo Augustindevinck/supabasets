@@ -14,7 +14,6 @@ export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const handleSignup = async (
     e: any,
@@ -38,17 +37,6 @@ export default function Login() {
             redirectTo: redirectURL,
           },
         });
-      } else if (type === "magic_link") {
-        await supabase.auth.signInWithOtp({
-          email,
-          options: {
-            emailRedirectTo: redirectURL,
-          },
-        });
-
-        toast.success("Vérifiez vos emails !");
-
-        setIsDisabled(true);
       } else if (type === "password") {
         const { error } = await supabase.auth.signInWithPassword({
           email,
@@ -160,7 +148,7 @@ export default function Login() {
 
           <button
             className="btn btn-primary btn-block"
-            disabled={isLoading || isDisabled}
+            disabled={isLoading}
             type="submit"
           >
             {isLoading && (
@@ -178,26 +166,6 @@ export default function Login() {
             </Link>
           </p>
         </div>
-
-        <div className="divider text-xs text-base-content/50 font-medium">
-          OU
-        </div>
-
-        <form
-          className="form-control w-full space-y-4"
-          onSubmit={(e) => handleSignup(e, { type: "magic_link" })}
-        >
-          <button
-            className="btn btn-outline btn-block"
-            disabled={isLoading || isDisabled}
-            type="submit"
-          >
-            {isLoading && (
-              <span className="loading loading-spinner loading-xs"></span>
-            )}
-            Recevoir un lien magique par email
-          </button>
-        </form>
       </div>
     </main>
   );
