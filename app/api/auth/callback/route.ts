@@ -15,5 +15,10 @@ export async function GET(req: NextRequest) {
   }
 
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(requestUrl.origin + config.auth.callbackUrl);
+  // Use the host header from the request (which contains the correct Replit URL)
+  const host = req.headers.get("host") || requestUrl.host;
+  const protocol = req.headers.get("x-forwarded-proto") || "https";
+  const origin = `${protocol}://${host}`;
+  
+  return NextResponse.redirect(origin + config.auth.callbackUrl);
 }
