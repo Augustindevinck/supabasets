@@ -111,7 +111,7 @@ const FAQ = () => {
           </p>
         </div>
 
-        <ul className="max-w-3xl mx-auto">
+        <ul>
           {faqList.map((item, i) => (
             <FaqItem key={i} item={item} />
           ))}
