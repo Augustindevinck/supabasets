@@ -122,11 +122,11 @@ export const DesktopSidebar = React.memo(({
   return (
     <motion.aside
       className={cn(
-        "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[300px] shrink-0",
+        "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[240px] shrink-0",
         className
       )}
       animate={{
-        width: animate ? (open ? "300px" : "60px") : "300px",
+        width: animate ? (open ? "240px" : "60px") : "240px",
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
