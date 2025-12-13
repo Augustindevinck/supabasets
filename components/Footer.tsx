@@ -73,11 +73,20 @@ const Footer = () => {
               </div>
 
               <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
-                <Link href="/tos" className="link link-hover">
-                  Terms of services
+                <Link href="/legal-mentions" className="link link-hover">
+                  Mentions légales
                 </Link>
                 <Link href="/privacy-policy" className="link link-hover">
-                  Privacy policy
+                  Politique de confidentialité
+                </Link>
+                <Link href="/cookie-policy" className="link link-hover">
+                  Politique de cookies
+                </Link>
+                <Link href="/cgv" className="link link-hover">
+                  Conditions Générales de Vente
+                </Link>
+                <Link href="/tos" className="link link-hover">
+                  Conditions Générales d'Utilisation
                 </Link>
               </div>
             </div>

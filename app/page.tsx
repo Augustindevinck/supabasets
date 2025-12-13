@@ -2,6 +2,7 @@ import FloatingHeader from "@/components/FloatingHeader";
 import WhatAppDoes from "@/components/WhatAppDoes";
 import FAQ from "@/components/FAQ";
 import GridBackground from "@/components/GridBackground";
+import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
@@ -32,6 +33,8 @@ export default function Page() {
         <WhatAppDoes />
         <FAQ />
       </main>
+
+      <Footer />
     </>
   );
 }
