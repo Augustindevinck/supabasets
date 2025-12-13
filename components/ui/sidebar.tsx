@@ -235,9 +235,9 @@ export const SidebarLink = React.memo(({
       aria-label={link.label}
       {...props}
     >
-      <div className="shrink-0" aria-hidden="true">
+      <span className="shrink-0 opacity-100" aria-hidden="true" style={{ opacity: 1 }}>
         {link.icon}
-      </div>
+      </span>
 
       <motion.span
         animate={{

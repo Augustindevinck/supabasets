@@ -119,7 +119,7 @@ export default function SidebarProfile() {
         aria-haspopup="true"
       >
         {user.user_metadata?.avatar_url ? (
-          <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden">
+          <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden" style={{ opacity: 1 }}>
             <img
               src={user.user_metadata.avatar_url}
               alt={`${displayName}'s profile picture`}
@@ -133,6 +133,7 @@ export default function SidebarProfile() {
           <span
             className="w-8 h-8 bg-base-100 flex justify-center items-center rounded-full shrink-0 capitalize text-sm font-bold"
             aria-hidden="true"
+            style={{ opacity: 1 }}
           >
             {avatarInitial}
           </span>

@@ -24,6 +24,7 @@ export default function SidebarLogo({
       <div 
         className="h-5 w-6 shrink-0 rounded-lg bg-black dark:bg-white" 
         aria-hidden="true"
+        style={{ opacity: 1 }}
       />
       <motion.span
         initial={{ opacity: 0 }}
