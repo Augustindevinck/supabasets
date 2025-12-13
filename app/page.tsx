@@ -1,4 +1,4 @@
-import FloatingHeader from "@/components/FloatingHeader";
+import ResizableHeader from "@/components/ResizableHeader";
 import WhatAppDoes from "@/components/WhatAppDoes";
 import FAQ from "@/components/FAQ";
 import GridBackground from "@/components/GridBackground";
@@ -7,8 +7,8 @@ import HeroContent from "@/components/HeroContent";
 
 export default function Page() {
   return (
-    <>
-      <FloatingHeader />
+    <div className="relative">
+      <ResizableHeader />
 
       <main>
         <section className="w-full min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 flex flex-col items-center justify-center relative overflow-hidden">
@@ -21,6 +21,6 @@ export default function Page() {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
