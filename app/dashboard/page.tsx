@@ -1,16 +1,15 @@
 
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import SidebarProfile from "@/components/SidebarProfile";
+import SidebarLogo from "@/components/SidebarLogo";
 import { IconLayoutDashboard } from "@tabler/icons-react";
-import { motion } from "framer-motion";
-import Link from "next/link";
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
 
-  const links = [
+  const links = useMemo(() => [
     {
       label: "Dashboard",
       href: "/dashboard",
@@ -18,14 +17,14 @@ export default function Dashboard() {
         <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
-  ];
+  ], []);
 
   return (
     <div className="flex h-screen w-full bg-base-100">
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
-            <Logo />
+            <SidebarLogo />
             <nav className="mt-8 flex flex-col gap-2" aria-label="Main navigation">
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
@@ -54,23 +53,5 @@ export default function Dashboard() {
         </main>
       </div>
     </div>
-  );
-}
-
-function Logo() {
-  return (
-    <Link
-      href="/"
-      className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black dark:text-white"
-    >
-      <div className="h-5 w-6 shrink-0 rounded-lg bg-black dark:bg-white" />
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="font-medium whitespace-pre text-black dark:text-white"
-      >
-        Template
-      </motion.span>
-    </Link>
   );
 }
