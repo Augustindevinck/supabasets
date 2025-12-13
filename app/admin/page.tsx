@@ -84,7 +84,7 @@ export default function AdminDashboard() {
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
-            <SidebarLogo />
+            <SidebarLogo href="/dashboard" />
             
             {/* User Links */}
             <nav className="mt-8 flex flex-col gap-2" aria-label="Main navigation">
