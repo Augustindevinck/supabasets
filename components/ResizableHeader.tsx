@@ -14,20 +14,7 @@ import { useState } from "react";
 import ButtonSignin from "./ButtonSignin";
 
 export default function ResizableHeader() {
-  const navItems = [
-    {
-      name: "Features",
-      link: "#features",
-    },
-    {
-      name: "Pricing",
-      link: "#pricing",
-    },
-    {
-      name: "Contact",
-      link: "#contact",
-    },
-  ];
+  const navItems: { name: string; link: string }[] = [];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
