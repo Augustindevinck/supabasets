@@ -62,7 +62,7 @@ interface NavbarLogoProps {
 const SCROLL_THRESHOLD = 50;
 
 const NAVBAR_STYLES = {
-  base: "mx-auto flex items-center justify-between rounded-full px-4 py-2 transition-all duration-150 ease-out backdrop-blur-md",
+  base: "mx-auto flex items-center justify-between rounded-full px-4 py-2 transition-all duration-[350ms] ease-out backdrop-blur-md",
   scrolled: "mt-4 w-[94%] sm:w-[90%] lg:w-[75%] bg-white/80 shadow-lg dark:bg-black/80",
   notScrolled: "mt-6 w-[98%] sm:w-[94%] lg:w-[85%] bg-white/60 dark:bg-black/60",
 } as const;
