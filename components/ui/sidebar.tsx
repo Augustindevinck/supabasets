@@ -157,7 +157,10 @@ export const MobileSidebar = React.memo(({
   return (
     <>
       <div
-        className="h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-transparent w-full"
+        className={cn(
+          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between w-full",
+          open ? "bg-white dark:bg-neutral-900" : "bg-transparent"
+        )}
         {...props}
       >
         <div className="flex justify-end z-20 w-full">
