@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import React, { useState, createContext, useContext, useCallback, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
+import Link from "next/link";
 
 interface Links {
   label: string;
@@ -224,7 +225,7 @@ export const SidebarLink = React.memo(({
   }, [setOpen]);
   
   return (
-    <a
+    <Link
       href={link.href}
       onClick={handleClick}
       className={cn(
@@ -233,7 +234,7 @@ export const SidebarLink = React.memo(({
         className
       )}
       aria-label={link.label}
-      {...props}
+      {...(props as React.ComponentProps<typeof Link>)}
     >
       <span className="shrink-0 opacity-100" aria-hidden="true" style={{ opacity: 1 }}>
         {link.icon}
@@ -254,7 +255,7 @@ export const SidebarLink = React.memo(({
       >
         {link.label}
       </motion.span>
-    </a>
+    </Link>
   );
 });
 
