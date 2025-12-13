@@ -127,17 +127,13 @@ const list: {
   },
   {
     name: "Yazdun",
-    text: "Yo Marc, it's fantastic man you just save me 10 hours on each project",
+    text: "It's fantastic, you just save me 10 hours on each project",
     type: refTypes.other,
   },
   {
-    name: "Marc Lou",
+    name: "Sarah Chen",
     text: "The tool is exactly what I didn't even know I needed.",
-    videoPoster: "https://d1wkquwg5s1b04.cloudfront.net/demo/marcPoster.jpg",
-    videoSrc: "https://d1wkquwg5s1b04.cloudfront.net/demo/marcVideo.mp4",
-    videoHeight: 250,
-    videoWidth: 500,
-    type: refTypes.video,
+    type: refTypes.other,
   },
   {
     username: "zawwadx",

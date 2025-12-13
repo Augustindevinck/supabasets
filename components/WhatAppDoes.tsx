@@ -8,7 +8,7 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    icon: "⚡",
+    icon: "🚀",
     title: "Remplacer par titre de fonctionnalité",
     description: "Ajouter une brève description de ce que fait cette fonctionnalité et comment elle aide l'utilisateur.",
   },

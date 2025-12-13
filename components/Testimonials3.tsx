@@ -11,13 +11,13 @@ const list: {
 }[] = [
   {
     // Optional, use for social media like Twitter. Does not link anywhere but cool to display
-    username: "marclou",
+    username: "dev_user",
     // REQUIRED
-    name: "Marc Lou",
+    name: "Alex Developer",
     // REQUIRED
     text: "Really easy to use. The tutorials are really useful and explains how everything works. Hope to ship my next project really fast!",
     // Optional, a statically imported image (usually from your public folder—recommended) or a link to the person's avatar. Shows a fallback letter if not provided
-    img: "https://pbs.twimg.com/profile_images/1514863683574599681/9k7PqDTA_400x400.jpg",
+    img: "",
   },
   {
     username: "the_mcnaveen",
@@ -91,8 +91,7 @@ const Testimonials3 = () => {
             </h2>
           </div>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-base-content/80">
-            Don&apos;t take our word for it. Here&apos;s what they have to say
-            about ShipFast.
+            Don&apos;t take our word for it. Here&apos;s what our users have to say.
           </p>
         </div>
 
