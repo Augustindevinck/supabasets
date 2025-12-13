@@ -114,7 +114,7 @@ const list: {
   {
     username: "krishna",
     name: "Krishna Kant",
-    text: "Finally a good boilerplate for Nextjs, now I dont have to cry about it comparing with laravel ecosystem.",
+    text: "Finally a good Next.js template, now I dont have to cry about it comparing with laravel ecosystem.",
     type: refTypes.productHunt,
     link: "https://www.producthunt.com/posts/shipfast-2?comment=2707061",
   },
@@ -127,7 +127,7 @@ const list: {
   },
   {
     name: "Yazdun",
-    text: "Yo Marc, I got the boilerplate, it's fantastic man you just save me 10 hours on each project",
+    text: "Yo Marc, it's fantastic man you just save me 10 hours on each project",
     type: refTypes.other,
   },
   {
@@ -142,7 +142,7 @@ const list: {
   {
     username: "zawwadx",
     name: "Zawwad Ul Sami",
-    text: "It's an amazing minimalist, lightweight boilerplate with well-organized code. It has almost all the core features you would want in a SaaS boilerplate. As a new team last year it actually took us months to build a similar set of features at a stable level.",
+    text: "It's an amazing minimalist, lightweight template with well-organized code. It has almost all the core features you would want in a SaaS. As a new team last year it actually took us months to build a similar set of features at a stable level.",
     type: refTypes.twitter,
   },
   {
@@ -156,7 +156,7 @@ const list: {
   {
     username: "VicPivots",
     name: "Victor Abeledo",
-    text: "Marc, I got your boilerplate and having the payments setup with Stripe + user auth is a blessing. This will save me like a week of work for each new side project I spin up. I appreciate that is well documented, as well. 100% worth it 🚀🚀🚀",
+    text: "Having the payments setup with Stripe + user auth is a blessing. This will save me like a week of work for each new side project I spin up. I appreciate that is well documented, as well. 100% worth it 🚀🚀🚀",
     type: refTypes.twitter,
     link: "https://twitter.com/VicPivots/status/1697352442986250413?s=20",
   },

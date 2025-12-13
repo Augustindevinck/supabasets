@@ -41,7 +41,7 @@ const features = [
       <div className="px-6 max-w-[600px] flex flex-col gap-4 overflow-hidden">
         {[
           {
-            text: "Add LemonSqueezy integration to the boilerplate",
+            text: "Add LemonSqueezy integration",
             secondaryText: "Yes, ship this! ✅",
             votes: 48,
             transition: "group-hover:-mt-36 group-hover:md:-mt-28 duration-500",

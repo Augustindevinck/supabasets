@@ -5,7 +5,7 @@ const config = {
   appName: "Template",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.",
+    "All you need to build your SaaS, AI tool, or any other web app.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "template.local",
   crisp: {
@@ -32,9 +32,6 @@ const config = {
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
         priceAnchor: 149,
         features: [
-          {
-            name: "NextJS boilerplate",
-          },
           { name: "User oauth" },
           { name: "Database" },
           { name: "Emails" },
@@ -53,7 +50,7 @@ const config = {
         priceAnchor: 299,
         features: [
           {
-            name: "NextJS boilerplate",
+
           },
           { name: "User oauth" },
           { name: "Database" },
