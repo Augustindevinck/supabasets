@@ -70,17 +70,12 @@ export default function Dashboard() {
         <header className="border-b border-base-200 bg-base-100">
           <div className="px-8 py-6">
             <h1 className="text-3xl md:text-4xl font-extrabold">Dashboard</h1>
-            <p className="text-base-content/60 mt-2">Bienvenue dans votre espace personnel</p>
           </div>
         </header>
 
         <main className="flex-1 overflow-y-auto">
           <section className="p-8">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="p-6 bg-white dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-lg font-semibold mb-2">Contenu</h3>
-                <p className="text-neutral-600 dark:text-neutral-400">Votre contenu du dashboard va ici</p>
-              </div>
             </div>
           </section>
         </main>
