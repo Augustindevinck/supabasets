@@ -5,6 +5,7 @@ import SidebarProfile from "@/components/SidebarProfile";
 import {
   IconLayoutDashboard,
 } from "@tabler/icons-react";
+import { motion } from "framer-motion";
 import { createClient } from "@/libs/supabase/client";
 
 export default function Dashboard() {
