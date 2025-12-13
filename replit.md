@@ -155,6 +155,16 @@ Located in `components/ui/sidebar.tsx`:
 - `SidebarLink` - Individual navigation links with icons
 - Uses `framer-motion` for smooth animations
 
+## Settings Page
+Users can manage their account at `/dashboard/settings` with:
+- **Profil Section**: Edit name, view email
+- **Security Section**: Change password (sends reset link to email)
+- **Danger Zone**: Delete account (to be implemented)
+
+Access via:
+- Sidebar link under Dashboard
+- User profile dropdown menu in the sidebar
+
 ### Dependencies
 - `framer-motion` - Animation library
 - `@tabler/icons-react` - Icon set
