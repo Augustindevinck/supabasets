@@ -22,18 +22,18 @@ export default function SidebarProfile() {
   if (!user) return null;
 
   return (
-    <div className="flex items-center gap-2 group/sidebar py-2">
+    <div className="flex items-center gap-2 group/sidebar py-2 px-1">
       {user?.user_metadata?.avatar_url ? (
         <img
           src={user?.user_metadata?.avatar_url}
           alt={"Profile picture"}
-          className="w-8 h-8 rounded-full shrink-0 object-cover"
+          className="w-10 h-10 rounded-full shrink-0 object-cover"
           referrerPolicy="no-referrer"
-          width={32}
-          height={32}
+          width={40}
+          height={40}
         />
       ) : (
-        <span className="w-8 h-8 bg-base-100 flex justify-center items-center rounded-full shrink-0 capitalize text-sm font-bold">
+        <span className="w-10 h-10 bg-base-100 flex justify-center items-center rounded-full shrink-0 capitalize text-sm font-bold">
           {user?.email?.charAt(0)}
         </span>
       )}
