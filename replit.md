@@ -101,31 +101,37 @@ The app is configured for deployment on Replit with autoscaling support.
 
 ## Authentication
 - **Email/Password**: Users can sign up and sign in with email + password
-  - Signup page: `/signup` - Creates account with optional name
+  - Signup page: `/signup` - Creates account with mandatory name
   - Signin page: `/signin` - Login with email/password
   - Password minimum: 6 characters
 - **Google OAuth**: Continue with Google button
-- **Magic Link**: Passwordless email login option
 - Supabase Auth handles all authentication
 - After successful auth, users are redirected to `/dashboard`
 
 ## Admin System
 - Admin emails are defined in `libs/admin.ts`
 - Current admins: `dropposting40@gmail.com`
-- Admin dashboard: `/admin` (protected, server-side verification)
+- Two admin interfaces:
+  - **Admin Dashboard** (`/admin/dashboard`) - Overview avec statistiques (nombre d'utilisateurs)
+  - **User Management** (`/admin`) - Gestion complète des utilisateurs
 - API route `/api/user/check-admin` verifies admin status server-side
-- ButtonAccount shows "Admin" button only for verified admins
+- Admin links visible in sidebar for authorized users
 
-### Interface Admin
-L'interface admin (`/admin`) est une page protégée accessible uniquement aux admins avec:
-- **Same Sidebar as Dashboard**: Navigation cohérente avec Dashboard et Settings
-- **Admin Section**: Section séparée en dessous d'une barre, avec accès aux fonctionnalités admin
-- **User Management**: Gestion complète des utilisateurs inscrits
+### Admin Interfaces
+Les interfaces admin (`/admin/dashboard` et `/admin`) sont des pages protégées accessibles uniquement aux admins avec:
+- **Same Sidebar as Home/Settings**: Navigation cohérente
+- **Admin Section**: Section séparée avec accès aux fonctionnalités admin
+- **Responsive Design**: Support desktop et mobile
 
 #### Fonctionnalités Admin:
-- Voir tous les utilisateurs inscrits (nom, email, provider, date d'inscription, dernière connexion)
-- Supprimer des utilisateurs (avec confirmation)
-- Navigation intuitive entre Dashboard et fonctionnalités admin
+1. **Admin Dashboard** (`/admin/dashboard`):
+   - Statistiques d'utilisation du SaaS
+   - Nombre total d'utilisateurs inscrits
+   - Vue d'ensemble centralisée
+
+2. **User Management** (`/admin`):
+   - Voir tous les utilisateurs inscrits (nom, email, provider, date d'inscription, dernière connexion)
+   - Supprimer des utilisateurs (avec confirmation)
 
 #### APIs Admin:
 - `GET /api/admin/users` - Récupère la liste des utilisateurs
@@ -134,8 +140,10 @@ L'interface admin (`/admin`) est une page protégée accessible uniquement aux a
 #### Fichiers clés:
 - `libs/supabase/admin.ts` - Client Supabase avec service role key
 - `components/admin/UsersTable.tsx` - Composant table des utilisateurs
+- `components/AdminLinks.tsx` - Liens admin réutilisables dans la sidebar
 - `app/api/admin/users/route.ts` - API routes admin
-- `app/admin/page.tsx` - Page admin avec sidebar et gestion des utilisateurs
+- `app/admin/page.tsx` - Page admin user management
+- `app/admin/dashboard/page.tsx` - Page admin dashboard avec statistiques
 
 ### Adding New Admins
 Edit `libs/admin.ts` and add email to `ADMIN_EMAILS` array:
@@ -146,30 +154,36 @@ const ADMIN_EMAILS = [
 ];
 ```
 
-## Dashboard UI
+## Navigation & UI
+### Home Page
+- Main page after login: `/dashboard`
+- Contains dashboard grid layout
+- Accessible from sidebar under "Home" link
+
+### Sidebar Navigation
 - **Left Sidebar**: Aceternity UI responsive sidebar with smooth animations
   - Collapses on hover (desktop), expandable menu on mobile
   - Dark mode support
-  - Quick links: Dashboard, Settings
+  - Quick links: Home, Settings
   - User account button integrated
-- **Header**: Dashboard title and welcome message
-- **Main Content Area**: Full-width layout with responsive grid
+  - Admin section for authorized users
+- **Header**: Page title and description
 
 ### Sidebar Components
 Located in `components/ui/sidebar.tsx`:
 - `Sidebar` - Main container
 - `SidebarBody` - Layout with responsive desktop/mobile views
-- `SidebarLink` - Individual navigation links with icons
-- Uses `framer-motion` for smooth animations
+- `SidebarLink` - Individual navigation links using Next.js Link (no full refresh)
+- Uses `framer-motion` for smooth animations without element disappearing
 
-## Settings Page
+### Settings Page
 Users can manage their account at `/dashboard/settings` with:
 - **Profil Section**: Edit name, view email
 - **Security Section**: Change password (sends reset link to email)
 - **Danger Zone**: Delete account (to be implemented)
 
 Access via:
-- Sidebar link under Dashboard
+- Sidebar link under Home
 - User profile dropdown menu in the sidebar
 
 ### Dependencies

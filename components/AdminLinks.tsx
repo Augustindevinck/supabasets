@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { createClient } from "@/libs/supabase/client";
 import { SidebarLink } from "@/components/ui/sidebar";
-import { IconUsers } from "@tabler/icons-react";
+import { IconUsers, IconLayoutDashboard } from "@tabler/icons-react";
 import { ADMIN_EMAILS } from "@/libs/admin";
 
 export default function AdminLinks({ open }: { open: boolean }) {
@@ -33,6 +33,13 @@ export default function AdminLinks({ open }: { open: boolean }) {
   }
 
   const adminLinks = [
+    {
+      label: "Dashboard",
+      href: "/admin/dashboard",
+      icon: (
+        <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
+    },
     {
       label: "Utilisateurs",
       href: "/admin",

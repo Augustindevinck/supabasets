@@ -12,7 +12,7 @@ export default function Dashboard() {
 
   const links = useMemo(() => [
     {
-      label: "Dashboard",
+      label: "Home",
       href: "/dashboard",
       icon: (
         <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
@@ -50,7 +50,7 @@ export default function Dashboard() {
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="border-b border-base-200 bg-base-100">
           <div className="px-8 py-6">
-            <h1 className="text-3xl md:text-4xl font-extrabold">Dashboard</h1>
+            <h1 className="text-3xl md:text-4xl font-extrabold">Home</h1>
           </div>
         </header>
 
