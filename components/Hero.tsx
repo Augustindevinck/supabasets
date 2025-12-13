@@ -26,7 +26,7 @@ const Hero = () => {
           Ship your startup in days, not weeks
         </h1>
         <p className="text-lg opacity-80 leading-relaxed">
-          All you need to build your SaaS, AI tool, or any other web app. From idea to production in 5 minutes.
+          From idea to production in 5 minutes.
         </p>
         <Link href="/signup" className="btn btn-primary btn-wide">
           Get {config.appName}

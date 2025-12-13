@@ -4,8 +4,7 @@ const config = {
   // REQUIRED
   appName: "Template",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
-  appDescription:
-    "All you need to build your SaaS, AI tool, or any other web app.",
+  appDescription: "",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "template.local",
   crisp: {
