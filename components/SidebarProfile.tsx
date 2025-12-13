@@ -24,16 +24,18 @@ export default function SidebarProfile() {
   return (
     <div className="flex items-center gap-2 group/sidebar py-2">
       {user?.user_metadata?.avatar_url ? (
-        <img
-          src={user?.user_metadata?.avatar_url}
-          alt={"Profile picture"}
-          className="w-8 h-8 rounded-full shrink-0 object-cover aspect-square"
-          referrerPolicy="no-referrer"
-          width={32}
-          height={32}
-        />
+        <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden">
+          <img
+            src={user?.user_metadata?.avatar_url}
+            alt={"Profile picture"}
+            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+            width={32}
+            height={32}
+          />
+        </div>
       ) : (
-        <span className="w-8 h-8 bg-base-100 flex justify-center items-center rounded-full shrink-0 capitalize text-sm font-bold aspect-square">
+        <span className="w-8 h-8 bg-base-100 flex justify-center items-center rounded-full shrink-0 capitalize text-sm font-bold">
           {user?.email?.charAt(0)}
         </span>
       )}
