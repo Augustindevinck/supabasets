@@ -68,3 +68,19 @@ The app is configured for deployment on Replit with autoscaling support.
 - **GridBackground** (`components/GridBackground.tsx`): Animated grid background with radial fade
   - Used in hero sections for modern aesthetic
   - Adapts to light/dark mode automatically
+
+## Admin System
+- Admin emails are defined in `libs/admin.ts`
+- Current admins: `dropposting40@gmail.com`
+- Admin dashboard: `/admin` (protected, server-side verification)
+- API route `/api/user/check-admin` verifies admin status server-side
+- ButtonAccount shows "Admin" button only for verified admins
+
+### Adding New Admins
+Edit `libs/admin.ts` and add email to `ADMIN_EMAILS` array:
+```typescript
+const ADMIN_EMAILS = [
+  "dropposting40@gmail.com",
+  "new-admin@example.com",  // add new admins here
+];
+```
