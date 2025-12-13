@@ -69,6 +69,16 @@ The app is configured for deployment on Replit with autoscaling support.
   - Used in hero sections for modern aesthetic
   - Adapts to light/dark mode automatically
 
+## Authentication
+- **Email/Password**: Users can sign up and sign in with email + password
+  - Signup page: `/signup` - Creates account with optional name
+  - Signin page: `/signin` - Login with email/password
+  - Password minimum: 6 characters
+- **Google OAuth**: Continue with Google button
+- **Magic Link**: Passwordless email login option
+- Supabase Auth handles all authentication
+- After successful auth, users are redirected to `/dashboard`
+
 ## Admin System
 - Admin emails are defined in `libs/admin.ts`
 - Current admins: `dropposting40@gmail.com`
