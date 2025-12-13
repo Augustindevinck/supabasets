@@ -6,7 +6,6 @@ import { Popover, Transition } from "@headlessui/react";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/libs/supabase/client";
 import apiClient from "@/libs/api";
-import { isAdmin } from "@/libs/admin";
 
 // A button to show user some account actions
 //  1. Billing: open a Stripe Customer Portal to manage their billing (cancel subscription, update payment method, etc.).
@@ -18,6 +17,7 @@ const ButtonAccount = () => {
         const supabase = createClient();
         const [isLoading, setIsLoading] = useState<boolean>(false);
         const [user, setUser] = useState<User>(null);
+        const [isAdminUser, setIsAdminUser] = useState<boolean>(false);
 
         useEffect(() => {
                 const getUser = async () => {
@@ -26,6 +26,16 @@ const ButtonAccount = () => {
                         } = await supabase.auth.getUser();
 
                         setUser(user);
+                        
+                        if (user) {
+                                try {
+                                        const res = await fetch("/api/user/check-admin");
+                                        const data = await res.json();
+                                        setIsAdminUser(data.isAdmin);
+                                } catch (e) {
+                                        console.error("Failed to check admin status:", e);
+                                }
+                        }
                 };
 
                 getUser();
@@ -109,7 +119,7 @@ const ButtonAccount = () => {
                                                 <Popover.Panel className="absolute left-0 z-10 mt-3 w-screen max-w-[16rem] transform">
                                                         <div className="overflow-hidden rounded-xl shadow-xl ring-1 ring-base-content/10 bg-base-100 p-1">
                                                                 <div className="space-y-0.5 text-sm">
-                                                                        {isAdmin(user?.email) && (
+                                                                        {isAdminUser && (
                                                                                 <a
                                                                                         href="/admin"
                                                                                         className="flex items-center gap-2 hover:bg-primary/20 hover:text-primary duration-200 py-1.5 px-4 w-full rounded-lg font-medium"
