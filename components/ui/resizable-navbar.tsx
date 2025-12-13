@@ -1,13 +1,14 @@
+
 "use client";
+
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-import React, { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useCallback, memo } from "react";
+
+// ========================================
+// Types & Interfaces
+// ========================================
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -17,14 +18,13 @@ interface NavbarProps {
 interface NavBodyProps {
   children: React.ReactNode;
   className?: string;
-  visible?: boolean;
 }
 
 interface NavItemsProps {
-  items: {
+  items: Array<{
     name: string;
     link: string;
-  }[];
+  }>;
   className?: string;
   onItemClick?: () => void;
 }
@@ -32,7 +32,6 @@ interface NavItemsProps {
 interface MobileNavProps {
   children: React.ReactNode;
   className?: string;
-  visible?: boolean;
 }
 
 interface MobileNavHeaderProps {
@@ -47,150 +46,269 @@ interface MobileNavMenuProps {
   onClose: () => void;
 }
 
-export const Navbar = ({ children }: { children: React.ReactNode }) => {
+interface MobileNavToggleProps {
+  isOpen: boolean;
+  onClick: () => void;
+}
+
+interface NavbarLogoProps {
+  className?: string;
+}
+
+// ========================================
+// Constants
+// ========================================
+
+const SCROLL_THRESHOLD = 50;
+const SCROLL_THROTTLE_MS = 100;
+
+const NAVBAR_STYLES = {
+  base: "mx-auto flex items-center justify-between rounded-full px-4 py-2 transition-all duration-300 ease-in-out backdrop-blur-md",
+  scrolled: "mt-4 w-[94%] sm:w-[90%] lg:w-[75%] bg-white/80 shadow-lg dark:bg-black/80",
+  notScrolled: "mt-6 w-[98%] sm:w-[94%] lg:w-[85%] bg-white/60 dark:bg-black/60",
+} as const;
+
+// ========================================
+// Hooks
+// ========================================
+
+const useScrollDetection = (threshold: number = SCROLL_THRESHOLD) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsScrolled(window.scrollY > threshold);
+      }, SCROLL_THROTTLE_MS);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    handleScroll(); // Initial check
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [threshold]);
+
+  return isScrolled;
+};
+
+// ========================================
+// Main Components
+// ========================================
+
+export const Navbar = memo(({ children, className }: NavbarProps) => {
+  const isScrolled = useScrollDetection();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
       <nav
         className={cn(
-          "mx-auto flex items-center justify-between rounded-full px-4 py-2 transition-all duration-300 ease-in-out backdrop-blur-md",
-          isScrolled
-            ? "mt-4 w-[94%] sm:w-[90%] lg:w-[75%] bg-white/80 shadow-lg dark:bg-black/80"
-            : "mt-6 w-[98%] sm:w-[94%] lg:w-[85%] bg-white/60 dark:bg-black/60"
+          NAVBAR_STYLES.base,
+          isScrolled ? NAVBAR_STYLES.scrolled : NAVBAR_STYLES.notScrolled,
+          className
         )}
+        role="navigation"
+        aria-label="Main navigation"
       >
         {children}
       </nav>
     </header>
   );
-};
+});
 
-export const NavBody = ({ children, className }: NavBodyProps) => {
+Navbar.displayName = "Navbar";
+
+export const NavBody = memo(({ children, className }: NavBodyProps) => {
   return (
     <div className={cn("hidden lg:flex items-center justify-between w-full", className)}>
       {children}
     </div>
   );
-};
+});
 
-export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
+NavBody.displayName = "NavBody";
+
+export const NavItems = memo(({ items, className, onItemClick }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
+  const handleMouseLeave = useCallback(() => setHovered(null), []);
+  const handleMouseEnter = useCallback((idx: number) => setHovered(idx), []);
+
   return (
-    <motion.div
-      onMouseLeave={() => setHovered(null)}
+    <div
+      onMouseLeave={handleMouseLeave}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium transition duration-200 lg:flex lg:space-x-2",
-        className,
+        "flex flex-1 flex-row items-center justify-center gap-2 text-sm font-medium",
+        className
       )}
     >
       {items.map((item, idx) => (
         <a
-          onMouseEnter={() => setHovered(idx)}
+          key={item.link}
+          onMouseEnter={() => handleMouseEnter(idx)}
           onClick={onItemClick}
-          className="relative px-4 py-2"
-          key={`link-${idx}`}
+          className="relative px-4 py-2 rounded-full transition-colors hover:text-primary"
           href={item.link}
+          aria-label={item.name}
         >
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
               className="absolute inset-0 h-full w-full rounded-full bg-base-200 dark:bg-neutral-800"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
             />
           )}
-          <span className="relative z-20">{item.name}</span>
+          <span className="relative z-10">{item.name}</span>
         </a>
       ))}
-    </motion.div>
+    </div>
   );
-};
+});
 
-export const MobileNav = ({ children, className }: MobileNavProps) => {
+NavItems.displayName = "NavItems";
+
+// ========================================
+// Mobile Components
+// ========================================
+
+export const MobileNav = memo(({ children, className }: MobileNavProps) => {
   return (
     <div className={cn("flex lg:hidden items-center justify-between w-full", className)}>
       {children}
     </div>
   );
-};
+});
 
-export const MobileNavHeader = ({
-  children,
-  className,
-}: MobileNavHeaderProps) => {
+MobileNav.displayName = "MobileNav";
+
+export const MobileNavHeader = memo(({ children, className }: MobileNavHeaderProps) => {
   return (
-    <div
-      className={cn(
-        "flex w-full flex-row items-center justify-between",
-        className,
-      )}
-    >
+    <div className={cn("flex w-full flex-row items-center justify-between", className)}>
       {children}
     </div>
   );
-};
+});
 
-export const MobileNavMenu = ({
-  children,
-  className,
-  isOpen,
-  onClose,
-}: MobileNavMenuProps) => {
+MobileNavHeader.displayName = "MobileNavHeader";
+
+export const MobileNavMenu = memo(({ children, className, isOpen, onClose }: MobileNavMenuProps) => {
+  // Close on Escape key
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isOpen, onClose]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className={cn(
-            "absolute inset-x-0 top-20 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-xl bg-base-100 px-6 py-6 backdrop-blur-sm dark:bg-neutral-950 mx-[2%] sm:mx-[7.5%] lg:mx-[15%] shadow-lg",
-            className,
-          )}
-        >
-          {children}
-        </motion.div>
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+            aria-hidden="true"
+          />
+
+          {/* Menu */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className={cn(
+              "absolute inset-x-0 top-20 z-50 flex w-full flex-col items-start justify-start gap-4",
+              "rounded-xl bg-base-100 px-6 py-6 backdrop-blur-sm dark:bg-neutral-950",
+              "mx-[2%] sm:mx-[7.5%] lg:mx-[15%] shadow-lg",
+              className
+            )}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
+          >
+            {children}
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );
-};
+});
 
-export const MobileNavToggle = ({
-  isOpen,
-  onClick,
-}: {
-  isOpen: boolean;
-  onClick: () => void;
-}) => {
-  return isOpen ? (
-    <IconX className="text-current dark:text-white cursor-pointer" onClick={onClick} />
-  ) : (
-    <IconMenu2 className="text-current dark:text-white cursor-pointer" onClick={onClick} />
+MobileNavMenu.displayName = "MobileNavMenu";
+
+export const MobileNavToggle = memo(({ isOpen, onClick }: MobileNavToggleProps) => {
+  return (
+    <button
+      onClick={onClick}
+      className="p-2 -mr-2 text-current dark:text-white transition-colors hover:text-primary"
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-expanded={isOpen}
+      aria-controls="mobile-menu"
+    >
+      {isOpen ? (
+        <IconX className="w-6 h-6" aria-hidden="true" />
+      ) : (
+        <IconMenu2 className="w-6 h-6" aria-hidden="true" />
+      )}
+    </button>
   );
-};
+});
 
-export const NavbarLogo = () => {
+MobileNavToggle.displayName = "MobileNavToggle";
+
+// ========================================
+// Utility Components
+// ========================================
+
+export const NavbarLogo = memo(({ className }: NavbarLogoProps) => {
   return (
     <a
       href="/"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-extrabold text-lg tracking-tight"
+      className={cn(
+        "relative z-20 flex items-center space-x-2 px-2 py-1 text-lg font-extrabold tracking-tight",
+        "transition-colors hover:text-primary",
+        className
+      )}
       title="Home"
+      aria-label="Go to homepage"
     >
       Template
     </a>
   );
-};
+});
 
-export const NavbarButton = ({
+NavbarLogo.displayName = "NavbarLogo";
+
+export const NavbarButton = memo(({
   children,
   className,
   variant = "primary",
@@ -209,10 +327,13 @@ export const NavbarButton = ({
         variant === "primary"
           ? "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
           : "bg-base-200 text-base-content hover:bg-base-300 dark:bg-neutral-800 dark:hover:bg-neutral-700",
-        className,
+        className
       )}
+      type="button"
     >
       {children}
     </button>
   );
-};
+});
+
+NavbarButton.displayName = "NavbarButton";

@@ -1,29 +1,46 @@
+
 "use client";
+
+import { useState, useCallback, memo } from "react";
 import {
   Navbar,
   NavBody,
   NavItems,
   MobileNav,
   NavbarLogo,
-  NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
-import { useState } from "react";
 import ButtonSignin from "./ButtonSignin";
 
-export default function ResizableHeader() {
-  const navItems: { name: string; link: string }[] = [];
+// ========================================
+// Constants
+// ========================================
 
+const NAV_ITEMS: Array<{ name: string; link: string }> = [];
+
+// ========================================
+// Component
+// ========================================
+
+const ResizableHeader = memo(() => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleToggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen((prev) => !prev);
+  }, []);
+
+  const handleCloseMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
 
   return (
     <Navbar>
       {/* Desktop Navigation */}
       <NavBody>
         <NavbarLogo />
-        <NavItems items={navItems} />
+        {NAV_ITEMS.length > 0 && <NavItems items={NAV_ITEMS} />}
         <div className="flex items-center gap-4">
           <ButtonSignin text="Login" />
         </div>
@@ -35,24 +52,28 @@ export default function ResizableHeader() {
           <NavbarLogo />
           <MobileNavToggle
             isOpen={isMobileMenuOpen}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={handleToggleMobileMenu}
           />
         </MobileNavHeader>
 
         <MobileNavMenu
           isOpen={isMobileMenuOpen}
-          onClose={() => setIsMobileMenuOpen(false)}
+          onClose={handleCloseMobileMenu}
         >
-          {navItems.map((item, idx) => (
-            <a
-              key={`mobile-link-${idx}`}
-              href={item.link}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="relative text-current dark:text-neutral-300"
-            >
-              <span className="block">{item.name}</span>
-            </a>
-          ))}
+          {NAV_ITEMS.length > 0 && (
+            <nav className="w-full space-y-4" aria-label="Mobile navigation links">
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.link}
+                  href={item.link}
+                  onClick={handleCloseMobileMenu}
+                  className="block text-current dark:text-neutral-300 hover:text-primary transition-colors"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </nav>
+          )}
           <div className="w-full pt-4 border-t border-base-200 dark:border-neutral-700">
             <ButtonSignin text="Login" />
           </div>
@@ -60,4 +81,8 @@ export default function ResizableHeader() {
       </MobileNav>
     </Navbar>
   );
-}
+});
+
+ResizableHeader.displayName = "ResizableHeader";
+
+export default ResizableHeader;
