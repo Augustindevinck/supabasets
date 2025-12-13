@@ -84,3 +84,23 @@ const ADMIN_EMAILS = [
   "new-admin@example.com",  // add new admins here
 ];
 ```
+
+## Dashboard UI
+- **Left Sidebar**: Aceternity UI responsive sidebar with smooth animations
+  - Collapses on hover (desktop), expandable menu on mobile
+  - Dark mode support
+  - Quick links: Dashboard, Settings
+  - User account button integrated
+- **Header**: Dashboard title and welcome message
+- **Main Content Area**: Full-width layout with responsive grid
+
+### Sidebar Components
+Located in `components/ui/sidebar.tsx`:
+- `Sidebar` - Main container
+- `SidebarBody` - Layout with responsive desktop/mobile views
+- `SidebarLink` - Individual navigation links with icons
+- Uses `framer-motion` for smooth animations
+
+### Dependencies
+- `framer-motion` - Animation library
+- `@tabler/icons-react` - Icon set
