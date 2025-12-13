@@ -32,7 +32,7 @@ export default function SidebarProfile() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center gap-2 group/sidebar py-2 px-3 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition"
+        className={`w-full flex items-center gap-2 group/sidebar py-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition ${open ? 'px-3' : 'justify-center'}`}
       >
         {user?.user_metadata?.avatar_url ? (
           <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden">
