@@ -125,8 +125,8 @@ export default function Settings() {
         </header>
 
         <main className="flex-1 overflow-y-auto">
-          <section className="p-8">
-            <div className="max-w-2xl space-y-6">
+          <section className="p-8 flex justify-center">
+            <div className="max-w-2xl w-full space-y-6">
               {/* Profile Section */}
               <div className="card bg-base-200">
                 <div className="card-body">

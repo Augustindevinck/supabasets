@@ -55,8 +55,8 @@ export default function Dashboard() {
         </header>
 
         <main className="flex-1 overflow-y-auto">
-          <section className="p-8">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <section className="p-8 flex justify-center w-full">
+            <div className="w-full grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {/* Dashboard content */}
             </div>
           </section>
