@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
-import ButtonAccount from "@/components/ButtonAccount";
+import SidebarProfile from "@/components/SidebarProfile";
 import {
   IconLayoutDashboard,
   IconSettings,
@@ -48,13 +48,11 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4">
-              <ButtonAccount />
-            </div>
+          <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4 space-y-2">
+            <SidebarProfile />
             <button
               onClick={handleLogout}
-              className="flex items-center justify-start gap-2 group/sidebar py-2 px-4 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition"
+              className="w-full flex items-center justify-start gap-2 group/sidebar py-2 px-3 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition"
             >
               <IconLogout className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
               <motion.span
