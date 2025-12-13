@@ -97,6 +97,7 @@ export const DesktopSidebar = React.memo(({
 }: React.ComponentProps<typeof motion.div>) => {
   const { open, setOpen, animate } = useSidebar();
   const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  const isMountedRef = React.useRef(false);
 
   const handleMouseEnter = useCallback(() => {
     if (closeTimeoutRef.current) {
@@ -107,12 +108,14 @@ export const DesktopSidebar = React.memo(({
   }, [setOpen]);
 
   const handleMouseLeave = useCallback(() => {
+    if (!isMountedRef.current) return;
     closeTimeoutRef.current = setTimeout(() => {
       setOpen(false);
     }, 300);
   }, [setOpen]);
 
   React.useEffect(() => {
+    isMountedRef.current = true;
     return () => {
       if (closeTimeoutRef.current) {
         clearTimeout(closeTimeoutRef.current);
