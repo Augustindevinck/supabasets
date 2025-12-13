@@ -1,10 +1,10 @@
-
 "use client";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/libs/supabase/client";
 import { useSidebar } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const MENU_ITEMS = [
   { label: "Settings", href: "/dashboard/settings" },
@@ -26,14 +26,14 @@ export default function SidebarProfile() {
     const getUser = async () => {
       try {
         const { data: { user }, error } = await supabase.auth.getUser();
-        
+
         if (!isMounted) return;
 
         if (error) {
           console.error("Error fetching user:", error);
           return;
         }
-        
+
         setUser(user);
       } catch (error) {
         if (isMounted) {
@@ -45,7 +45,7 @@ export default function SidebarProfile() {
         }
       }
     };
-    
+
     getUser();
 
     return () => {
@@ -82,7 +82,7 @@ export default function SidebarProfile() {
   }, [isOpen]);
 
   const toggleDropdown = useCallback(() => setIsOpen(prev => !prev), []);
-  
+
   const closeDropdown = useCallback(() => setIsOpen(false), []);
 
   const handleLogout = useCallback(async () => {
@@ -130,7 +130,7 @@ export default function SidebarProfile() {
             />
           </div>
         ) : (
-          <span 
+          <span
             className="w-8 h-8 bg-base-100 flex justify-center items-center rounded-full shrink-0 capitalize text-sm font-bold"
             aria-hidden="true"
           >
@@ -152,7 +152,7 @@ export default function SidebarProfile() {
         >
           {MENU_ITEMS.map((item, index) => {
             const isLast = index === MENU_ITEMS.length - 1;
-            
+
             if (item.action === "logout") {
               return (
                 <button

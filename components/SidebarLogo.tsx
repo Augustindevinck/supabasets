@@ -31,6 +31,10 @@ export default function SidebarLogo({
           opacity: animate ? (open ? 1 : 0) : 1,
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
         }}
+        transition={{
+          opacity: { duration: 0.3, delay: open ? 0.1 : 0 },
+          display: { delay: open ? 0 : 0.3 }
+        }}
         className="font-medium whitespace-pre text-black dark:text-white"
       >
         {logoText}
