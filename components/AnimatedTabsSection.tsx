@@ -54,10 +54,10 @@ const AnimatedTabsSection = () => {
           </p>
         </div>
 
-        <div className="h-[16rem] sm:h-[24rem] md:h-[40rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
+        <div className="h-[16rem] sm:h-[24rem] md:h-[40rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-center justify-center">
           <Tabs 
             tabs={tabs}
-            containerClassName="bg-gray-100 dark:bg-gray-900 rounded-lg p-1 gap-1 sm:gap-2 flex-wrap"
+            containerClassName="bg-gray-100 dark:bg-gray-900 rounded-lg p-1 gap-1 sm:gap-2 flex-wrap justify-center"
             tabClassName="px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm md:text-base whitespace-nowrap"
           />
         </div>
