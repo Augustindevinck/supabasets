@@ -84,7 +84,7 @@ export default function AdminLayout({ children, pageTitle, pageSubtitle }: Admin
   }
 
   return (
-    <div className="flex h-screen w-full bg-base-100">
+    <div className="flex flex-col md:flex-row h-screen w-full bg-base-100">
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
