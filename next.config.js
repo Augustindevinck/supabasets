@@ -6,11 +6,8 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: true,
   
-  // Optimize production builds
-  swcMinify: true,
-  
   experimental: {
-    optimizePackageImports: ['@headlessui/react', 'lucide-react'],
+    optimizePackageImports: ['@headlessui/react', 'lucide-react', 'daisyui', '@tabler/icons-react'],
   },
   
   images: {
