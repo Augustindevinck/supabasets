@@ -4,7 +4,7 @@ import { ReactNode, useState, useMemo } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import SidebarProfile from "@/components/SidebarProfile";
 import SidebarLogo from "@/components/SidebarLogo";
-import { IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
+import { IconLayoutDashboard } from "@tabler/icons-react";
 import AdminLinks from "@/components/AdminLinks";
 
 interface DashboardLayoutProps {
@@ -21,13 +21,6 @@ export default function DashboardLayout({ children, pageTitle }: DashboardLayout
       href: "/dashboard",
       icon: (
         <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-    {
-      label: "Settings",
-      href: "/dashboard/settings",
-      icon: (
-        <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
   ], []);

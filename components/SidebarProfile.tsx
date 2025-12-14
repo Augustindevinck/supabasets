@@ -154,7 +154,7 @@ export default function SidebarProfile() {
           {MENU_ITEMS.map((item, index) => {
             const isLast = index === MENU_ITEMS.length - 1;
 
-            if (item.action === "logout") {
+            if ("action" in item && item.action === "logout") {
               return (
                 <button
                   key={item.label}
@@ -173,7 +173,7 @@ export default function SidebarProfile() {
             return (
               <Link
                 key={item.label}
-                href={item.href}
+                href={"href" in item ? item.href : "/"}
                 className={cn(
                   "block w-full text-left px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-700 text-sm text-neutral-700 dark:text-neutral-200",
                   index === 0 ? "rounded-t-lg" : ""
