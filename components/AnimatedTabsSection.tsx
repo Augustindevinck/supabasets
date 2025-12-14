@@ -20,7 +20,7 @@ const AnimatedTabsSection = () => {
       title: "Fonctionnalité 2",
       value: "feature2",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 sm:p-8 md:p-10 text-lg sm:text-2xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-600 to-purple-800">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 sm:p-8 md:p-10 text-lg sm:text-2xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-500 to-blue-700">
           <p className="mb-4">Fonctionnalité principale 2</p>
           <p className="text-sm sm:text-base md:text-lg font-normal opacity-90">
             Remplacer par la description détaillée de cette fonctionnalité et ses bénéfices pour vos utilisateurs.
