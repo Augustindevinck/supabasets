@@ -120,11 +120,11 @@ export default function AdminLayout({ children, pageTitle, pageSubtitle }: Admin
       </Sidebar>
 
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="border-b border-base-200 bg-base-100">
-          <div className="px-8 py-6">
-            <h1 className="text-3xl md:text-4xl font-extrabold">{pageTitle}</h1>
+        <header className="sticky top-0 z-40 border-b border-base-200 bg-base-100">
+          <div className="px-4 md:px-8 py-4 md:py-6">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold">{pageTitle}</h1>
             {pageSubtitle && (
-              <p className="text-base-content/60 mt-2">{pageSubtitle}</p>
+              <p className="text-base-content/60 mt-2 text-sm md:text-base">{pageSubtitle}</p>
             )}
           </div>
         </header>
