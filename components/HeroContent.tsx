@@ -1,5 +1,6 @@
 "use client";
 import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
+import { Button } from "@/components/ui/moving-border";
 
 export default function HeroContent() {
   return (
@@ -16,12 +17,14 @@ export default function HeroContent() {
           Mettre un élément animé comme un texte qui change, ou alors commencer à engager en demandant une info ou une action
         </p>
 
-        <a
-          className="btn btn-primary"
+        <Button
+          as="a"
           href="/signin"
+          borderRadius="0.75rem"
+          className="text-base sm:text-lg font-semibold"
         >
           CTA (Appel à l&apos;action)
-        </a>
+        </Button>
       </div>
     </HeroHighlight>
   );
