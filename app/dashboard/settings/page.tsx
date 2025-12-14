@@ -3,37 +3,15 @@
 import { useState, useEffect, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/libs/supabase/client";
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
-import SidebarProfile from "@/components/SidebarProfile";
-import SidebarLogo from "@/components/SidebarLogo";
-import { IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
 import toast from "react-hot-toast";
-import AdminLinks from "@/components/AdminLinks";
+import DashboardLayout from "@/components/DashboardLayout";
 
 export default function Settings() {
-  const [open, setOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const supabase = useMemo(() => createClient(), []);
-
-  const links = useMemo(() => [
-    {
-      label: "Home",
-      href: "/dashboard",
-      icon: (
-        <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-    {
-      label: "Settings",
-      href: "/dashboard/settings",
-      icon: (
-        <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-  ], []);
 
   // Fetch user data
   useEffect(() => {
@@ -91,41 +69,17 @@ export default function Settings() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen w-full bg-base-100 items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
+      <DashboardLayout pageTitle="Settings">
+        <div className="flex items-center justify-center h-full">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      </DashboardLayout>
     );
   }
 
   return (
-    <div className="flex h-screen w-full bg-base-100">
-      <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between gap-10">
-          <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
-            <SidebarLogo href="/dashboard" />
-            <nav className="mt-8 flex flex-col gap-2" aria-label="Main navigation">
-              {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
-            </nav>
-
-            <AdminLinks open={open} />
-          </div>
-          <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4">
-            <SidebarProfile />
-          </div>
-        </SidebarBody>
-      </Sidebar>
-
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="border-b border-base-200 bg-base-100">
-          <div className="px-8 py-6">
-            <h1 className="text-3xl md:text-4xl font-extrabold">Settings</h1>
-          </div>
-        </header>
-
-        <main className="flex-1 overflow-y-auto">
-          <section className="p-8 flex justify-center">
+    <DashboardLayout pageTitle="Settings">
+      <section className="p-8 flex justify-center">
             <div className="max-w-2xl w-full space-y-6">
               {/* Profile Section */}
               <div className="card bg-base-200">
@@ -226,8 +180,6 @@ export default function Settings() {
               </div>
             </div>
           </section>
-        </main>
-      </div>
-    </div>
+    </DashboardLayout>
   );
 }
