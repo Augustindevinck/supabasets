@@ -68,8 +68,8 @@ export function Button({
       <div
         className={cn(
           "relative flex h-full w-full items-center justify-center px-8 font-semibold antialiased transition-all",
-          "bg-gradient-to-r from-blue-200 to-blue-300 text-blue-900",
-          "hover:from-blue-300 hover:to-blue-400 shadow-lg hover:shadow-blue-300/50",
+          "bg-gradient-to-r from-blue-300 to-blue-400 text-white",
+          "hover:from-blue-400 hover:to-blue-500 shadow-lg hover:shadow-blue-400/50",
           className,
         )}
         style={{

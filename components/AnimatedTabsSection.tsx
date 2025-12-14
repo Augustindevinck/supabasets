@@ -8,7 +8,7 @@ const AnimatedTabsSection = () => {
       title: "Fonctionnalité 1",
       value: "feature1",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 sm:p-8 md:p-10 text-lg sm:text-2xl md:text-4xl font-bold text-blue-900 bg-gradient-to-br from-blue-200 to-blue-300">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 sm:p-8 md:p-10 text-lg sm:text-2xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-300 to-blue-400">
           <p className="mb-4">Fonctionnalité principale 1</p>
           <p className="text-sm sm:text-base md:text-lg font-normal opacity-90">
             Remplacer par la description détaillée de cette fonctionnalité et ses bénéfices pour vos utilisateurs.
@@ -20,7 +20,7 @@ const AnimatedTabsSection = () => {
       title: "Fonctionnalité 2",
       value: "feature2",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 sm:p-8 md:p-10 text-lg sm:text-2xl md:text-4xl font-bold text-blue-900 bg-gradient-to-br from-blue-300 to-blue-400">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 sm:p-8 md:p-10 text-lg sm:text-2xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-400 to-blue-500">
           <p className="mb-4">Fonctionnalité principale 2</p>
           <p className="text-sm sm:text-base md:text-lg font-normal opacity-90">
             Remplacer par la description détaillée de cette fonctionnalité et ses bénéfices pour vos utilisateurs.
@@ -32,7 +32,7 @@ const AnimatedTabsSection = () => {
       title: "Fonctionnalité 3",
       value: "feature3",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 sm:p-8 md:p-10 text-lg sm:text-2xl md:text-4xl font-bold text-blue-900 bg-gradient-to-br from-blue-200 to-blue-300">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 sm:p-8 md:p-10 text-lg sm:text-2xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-300 to-blue-400">
           <p className="mb-4">Fonctionnalité principale 3</p>
           <p className="text-sm sm:text-base md:text-lg font-normal opacity-90">
             Remplacer par la description détaillée de cette fonctionnalité et ses bénéfices pour vos utilisateurs.
