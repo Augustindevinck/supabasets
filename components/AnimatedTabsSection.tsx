@@ -43,7 +43,7 @@ const AnimatedTabsSection = () => {
   ];
 
   return (
-    <section className="w-full bg-base-100 py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-base-100 py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 md:mb-24">
       <div className="mx-auto w-[98%] sm:w-[85%] lg:w-[70%]">
         <div className="text-center mb-12 sm:mb-14 md:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-3 sm:mb-4">
