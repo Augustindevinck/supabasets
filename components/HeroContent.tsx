@@ -9,7 +9,7 @@ export default function HeroContent() {
         <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
           Proposition de valeur{" "}
           <Highlight className="text-black dark:text-white">
-            clair et directe
+            claire et directe
           </Highlight>
         </h1>
 
