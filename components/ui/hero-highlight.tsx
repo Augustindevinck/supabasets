@@ -28,6 +28,7 @@ export const Highlight = ({
 }) => {
   return (
     <motion.span
+      suppressHydrationWarning
       initial={{
         backgroundSize: "0% 100%",
       }}
@@ -35,9 +36,8 @@ export const Highlight = ({
         backgroundSize: "100% 100%",
       }}
       transition={{
-        duration: 2,
+        duration: 1.5,
         ease: "linear",
-        delay: 0.5,
       }}
       style={{
         backgroundRepeat: "no-repeat",
