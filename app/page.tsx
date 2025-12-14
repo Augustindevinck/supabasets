@@ -1,5 +1,5 @@
 import ResizableHeader from "@/components/ResizableHeader";
-import WhatAppDoes from "@/components/WhatAppDoes";
+import AnimatedTabsSection from "@/components/AnimatedTabsSection";
 import FAQ from "@/components/FAQ";
 import GridBackground from "@/components/GridBackground";
 import Footer from "@/components/Footer";
@@ -16,7 +16,7 @@ export default function Page() {
           <HeroContent />
         </section>
 
-        <WhatAppDoes />
+        <AnimatedTabsSection />
         <FAQ />
       </main>
 
