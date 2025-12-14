@@ -32,7 +32,7 @@ export function Button({
   return (
     <Component
       className={cn(
-        "relative h-16 w-fit overflow-hidden bg-transparent p-[2px] text-xl",
+        "relative h-16 w-fit overflow-hidden bg-transparent p-[3px] text-xl",
         containerClassName,
       )}
       style={{
@@ -40,6 +40,7 @@ export function Button({
       }}
       {...otherProps}
     >
+      {/* Outer moving border */}
       <div
         className="absolute inset-0"
         style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
@@ -47,16 +48,28 @@ export function Button({
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
             className={cn(
-              "h-20 w-20 bg-[radial-gradient(#5b21b6_40%,transparent_60%)] opacity-[0.8]",
+              "h-20 w-20 bg-[radial-gradient(#7c3aed_40%,transparent_60%)] opacity-[0.9]",
               borderClassName,
             )}
           />
         </MovingBorder>
       </div>
 
+      {/* Static inner border layer */}
+      <div
+        className="absolute inset-0 bg-transparent pointer-events-none"
+        style={{
+          borderRadius: `calc(${borderRadius} * 0.96)`,
+          border: "1.5px solid rgba(124, 58, 237, 0.6)",
+        }}
+      />
+
+      {/* Button content with gradient */}
       <div
         className={cn(
-          "relative flex h-full w-full items-center justify-center border border-purple-200 bg-white text-base font-semibold text-purple-600 antialiased backdrop-blur-xl hover:bg-purple-50 transition-colors",
+          "relative flex h-full w-full items-center justify-center font-semibold antialiased transition-all",
+          "bg-gradient-to-r from-purple-600 to-violet-600 text-white",
+          "hover:from-purple-700 hover:to-violet-700 shadow-lg hover:shadow-purple-500/50",
           className,
         )}
         style={{
@@ -82,7 +95,7 @@ export const MovingBorder = ({
   ry?: string;
   [key: string]: any;
 }) => {
-  const pathRef = useRef<any>();
+  const pathRef = useRef(null);
   const progress = useMotionValue<number>(0);
 
   useAnimationFrame((time) => {
