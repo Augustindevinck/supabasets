@@ -3,8 +3,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import toast from "react-hot-toast";
 
-// Assuming User interface is defined elsewhere or needs to be included
-// For now, I'll define it here based on the original code's usage
 interface User {
   id: string;
   email: string;
@@ -20,7 +18,7 @@ export default function UsersTable() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const fetchUsers = useCallback(async () => {
-    setIsLoading(true); // Set loading true at the start of fetch
+    setIsLoading(true);
     try {
       const response = await fetch("/api/admin/users");
       if (!response.ok) {
@@ -39,11 +37,11 @@ export default function UsersTable() {
     } finally {
       setIsLoading(false);
     }
-  }, []); // fetchUsers doesn't depend on external state that changes
+  }, []);
 
   useEffect(() => {
     fetchUsers();
-  }, [fetchUsers]); // Depend on fetchUsers
+  }, [fetchUsers]);
 
   const handleDelete = useCallback(async (userId: string, email: string) => {
     if (!confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur ${email} ?`)) {
@@ -77,9 +75,8 @@ export default function UsersTable() {
     } finally {
       setDeletingId(null);
     }
-  }, []); // handleDelete doesn't depend on external state that changes
+  }, []);
 
-  // Memoize the formatting function
   const formatDate = useCallback((dateString: string | null) => {
     if (!dateString) return "Jamais";
     try {
@@ -96,21 +93,29 @@ export default function UsersTable() {
     }
   }, []);
 
-  // Memoize the sorted users based on createdAt
-  // Assuming the backend provides createdAt, if not, adjust accordingly
-  // Using `created_at` from supabase is common, adjust if your backend uses `createdAt`
+  const formatDateShort = useCallback((dateString: string | null) => {
+    if (!dateString) return "Jamais";
+    try {
+      return new Date(dateString).toLocaleDateString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+    } catch (error) {
+      console.error("Error formatting date:", dateString, error);
+      return "Date invalide";
+    }
+  }, []);
+
   const sortedUsers = useMemo(() => {
     return [...users].sort((a, b) => {
-      // Safely access dates, default to 0 if null/undefined or invalid
       const dateA = new Date(a.createdAt || 0).getTime();
       const dateB = new Date(b.createdAt || 0).getTime();
-      // Handle potential NaN from invalid dates
       const validDateA = isNaN(dateA) ? 0 : dateA;
       const validDateB = isNaN(dateB) ? 0 : dateB;
-      return validDateB - validDateA; // Descending order
+      return validDateB - validDateA;
     });
   }, [users]);
-
 
   if (isLoading) {
     return (
@@ -120,28 +125,31 @@ export default function UsersTable() {
     );
   }
 
+  if (sortedUsers.length === 0) {
+    return (
+      <div className="text-center py-8 text-base-content/60">
+        Aucun utilisateur trouvé
+      </div>
+    );
+  }
+
   return (
-    <div className="overflow-x-auto">
-      <table className="table table-zebra w-full">
-        <thead>
-          <tr className="bg-base-200">
-            <th>Nom</th>
-            <th>Email</th>
-            <th>Provider</th>
-            <th>Inscrit le</th>
-            <th>Dernière connexion</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedUsers.length === 0 ? (
-            <tr>
-              <td colSpan={6} className="text-center py-8 text-base-content/60">
-                Aucun utilisateur trouvé
-              </td>
+    <div className="space-y-4">
+      {/* Vue Desktop - Table */}
+      <div className="hidden lg:block overflow-x-auto">
+        <table className="table table-zebra w-full">
+          <thead>
+            <tr className="bg-base-200">
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Provider</th>
+              <th>Inscrit le</th>
+              <th>Dernière connexion</th>
+              <th>Actions</th>
             </tr>
-          ) : (
-            sortedUsers.map((user) => (
+          </thead>
+          <tbody>
+            {sortedUsers.map((user) => (
               <tr key={user.id}>
                 <td className="font-medium">{user.name}</td>
                 <td>{user.email}</td>
@@ -166,13 +174,109 @@ export default function UsersTable() {
                   </button>
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      <div className="mt-4 text-sm text-base-content/60">
-        Total: {users.length} utilisateur{users.length > 1 ? "s" : ""}
+      {/* Vue Tablette - Tableau compacte */}
+      <div className="hidden md:block lg:hidden overflow-x-auto">
+        <table className="table table-zebra w-full table-sm">
+          <thead>
+            <tr className="bg-base-200">
+              <th className="p-2">Nom</th>
+              <th className="p-2">Email</th>
+              <th className="p-2">Inscrit</th>
+              <th className="p-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedUsers.map((user) => (
+              <tr key={user.id} className="text-sm">
+                <td className="font-medium p-2">{user.name}</td>
+                <td className="p-2 text-xs break-all">{user.email}</td>
+                <td className="p-2 text-xs">{formatDateShort(user.createdAt)}</td>
+                <td className="p-2">
+                  <button
+                    className="btn btn-error btn-xs"
+                    onClick={() => handleDelete(user.id, user.email)}
+                    disabled={deletingId === user.id}
+                  >
+                    {deletingId === user.id ? (
+                      <span className="loading loading-spinner loading-xs"></span>
+                    ) : (
+                      "Supprimer"
+                    )}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Vue Mobile - Cartes */}
+      <div className="md:hidden space-y-3">
+        {sortedUsers.map((user) => (
+          <div key={user.id} className="card bg-base-200 shadow-sm">
+            <div className="card-body p-4 gap-3">
+              <div className="flex items-start justify-between">
+                <div className="flex-1 min-w-0">
+                  <h3 className="card-title text-base font-semibold truncate">
+                    {user.name}
+                  </h3>
+                  <p className="text-sm text-base-content/70 break-all">
+                    {user.email}
+                  </p>
+                </div>
+                <span className="badge badge-outline badge-xs ml-2 shrink-0">
+                  {user.provider}
+                </span>
+              </div>
+
+              <div className="divider divider-neutral my-0"></div>
+
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                  <p className="text-base-content/60">Inscrit le</p>
+                  <p className="font-medium">
+                    {formatDateShort(user.createdAt)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-base-content/60">Dernière connexion</p>
+                  <p className="font-medium">
+                    {formatDateShort(user.lastSignIn)}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                className="btn btn-error btn-sm w-full"
+                onClick={() => handleDelete(user.id, user.email)}
+                disabled={deletingId === user.id}
+              >
+                {deletingId === user.id ? (
+                  <>
+                    <span className="loading loading-spinner loading-xs"></span>
+                    Suppression...
+                  </>
+                ) : (
+                  "Supprimer"
+                )}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Compteur total */}
+      <div className="mt-6 pt-4 border-t border-base-300">
+        <p className="text-sm text-base-content/60">
+          Total: <span className="font-semibold text-base-content">
+            {users.length}
+          </span> utilisateur{users.length > 1 ? "s" : ""}
+        </p>
       </div>
     </div>
   );
