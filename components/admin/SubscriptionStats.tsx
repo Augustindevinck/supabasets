@@ -47,7 +47,7 @@ export default function SubscriptionStats({ stats, isLoading }: SubscriptionStat
           </div>
         </div>
 
-        <div className="card bg-gradient-to-r from-blue-300 to-blue-400 text-white">
+        <div className="card bg-gradient-blue-primary text-white">
           <div className="card-body p-4">
             <p className="text-sm text-white/80">Abonnés</p>
             <p className="text-2xl font-bold">{stats.subscribed}</p>
@@ -99,8 +99,8 @@ export default function SubscriptionStats({ stats, isLoading }: SubscriptionStat
                 />
                 <defs>
                   <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#93c5fd" />
-                    <stop offset="100%" stopColor="#60a5fa" />
+                    <stop offset="0%" stopColor="var(--primary-blue-light-hex)" />
+                    <stop offset="100%" stopColor="var(--primary-blue-medium-hex)" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -111,7 +111,7 @@ export default function SubscriptionStats({ stats, isLoading }: SubscriptionStat
 
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3">
-                <div className="w-4 h-4 rounded bg-gradient-to-r from-blue-300 to-blue-400"></div>
+                <div className="w-4 h-4 rounded bg-gradient-blue-primary"></div>
                 <span className="text-sm">
                   Abonnés: <span className="font-semibold">{stats.subscribed}</span> ({subscribedPercent.toFixed(1)}%)
                 </span>

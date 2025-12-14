@@ -9,6 +9,21 @@
   --theme-color-sat: 83%;
   --theme-color-light: 50%;
   --theme-color: hsl(var(--theme-color-hue), var(--theme-color-sat), var(--theme-color-light));
+  
+  /* Couleur bleu centralisée - mise à jour globale partout sur le SaaS */
+  --primary-blue-hue: 213;
+  --primary-blue-sat: 96%;
+  
+  /* Teintes bleu */
+  --primary-blue-light: 77%;  /* blue-300 #93c5fd */
+  --primary-blue-medium: 64%;  /* blue-400 #60a5fa */
+  --primary-blue-dark: 60%;   /* blue-500 #3b82f6 */
+  --primary-blue-darker: 55%; /* Variante plus sombre */
+  
+  /* Hex equivalents pour les gradients SVG et autres usages */
+  --primary-blue-light-hex: #93c5fd;
+  --primary-blue-medium-hex: #60a5fa;
+  --primary-blue-dark-hex: #3b82f6;
 }
 
 @theme {
@@ -96,4 +111,63 @@ progress::-webkit-progress-value {
 
 .icon-theme-text {
   color: hsl(var(--theme-color-hue), var(--theme-color-sat), calc(var(--theme-color-light) - 20%));
+}
+
+/* ============================================================================
+   CLASSES BLEU PRIMAIRE CENTRALISÉES
+   Modifiez les variables CSS :root pour mettre à jour TOUTES les couleurs bleu
+   ============================================================================ */
+
+/* Gradient bleu principal (light to medium) - utilisé pour les CTA, buttons */
+.bg-gradient-blue-primary {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-light)),
+    hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium))
+  );
+}
+
+/* Gradient bleu avec hover (medium to dark) */
+.hover\:bg-gradient-blue-primary:hover {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium)),
+    hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-dark))
+  );
+}
+
+/* Gradient bleu alternatif (medium to dark) */
+.bg-gradient-blue-secondary {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium)),
+    hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-dark))
+  );
+}
+
+/* Couleur bleu light uniquement */
+.text-blue-primary-light {
+  color: hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-light));
+}
+
+.bg-blue-primary-light {
+  background-color: hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-light));
+}
+
+/* Couleur bleu medium */
+.text-blue-primary-medium {
+  color: hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium));
+}
+
+.bg-blue-primary-medium {
+  background-color: hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium));
+}
+
+/* Couleur bleu dark */
+.text-blue-primary-dark {
+  color: hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-dark));
+}
+
+.bg-blue-primary-dark {
+  background-color: hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-dark));
 }

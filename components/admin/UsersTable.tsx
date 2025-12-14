@@ -173,7 +173,7 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
                 <td>{user.email}</td>
                 <td>
                   {user.isSubscribed ? (
-                    <span className="badge badge-sm bg-gradient-to-r from-blue-300 to-blue-400 text-white border-0">
+                    <span className="badge badge-sm bg-gradient-blue-primary text-white border-0">
                       Abonné
                     </span>
                   ) : (
@@ -227,7 +227,7 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
                 <td className="p-2 text-xs break-all">{user.email}</td>
                 <td className="p-2">
                   {user.isSubscribed ? (
-                    <span className="badge badge-xs bg-gradient-to-r from-blue-300 to-blue-400 text-white border-0">
+                    <span className="badge badge-xs bg-gradient-blue-primary text-white border-0">
                       Abonné
                     </span>
                   ) : (
@@ -272,7 +272,7 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
                 </div>
                 <div className="flex flex-col gap-1 ml-2 shrink-0">
                   {user.isSubscribed ? (
-                    <span className="badge badge-xs bg-gradient-to-r from-blue-300 to-blue-400 text-white border-0">
+                    <span className="badge badge-xs bg-gradient-blue-primary text-white border-0">
                       Abonné
                     </span>
                   ) : (
