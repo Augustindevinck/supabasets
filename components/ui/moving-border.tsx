@@ -48,7 +48,7 @@ export function Button({
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
             className={cn(
-              "h-20 w-20 bg-[radial-gradient(#0066ff_40%,transparent_60%)] opacity-[0.95]",
+              "h-20 w-20 bg-[radial-gradient(#60a5fa_40%,transparent_60%)] opacity-[0.95]",
               borderClassName,
             )}
           />
@@ -60,7 +60,7 @@ export function Button({
         className="absolute inset-0 bg-transparent pointer-events-none"
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
-          border: "1.5px solid rgba(0, 102, 255, 0.7)",
+          border: "1.5px solid rgba(96, 165, 250, 0.7)",
         }}
       />
 
@@ -68,8 +68,8 @@ export function Button({
       <div
         className={cn(
           "relative flex h-full w-full items-center justify-center px-8 font-semibold antialiased transition-all",
-          "bg-gradient-to-r from-blue-600 to-blue-500 text-white",
-          "hover:from-blue-700 hover:to-blue-600 shadow-lg hover:shadow-blue-500/50",
+          "bg-gradient-to-r from-blue-200 to-blue-300 text-blue-900",
+          "hover:from-blue-300 hover:to-blue-400 shadow-lg hover:shadow-blue-300/50",
           className,
         )}
         style={{
