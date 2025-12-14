@@ -130,12 +130,19 @@ Les interfaces admin (`/admin/dashboard` et `/admin`) sont des pages protégées
    - Vue d'ensemble centralisée
 
 2. **User Management** (`/admin`):
-   - Voir tous les utilisateurs inscrits (nom, email, provider, date d'inscription, dernière connexion)
+   - Statistiques d'abonnement avec graphique circulaire (abonnés vs non-abonnés)
+   - Taux de conversion affiché
+   - Voir tous les utilisateurs inscrits (nom, email, statut abonnement, provider, date d'inscription, dernière connexion)
+   - Badge de statut "Abonné" ou "Non abonné" pour chaque utilisateur
    - Supprimer des utilisateurs (avec confirmation)
 
 #### APIs Admin:
-- `GET /api/admin/users` - Récupère la liste des utilisateurs
+- `GET /api/admin/users` - Récupère la liste des utilisateurs avec données d'abonnement et statistiques
 - `DELETE /api/admin/users` - Supprime un utilisateur (body: `{ userId: string }`)
+
+#### Composants Admin:
+- `components/admin/SubscriptionStats.tsx` - Cartes de stats + graphique circulaire SVG
+- `components/admin/UsersTable.tsx` - Table des utilisateurs avec badges d'abonnement
 
 #### Fichiers clés:
 - `libs/supabase/admin.ts` - Client Supabase avec service role key
