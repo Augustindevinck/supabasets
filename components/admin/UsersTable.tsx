@@ -10,9 +10,21 @@ interface User {
   createdAt: string;
   lastSignIn: string | null;
   provider: string;
+  isSubscribed: boolean;
 }
 
-export default function UsersTable() {
+interface Stats {
+  total: number;
+  subscribed: number;
+  nonSubscribed: number;
+  conversionRate: string;
+}
+
+interface UsersTableProps {
+  onStatsLoaded?: (stats: Stats | null) => void;
+}
+
+export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -28,12 +40,17 @@ export default function UsersTable() {
 
       if (data.error) {
         toast.error(data.error);
+        if (onStatsLoaded) onStatsLoaded(null);
         return;
       }
 
       setUsers(data.users);
+      if (onStatsLoaded) {
+        onStatsLoaded(data.stats || null);
+      }
     } catch (error: any) {
       toast.error(error.message || "Erreur lors du chargement des utilisateurs");
+      if (onStatsLoaded) onStatsLoaded(null);
     } finally {
       setIsLoading(false);
     }
@@ -142,6 +159,7 @@ export default function UsersTable() {
             <tr className="bg-base-200">
               <th>Nom</th>
               <th>Email</th>
+              <th>Statut</th>
               <th>Provider</th>
               <th>Inscrit le</th>
               <th>Dernière connexion</th>
@@ -153,6 +171,17 @@ export default function UsersTable() {
               <tr key={user.id}>
                 <td className="font-medium">{user.name}</td>
                 <td>{user.email}</td>
+                <td>
+                  {user.isSubscribed ? (
+                    <span className="badge badge-sm bg-gradient-to-r from-blue-300 to-blue-400 text-white border-0">
+                      Abonné
+                    </span>
+                  ) : (
+                    <span className="badge badge-ghost badge-sm">
+                      Non abonné
+                    </span>
+                  )}
+                </td>
                 <td>
                   <span className="badge badge-outline badge-sm">
                     {user.provider}
@@ -186,6 +215,7 @@ export default function UsersTable() {
             <tr className="bg-base-200">
               <th className="p-2">Nom</th>
               <th className="p-2">Email</th>
+              <th className="p-2">Statut</th>
               <th className="p-2">Inscrit</th>
               <th className="p-2">Actions</th>
             </tr>
@@ -195,6 +225,17 @@ export default function UsersTable() {
               <tr key={user.id} className="text-sm">
                 <td className="font-medium p-2">{user.name}</td>
                 <td className="p-2 text-xs break-all">{user.email}</td>
+                <td className="p-2">
+                  {user.isSubscribed ? (
+                    <span className="badge badge-xs bg-gradient-to-r from-blue-300 to-blue-400 text-white border-0">
+                      Abonné
+                    </span>
+                  ) : (
+                    <span className="badge badge-ghost badge-xs">
+                      Non
+                    </span>
+                  )}
+                </td>
                 <td className="p-2 text-xs">{formatDateShort(user.createdAt)}</td>
                 <td className="p-2">
                   <button
@@ -229,9 +270,20 @@ export default function UsersTable() {
                     {user.email}
                   </p>
                 </div>
-                <span className="badge badge-outline badge-xs ml-2 shrink-0">
-                  {user.provider}
-                </span>
+                <div className="flex flex-col gap-1 ml-2 shrink-0">
+                  {user.isSubscribed ? (
+                    <span className="badge badge-xs bg-gradient-to-r from-blue-300 to-blue-400 text-white border-0">
+                      Abonné
+                    </span>
+                  ) : (
+                    <span className="badge badge-ghost badge-xs">
+                      Non abonné
+                    </span>
+                  )}
+                  <span className="badge badge-outline badge-xs">
+                    {user.provider}
+                  </span>
+                </div>
               </div>
 
               <div className="divider divider-neutral my-0"></div>

@@ -21,16 +21,34 @@ export async function GET() {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    const formattedUsers = users.map((u) => ({
-      id: u.id,
-      email: u.email,
-      name: u.user_metadata?.name || u.email?.split("@")[0] || "N/A",
-      createdAt: u.created_at,
-      lastSignIn: u.last_sign_in_at,
-      provider: u.app_metadata?.provider || "email",
-    }));
+    const { data: profiles } = await adminClient
+      .from("profiles")
+      .select("id, customer_id, price_id");
 
-    return NextResponse.json({ users: formattedUsers });
+    const formattedUsers = users.map((u) => {
+      const profile = profiles?.find((p) => p.id === u.id);
+      return {
+        id: u.id,
+        email: u.email,
+        name: u.user_metadata?.name || u.email?.split("@")[0] || "N/A",
+        createdAt: u.created_at,
+        lastSignIn: u.last_sign_in_at,
+        provider: u.app_metadata?.provider || "email",
+        isSubscribed: !!(profile?.customer_id && profile?.price_id),
+      };
+    });
+
+    const subscribedCount = formattedUsers.filter((u) => u.isSubscribed).length;
+    const stats = {
+      total: formattedUsers.length,
+      subscribed: subscribedCount,
+      nonSubscribed: formattedUsers.length - subscribedCount,
+      conversionRate: formattedUsers.length > 0
+        ? ((subscribedCount / formattedUsers.length) * 100).toFixed(1)
+        : "0",
+    };
+
+    return NextResponse.json({ users: formattedUsers, stats });
   } catch (error) {
     console.error("Error fetching users:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
