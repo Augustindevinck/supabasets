@@ -11,7 +11,7 @@ import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
 export function Button({
-  borderRadius = "1.75rem",
+  borderRadius = "1.5rem",
   children,
   as: Component = "button",
   containerClassName,
@@ -32,7 +32,7 @@ export function Button({
   return (
     <Component
       className={cn(
-        "relative h-16 w-fit overflow-hidden bg-transparent p-[3px] text-xl",
+        "relative h-14 w-fit overflow-hidden bg-transparent p-[2.5px] text-xl",
         containerClassName,
       )}
       style={{
@@ -48,7 +48,7 @@ export function Button({
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
             className={cn(
-              "h-20 w-20 bg-[radial-gradient(#7c3aed_40%,transparent_60%)] opacity-[0.9]",
+              "h-20 w-20 bg-[radial-gradient(#0066ff_40%,transparent_60%)] opacity-[0.95]",
               borderClassName,
             )}
           />
@@ -60,16 +60,16 @@ export function Button({
         className="absolute inset-0 bg-transparent pointer-events-none"
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
-          border: "1.5px solid rgba(124, 58, 237, 0.6)",
+          border: "1.5px solid rgba(0, 102, 255, 0.7)",
         }}
       />
 
       {/* Button content with gradient */}
       <div
         className={cn(
-          "relative flex h-full w-full items-center justify-center font-semibold antialiased transition-all",
-          "bg-gradient-to-r from-purple-600 to-violet-600 text-white",
-          "hover:from-purple-700 hover:to-violet-700 shadow-lg hover:shadow-purple-500/50",
+          "relative flex h-full w-full items-center justify-center px-8 font-semibold antialiased transition-all",
+          "bg-gradient-to-r from-blue-600 to-blue-500 text-white",
+          "hover:from-blue-700 hover:to-blue-600 shadow-lg hover:shadow-blue-500/50",
           className,
         )}
         style={{
