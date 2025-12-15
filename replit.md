@@ -92,10 +92,11 @@ Next.js includes a built-in `optimizePackageImports` feature that tree-shakes he
 - `@headlessui/react` - UI components
 - `@tabler/icons-react` - Icons (3000+ icons, must tree-shake)
 - `daisyui` - Tailwind component library
-- `aceternity-ui` - Custom animations and components
-- `framer-motion` - Animation library
+- `framer-motion` - Animation library for smooth transitions
 - `react-hot-toast` - Toast notifications
 - `react-tooltip` - Tooltip component
+
+**Note:** Removed `aceternity-ui` dependency - all UI components are now custom-built for better performance and compatibility
 
 This setting dramatically reduces first build time (from minutes to seconds) by only bundling what you actually import.
 
@@ -191,13 +192,13 @@ const ADMIN_EMAILS = [
 - Accessible from sidebar under "Home" link
 
 ### Sidebar Navigation
-- **Left Sidebar**: Aceternity UI responsive sidebar with smooth animations
+- **Left Sidebar**: Custom responsive sidebar with smooth framer-motion animations
   - Collapses on hover (desktop), expandable menu on mobile
-  - Dark mode support
+  - Dark mode support optimized for light/dark themes
   - Quick links: Home, Settings
   - User account button integrated
   - Admin section for authorized users
-- **Header**: Page title and description
+- **Header**: Custom header component with responsive design
 
 ### Sidebar Components
 Located in `components/ui/sidebar.tsx`:
