@@ -27,8 +27,8 @@ const ButtonLead = ({ extraStyle }: { extraStyle?: string }) => {
       inputRef.current.blur();
       setEmail("");
       setIsDisabled(true);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      toast.error("Une erreur est survenue");
     } finally {
       setIsLoading(false);
     }

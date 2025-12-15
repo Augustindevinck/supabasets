@@ -68,8 +68,7 @@ export default function Signup() {
           router.push(config.auth.callbackUrl);
         }
       }
-    } catch (error) {
-      console.log(error);
+    } catch {
       toast.error("Une erreur est survenue");
     } finally {
       setIsLoading(false);

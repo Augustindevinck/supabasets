@@ -6,6 +6,14 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: true,
   
+  // Allow dev server access from Replit proxy
+  allowedDevOrigins: [
+    'localhost',
+    '127.0.0.1',
+    '.replit.dev',
+    '.riker.replit.dev',
+  ],
+  
   experimental: {
     optimizePackageImports: [
       '@headlessui/react',
@@ -37,18 +45,6 @@ const nextConfig = {
         hostname: 'logos-world.net',
       },
     ],
-  },
-  webpack: (config, { webpack, isServer }) => {
-    // Ignore MongoDB's optional dependencies to prevent build warnings
-    if (isServer) {
-      config.plugins.push(
-        new webpack.IgnorePlugin({
-          resourceRegExp: /^(kerberos|@mongodb-js\/zstd|@aws-sdk\/credential-providers|gcp-metadata|snappy|socks|aws4|mongodb-client-encryption)$/,
-        })
-      );
-    }
-
-    return config;
   },
 };
 
