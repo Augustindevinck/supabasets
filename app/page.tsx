@@ -1,5 +1,5 @@
 import ResizableHeader from "@/components/ResizableHeader";
-import AnimatedTabsSection from "@/components/AnimatedTabsSection";
+import FeaturesSection from "@/components/FeaturesSection";
 import FAQ from "@/components/FAQ";
 import GridBackground from "@/components/GridBackground";
 import Footer from "@/components/Footer";
@@ -16,7 +16,7 @@ export default function Page() {
           <HeroContent />
         </section>
 
-        <AnimatedTabsSection />
+        <FeaturesSection />
         <FAQ />
       </main>
 
