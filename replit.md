@@ -107,6 +107,21 @@ This setting dramatically reduces first build time (from minutes to seconds) by 
 2. Rebuild fresh: `npm run build`
 3. Monitor with: `npm run build -- --debug`
 
+## Color Scheme & Design
+### White-First Design
+- **Background**: All components use white (`bg-white`) background
+- **Text**: Dark gray text (`text-gray-900`, `text-gray-600`, `text-gray-700`)
+- **Borders**: Light gray borders (`border-gray-200`)
+- **No Mode Switching**: No dark mode - always white background with dark text
+
+### Custom Components (No Aceternity)
+All UI components are custom-built for optimal performance:
+- **GridBackground** (`components/GridBackground.tsx`): White grid with subtle gray lines
+- **HeroHighlight** (`components/ui/hero-highlight.tsx`): White background container
+- **Highlight** (animated text): Blue gradient text on white background
+- **Header** (`components/Header.tsx`): White header with gray text navigation
+- **Sidebar** (`components/ui/sidebar.tsx`): White sidebar with light gray borders
+
 ## Code Conventions & ESLint Rules
 
 ### French Text & Apostrophes
@@ -117,11 +132,6 @@ This setting dramatically reduces first build time (from minutes to seconds) by 
 - `cn()` function in `lib/utils.ts` uses clsx for conditional class merging
 - Import: `import { cn } from "@/lib/utils"`
 - Usage: `className={cn("base-class", condition && "conditional-class")}`
-
-### Design Components
-- **GridBackground** (`components/GridBackground.tsx`): Animated grid background with radial fade
-  - Used in hero sections for modern aesthetic
-  - Adapts to light/dark mode automatically
 
 ## Authentication
 - **Email/Password**: Users can sign up and sign in with email + password
@@ -194,11 +204,13 @@ const ADMIN_EMAILS = [
 ### Sidebar Navigation
 - **Left Sidebar**: Custom responsive sidebar with smooth framer-motion animations
   - Collapses on hover (desktop), expandable menu on mobile
-  - Dark mode support optimized for light/dark themes
+  - White background with gray border
   - Quick links: Home, Settings
   - User account button integrated
   - Admin section for authorized users
-- **Header**: Custom header component with responsive design
+- **Header**: Custom white header with gray text and border
+  - Clean, light design adapted for white background
+  - Mobile-responsive menu with same white styling
 
 ### Sidebar Components
 Located in `components/ui/sidebar.tsx`:

@@ -51,7 +51,7 @@ const Header = memo(() => {
   }, [searchParams]);
 
   return (
-    <header className="bg-neutral-900/90 rounded-lg dark">
+    <header className="bg-white border-b border-gray-200 rounded-lg">
       <nav
         className="container flex items-center justify-between px-8 py-4 mx-auto"
         aria-label="Global"
@@ -59,7 +59,7 @@ const Header = memo(() => {
         {/* Your logo/name on large screens */}
         <div className="flex lg:flex-1">
           <Link
-            className="flex items-center gap-2 shrink-0 text-white"
+            className="flex items-center gap-2 shrink-0 text-gray-900"
             href="/"
             title={`${config.appName} homepage`}
           >
@@ -81,7 +81,7 @@ const Header = memo(() => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 text-white"
+              className="w-6 h-6 text-gray-900"
             >
               <path
                 strokeLinecap="round"
@@ -98,7 +98,7 @@ const Header = memo(() => {
             <Link
               href={link.href}
               key={link.href}
-              className="link link-hover text-neutral-300 hover:text-white"
+              className="link link-hover text-gray-600 hover:text-gray-900"
               title={link.label}
             >
               {link.label}
@@ -113,12 +113,12 @@ const Header = memo(() => {
       {/* Mobile menu, show/hide based on menu state. */}
       <div className={`relative z-50 ${isOpen ? "" : "hidden"}`}>
         <div
-          className={`fixed inset-y-0 right-0 z-10 w-full px-8 py-4 overflow-y-auto bg-neutral-900/95 rounded-3xl sm:max-w-sm sm:ring-1 sm:ring-white/10 transform origin-right transition ease-in-out duration-300 dark`}
+          className={`fixed inset-y-0 right-0 z-10 w-full px-8 py-4 overflow-y-auto bg-white rounded-3xl sm:max-w-sm sm:ring-1 sm:ring-gray-200 transform origin-right transition ease-in-out duration-300`}
         >
           {/* Your logo/name on small screens */}
           <div className="flex items-center justify-between">
             <Link
-              className="flex items-center gap-2 shrink-0 text-white"
+              className="flex items-center gap-2 shrink-0 text-gray-900"
               title={`${config.appName} homepage`}
               href="/"
             >
@@ -137,7 +137,7 @@ const Header = memo(() => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 text-white"
+                className="w-6 h-6 text-gray-900"
               >
                 <path
                   strokeLinecap="round"

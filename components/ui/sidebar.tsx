@@ -114,13 +114,6 @@ export const DesktopSidebar = React.memo(({
     }, 300);
   }, [setOpen]);
 
-  // Force light mode for this component
-  React.useEffect(() => {
-    const sidebar = document.querySelector('[data-sidebar="desktop"]');
-    if (sidebar) {
-      sidebar.classList.add('light');
-    }
-  }, []);
 
   React.useEffect(() => {
     isMountedRef.current = true;
@@ -136,7 +129,7 @@ export const DesktopSidebar = React.memo(({
       suppressHydrationWarning
       data-sidebar="desktop"
       className={cn(
-        "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 w-[200px] shrink-0 light",
+        "h-full px-4 py-4 hidden md:flex md:flex-col bg-white w-[200px] shrink-0 border-r border-gray-200",
         className
       )}
       initial={{
@@ -171,7 +164,7 @@ export const MobileSidebar = React.memo(({
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between w-full light",
+          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between w-full",
           open ? "bg-white" : "bg-transparent"
         )}
         {...props}
@@ -197,7 +190,7 @@ export const MobileSidebar = React.memo(({
                 ease: "easeInOut",
               }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white p-10 z-[100] flex flex-col justify-between light",
+                "fixed h-full w-full inset-0 bg-white p-10 z-[100] flex flex-col justify-between",
                 className
               )}
               role="dialog"
