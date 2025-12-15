@@ -5,15 +5,15 @@ import { Button } from "@/components/ui/moving-border";
 export default function HeroContent() {
   return (
     <HeroHighlight>
-      <div className="flex flex-col items-center justify-center text-center gap-12 px-4 sm:px-6 lg:px-8 mx-auto w-[98%] sm:w-[85%] lg:w-[70%]">
-        <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
+      <div className="flex flex-col items-center justify-center text-center gap-12 px-4 sm:px-6 lg:px-8 mx-auto w-[98%] sm:w-[85%] lg:w-[70%] dark">
+        <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight text-white">
           Proposition de valeur{" "}
-          <Highlight className="text-black dark:text-white">
+          <Highlight className="text-white">
             claire et directe
           </Highlight>
         </h1>
 
-        <p className="text-lg opacity-80">
+        <p className="text-lg opacity-80 text-neutral-300">
           Mettre un élément animé comme un texte qui change, ou alors commencer à engager en demandant une info ou une action
         </p>
 

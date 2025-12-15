@@ -13,7 +13,7 @@ export const HeroHighlight = ({
   containerClassName?: string;
 }) => {
   return (
-    <div className={cn("group relative", containerClassName)}>
+    <div className={cn("group relative bg-neutral-950 dark min-h-screen flex items-center justify-center", containerClassName)}>
       <div className={cn("relative z-20", className)}>{children}</div>
     </div>
   );
@@ -43,9 +43,10 @@ export const Highlight = ({
         backgroundRepeat: "no-repeat",
         backgroundPosition: "left center",
         display: "inline",
+        backgroundImage: "linear-gradient(to right, hsl(213, 96%, 64%), hsl(213, 96%, 60%))"
       }}
       className={cn(
-        `relative inline-block rounded-lg bg-gradient-blue-primary px-1 pb-1`,
+        `relative inline-block rounded-lg px-1 pb-1 text-white`,
         className,
       )}
     >
