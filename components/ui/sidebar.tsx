@@ -114,6 +114,14 @@ export const DesktopSidebar = React.memo(({
     }, 300);
   }, [setOpen]);
 
+  // Force light mode for this component
+  React.useEffect(() => {
+    const sidebar = document.querySelector('[data-sidebar="desktop"]');
+    if (sidebar) {
+      sidebar.classList.add('light');
+    }
+  }, []);
+
   React.useEffect(() => {
     isMountedRef.current = true;
     return () => {
@@ -126,8 +134,9 @@ export const DesktopSidebar = React.memo(({
   return (
     <motion.aside
       suppressHydrationWarning
+      data-sidebar="desktop"
       className={cn(
-        "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[200px] shrink-0",
+        "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 w-[200px] shrink-0 light",
         className
       )}
       initial={{
@@ -162,8 +171,8 @@ export const MobileSidebar = React.memo(({
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between w-full",
-          open ? "bg-white dark:bg-neutral-900" : "bg-transparent"
+          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between w-full light",
+          open ? "bg-white" : "bg-transparent"
         )}
         {...props}
       >
@@ -172,7 +181,7 @@ export const MobileSidebar = React.memo(({
             onClick={toggleSidebar}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="text-neutral-800 dark:text-neutral-200 p-1"
+            className="text-neutral-800 p-1"
           >
             <IconMenu2 />
           </button>
@@ -188,14 +197,14 @@ export const MobileSidebar = React.memo(({
                 ease: "easeInOut",
               }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
+                "fixed h-full w-full inset-0 bg-white p-10 z-[100] flex flex-col justify-between light",
                 className
               )}
               role="dialog"
               aria-label="Mobile navigation"
             >
               <button
-                className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200 p-1"
+                className="absolute right-10 top-10 z-50 text-neutral-800 p-1"
                 onClick={toggleSidebar}
                 aria-label="Close menu"
               >
@@ -239,7 +248,7 @@ export const SidebarLink = React.memo(({
       href={link.href}
       onClick={handleClick}
       className={cn(
-        "flex items-center gap-2 group/sidebar py-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors duration-150",
+        "flex items-center gap-2 group/sidebar py-2 rounded-lg hover:bg-neutral-200 transition-colors duration-150 light",
         open ? "justify-start px-3" : "justify-center",
         className
       )}
@@ -261,7 +270,7 @@ export const SidebarLink = React.memo(({
           opacity: { duration: 0.3 },
           marginLeft: { duration: 0.3 }
         }}
-        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre overflow-hidden !p-0 !m-0"
+        className="text-neutral-700 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre overflow-hidden !p-0 !m-0"
       >
         {link.label}
       </motion.span>
