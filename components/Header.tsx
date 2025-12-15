@@ -8,9 +8,13 @@ import config from "@/config";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navLinks = [
+  const desktopNavLinks = [
     { label: "Pricing", href: "/#pricing" },
     { label: "Reviews", href: "/#testimonials" },
+    { label: "FAQ", href: "/#faq" },
+  ];
+
+  const mobileNavLinks = [
     { label: "FAQ", href: "/#faq" },
   ];
 
@@ -36,7 +40,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {desktopNavLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -73,7 +77,7 @@ export default function Header() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4 space-y-4">
-            {navLinks.map((link) => (
+            {mobileNavLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
