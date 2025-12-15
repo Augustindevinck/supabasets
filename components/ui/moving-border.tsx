@@ -63,8 +63,7 @@ export function Button({
         className="absolute inset-0 bg-transparent pointer-events-none"
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
-          border: `1.5px solid rgba(96, 165, 250, 0.7)`,
-          borderColor: `hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium), 0.7)`,
+          border: `1.5px solid hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium) / 0.7)`,
         }}
       />
 
@@ -78,7 +77,7 @@ export function Button({
         )}
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
-          boxShadow: `0 8px 16px hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium), 0.3)`,
+          boxShadow: `0 8px 16px hsl(var(--primary-blue-hue), var(--primary-blue-sat), var(--primary-blue-medium) / 0.3)`,
         }}
       >
         {children}
