@@ -7,7 +7,15 @@ const nextConfig = {
   generateEtags: true,
   
   experimental: {
-    optimizePackageImports: ['@headlessui/react', 'lucide-react', 'daisyui', '@tabler/icons-react'],
+    optimizePackageImports: [
+      '@headlessui/react',
+      '@tabler/icons-react',
+      'daisyui',
+      'aceternity-ui',
+      'framer-motion',
+      'react-hot-toast',
+      'react-tooltip',
+    ],
   },
   
   images: {

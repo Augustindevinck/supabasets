@@ -83,6 +83,29 @@ Ces classes sont utilisées dans les composants qui affichent des icônes color�
 ## Deployment
 The app is configured for deployment on Replit with autoscaling support.
 
+## Build Optimization
+
+### Package Import Optimization
+Next.js includes a built-in `optimizePackageImports` feature that tree-shakes heavy dependencies:
+
+**Current optimized packages:**
+- `@headlessui/react` - UI components
+- `@tabler/icons-react` - Icons (3000+ icons, must tree-shake)
+- `daisyui` - Tailwind component library
+- `aceternity-ui` - Custom animations and components
+- `framer-motion` - Animation library
+- `react-hot-toast` - Toast notifications
+- `react-tooltip` - Tooltip component
+
+This setting dramatically reduces first build time (from minutes to seconds) by only bundling what you actually import.
+
+**Note:** These optimizations are automatically applied. Your imports are already optimal - you're importing specific components, not entire modules. ✅
+
+### If Build Times Still Slow:
+1. Clear `.next` folder: `rm -rf .next`
+2. Rebuild fresh: `npm run build`
+3. Monitor with: `npm run build -- --debug`
+
 ## Code Conventions & ESLint Rules
 
 ### French Text & Apostrophes
