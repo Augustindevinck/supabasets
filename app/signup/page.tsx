@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/libs/supabase/client";
 import { Provider } from "@supabase/supabase-js";
@@ -15,6 +15,32 @@ export default function Signup() {
   const [password, setPassword] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasSignedUp, setHasSignedUp] = useState<boolean>(false);
+
+  // Monitor session after signup
+  useEffect(() => {
+    if (!hasSignedUp) return;
+
+    const checkSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          router.push(config.auth.callbackUrl);
+        }
+      } catch (error) {
+        console.error("Session check error:", error);
+      }
+    };
+
+    // Check immediately and then every 100ms for up to 2 seconds
+    const timer = setInterval(checkSession, 100);
+    const timeout = setTimeout(() => clearInterval(timer), 2000);
+
+    return () => {
+      clearInterval(timer);
+      clearTimeout(timeout);
+    };
+  }, [hasSignedUp, supabase, router]);
 
   const handleSignup = async (
     e: any,
@@ -24,7 +50,6 @@ export default function Signup() {
     }
   ) => {
     e?.preventDefault();
-
     setIsLoading(true);
 
     try {
@@ -51,7 +76,7 @@ export default function Signup() {
           return;
         }
 
-        const { error } = await supabase.auth.signUp({
+        const { error, data } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -64,25 +89,15 @@ export default function Signup() {
         if (error) {
           toast.error(error.message);
           setIsLoading(false);
-        } else {
+        } else if (data?.user) {
           toast.success("Compte créé avec succès !");
-          // Wait for session to be established before redirecting
-          await new Promise(resolve => setTimeout(resolve, 500));
-          
-          // Verify session is set before redirect
-          const { data: { session } } = await supabase.auth.getSession();
-          if (session) {
-            router.push(config.auth.callbackUrl);
-          } else {
-            // Fallback: try again after a bit more wait
-            await new Promise(resolve => setTimeout(resolve, 500));
-            router.push(config.auth.callbackUrl);
-          }
+          setHasSignedUp(true);
+          // Keep loading state until redirect happens
         }
       }
-    } catch {
+    } catch (error) {
+      console.error("Signup error:", error);
       toast.error("Une erreur est survenue");
-    } finally {
       setIsLoading(false);
     }
   };
@@ -163,6 +178,7 @@ export default function Signup() {
             placeholder="Nom"
             className="input input-bordered w-full placeholder:opacity-60"
             onChange={(e) => setName(e.target.value)}
+            disabled={isLoading}
           />
 
           <input
@@ -173,6 +189,7 @@ export default function Signup() {
             placeholder="Email"
             className="input input-bordered w-full placeholder:opacity-60"
             onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
           />
 
           <input
@@ -183,6 +200,7 @@ export default function Signup() {
             placeholder="Mot de passe (min. 6 caractères)"
             className="input input-bordered w-full placeholder:opacity-60"
             onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
           />
 
           <button

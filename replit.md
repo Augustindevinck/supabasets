@@ -85,10 +85,12 @@ The app is configured for deployment on Replit with autoscaling support.
 
 ## Recent Fixes (December 16, 2025)
 
-### Authentication Flow Improvements
-- **Fixed redirect delay**: Added session wait before redirection after signup/signin (500ms delay to ensure session is established)
-- **Session verification**: Signup now verifies session exists before redirect, with fallback mechanism
-- **Faster auth experience**: Eliminates blank page and improves mobile experience in Replit environment
+### Authentication Flow - Complete Rewrite
+- **Robust session polling**: Uses `useEffect` to poll session status every 100ms for up to 2 seconds
+- **Signup flow**: Sets `hasSignedUp` flag, triggers useEffect that checks for session establishment
+- **Signin flow**: Sets `shouldRedirect` flag, triggers useEffect that checks for session establishment
+- **Input protection**: Inputs disabled during authentication to prevent duplicate submissions
+- **Error handling**: Proper error states without double state updates
 - **Removed**: AnimatedTabsSection component (replaced with custom FeaturesSection)
 
 ### New Components

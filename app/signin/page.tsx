@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/libs/supabase/client";
 import { Provider } from "@supabase/supabase-js";
@@ -14,8 +14,34 @@ export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [shouldRedirect, setShouldRedirect] = useState<boolean>(false);
 
-  const handleSignup = async (
+  // Monitor session after signin
+  useEffect(() => {
+    if (!shouldRedirect) return;
+
+    const checkSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          router.push(config.auth.callbackUrl);
+        }
+      } catch (error) {
+        console.error("Session check error:", error);
+      }
+    };
+
+    // Check immediately and then every 100ms for up to 2 seconds
+    const timer = setInterval(checkSession, 100);
+    const timeout = setTimeout(() => clearInterval(timer), 2000);
+
+    return () => {
+      clearInterval(timer);
+      clearTimeout(timeout);
+    };
+  }, [shouldRedirect, supabase, router]);
+
+  const handleSignIn = async (
     e: any,
     options: {
       type: string;
@@ -23,7 +49,6 @@ export default function Login() {
     }
   ) => {
     e?.preventDefault();
-
     setIsLoading(true);
 
     try {
@@ -48,14 +73,13 @@ export default function Login() {
           setIsLoading(false);
         } else {
           toast.success("Connexion réussie !");
-          // Wait for session to be established before redirecting
-          await new Promise(resolve => setTimeout(resolve, 500));
-          router.push(config.auth.callbackUrl);
+          setShouldRedirect(true);
+          // Keep loading state until redirect happens
         }
       }
-    } catch {
+    } catch (error) {
+      console.error("Sign in error:", error);
       toast.error("Une erreur est survenue");
-    } finally {
       setIsLoading(false);
     }
   };
@@ -87,7 +111,7 @@ export default function Login() {
         <button
           className="btn btn-block"
           onClick={(e) =>
-            handleSignup(e, { type: "oauth", provider: "google" })
+            handleSignIn(e, { type: "oauth", provider: "google" })
           }
           disabled={isLoading}
         >
@@ -126,7 +150,7 @@ export default function Login() {
 
         <form
           className="form-control w-full space-y-4"
-          onSubmit={(e) => handleSignup(e, { type: "password" })}
+          onSubmit={(e) => handleSignIn(e, { type: "password" })}
         >
           <input
             required
@@ -136,6 +160,7 @@ export default function Login() {
             placeholder="Email"
             className="input input-bordered w-full placeholder:opacity-60"
             onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
           />
 
           <input
@@ -146,6 +171,7 @@ export default function Login() {
             placeholder="Mot de passe"
             className="input input-bordered w-full placeholder:opacity-60"
             onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
           />
 
           <button
