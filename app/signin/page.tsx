@@ -45,8 +45,11 @@ export default function Login() {
 
         if (error) {
           toast.error(error.message);
+          setIsLoading(false);
         } else {
           toast.success("Connexion réussie !");
+          // Wait for session to be established before redirecting
+          await new Promise(resolve => setTimeout(resolve, 500));
           router.push(config.auth.callbackUrl);
         }
       }

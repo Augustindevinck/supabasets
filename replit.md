@@ -28,9 +28,9 @@ types/                  # TypeScript type definitions
 - **Language**: TypeScript
 
 ## Development
-- Run: `npm run dev` (starts on port 5000)
-- Build: `npm run build`
-- Start: `npm start`
+- Run: `bun run dev` (starts on port 5000)
+- Build: `bun run build`
+- Start: `bun start`
 
 ## Environment Variables
 Required secrets:
@@ -82,6 +82,21 @@ Ces classes sont utilisées dans les composants qui affichent des icônes color�
 
 ## Deployment
 The app is configured for deployment on Replit with autoscaling support.
+
+## Recent Fixes (December 16, 2025)
+
+### Authentication Flow Improvements
+- **Fixed redirect delay**: Added session wait before redirection after signup/signin (500ms delay to ensure session is established)
+- **Session verification**: Signup now verifies session exists before redirect, with fallback mechanism
+- **Faster auth experience**: Eliminates blank page and improves mobile experience in Replit environment
+- **Removed**: AnimatedTabsSection component (replaced with custom FeaturesSection)
+
+### New Components
+- **FeaturesSection** (`components/FeaturesSection.tsx`): Custom interactive features showcase with 3 tabs
+  - Automatisation Intelligente
+  - Analytics en Temps Réel
+  - Intégration Totale
+  - Fully custom CSS with fadeIn animations
 
 ## Build Optimization
 
@@ -136,11 +151,13 @@ All UI components are custom-built for optimal performance:
 ## Authentication
 - **Email/Password**: Users can sign up and sign in with email + password
   - Signup page: `/signup` - Creates account with mandatory name
-  - Signin page: `/signin` - Login with email/password
+  - Signin page: `/signin` - Login with email/password  
   - Password minimum: 6 characters
-- **Google OAuth**: Continue with Google button
+  - **Auto-redirect**: 500ms delay ensures session is established before redirect to `/dashboard`
+- **Google OAuth**: Continue with Google button (redirects via `/api/auth/callback`)
 - Supabase Auth handles all authentication
-- After successful auth, users are redirected to `/dashboard`
+- After successful auth, users are automatically redirected to `/dashboard`
+- Dashboard is protected - non-authenticated users are redirected to `/signin`
 
 ## Admin System
 - Admin emails are defined in `libs/admin.ts`

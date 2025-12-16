@@ -63,9 +63,21 @@ export default function Signup() {
 
         if (error) {
           toast.error(error.message);
+          setIsLoading(false);
         } else {
           toast.success("Compte créé avec succès !");
-          router.push(config.auth.callbackUrl);
+          // Wait for session to be established before redirecting
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+          // Verify session is set before redirect
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session) {
+            router.push(config.auth.callbackUrl);
+          } else {
+            // Fallback: try again after a bit more wait
+            await new Promise(resolve => setTimeout(resolve, 500));
+            router.push(config.auth.callbackUrl);
+          }
         }
       }
     } catch {
