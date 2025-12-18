@@ -4,6 +4,9 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { createModuleLogger } from "@/lib/logger";
+
+const webhookLogger = createModuleLogger("Stripe-Webhook");
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-08-16",
@@ -34,8 +37,11 @@ export async function POST(req: NextRequest) {
   try {
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err) {
-    console.error(`Webhook signature verification failed. ${err.message}`);
-    return NextResponse.json({ error: err.message }, { status: 400 });
+    webhookLogger.error(
+      "Webhook signature verification failed",
+      err instanceof Error ? err : new Error(String(err))
+    );
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Verification failed" }, { status: 400 });
   }
 
   eventType = event.type;
@@ -178,8 +184,11 @@ export async function POST(req: NextRequest) {
       // Unhandled event type
     }
   } catch (e) {
-    console.error("stripe error: ", e.message);
+    webhookLogger.error("Webhook processing failed", e instanceof Error ? e : new Error(String(e)), {
+      eventType,
+    });
   }
 
+  webhookLogger.debug("Webhook processed", { eventType });
   return NextResponse.json({});
 }

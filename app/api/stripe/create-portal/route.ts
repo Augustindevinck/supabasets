@@ -1,6 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
 import { createClient } from "@/libs/supabase/server";
 import { createCustomerPortal } from "@/libs/stripe";
+import { createModuleLogger } from "@/lib/logger";
+
+const portalLogger = createModuleLogger("Stripe-Portal");
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,11 +48,12 @@ export async function POST(req: NextRequest) {
       returnUrl: body.returnUrl,
     });
 
+    portalLogger.info("Portal session created");
     return NextResponse.json({
       url: stripePortalUrl,
     });
   } catch (e) {
-    console.error(e);
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+    portalLogger.error("Portal creation failed", e as Error);
+    return NextResponse.json({ error: e instanceof Error ? e.message : "Unknown error" }, { status: 500 });
   }
 }

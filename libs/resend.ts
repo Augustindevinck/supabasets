@@ -1,5 +1,8 @@
 import { Resend } from "resend";
 import config from "@/config";
+import { createModuleLogger } from "@/lib/logger";
+
+const emailLogger = createModuleLogger("Email-Resend");
 
 if (!process.env.RESEND_API_KEY) {
   throw new Error("RESEND_API_KEY is not set");
@@ -30,9 +33,10 @@ export const sendEmail = async ({
   });
 
   if (error) {
-    console.error("Error sending email:", error.message);
+    emailLogger.error("Email sending failed", error.message, { to });
     throw error;
   }
 
+  emailLogger.info("Email sent successfully", { to, subject });
   return data;
 };

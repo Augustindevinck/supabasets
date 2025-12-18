@@ -83,6 +83,59 @@ Ces classes sont utilisées dans les composants qui affichent des icônes color�
 ## Deployment
 The app is configured for deployment on Replit with autoscaling support.
 
+## Logging System (December 18, 2025)
+
+### Complete Unified Logging System
+A professional, enterprise-grade logging utility has been implemented across the entire application:
+
+**Location:** `lib/logger.ts` - Centralized logger module
+**Features:**
+- 4 log levels: DEBUG, INFO, WARN, ERROR
+- Environment-aware: DEBUG level in development, WARN+ in production
+- Formatted timestamps (ISO 8601)
+- Context tracking (module name, user ID, request ID)
+- Performance timers for API calls
+- User action logging
+- Color-coded console output (browser)
+
+**Integration Points:**
+- `libs/api.ts` - API interceptor logging with status codes
+- `libs/gpt.ts` - OpenAI API call tracking
+- `libs/stripe.ts` - Stripe operation logging
+- `libs/resend.ts` - Email delivery tracking
+- `app/api/lead/route.ts` - Lead capture logging
+- `app/api/stripe/*` - Stripe webhook and checkout logging
+- `app/api/admin/users/route.ts` - Admin operation logging
+
+**Usage in New Modules:**
+```typescript
+import { createModuleLogger } from "@/lib/logger";
+const logger = createModuleLogger("ModuleName");
+
+logger.debug("Debug message", { context: "value" });
+logger.info("Info message", { key: "value" });
+logger.warn("Warning message", { optional: "context" });
+logger.error("Error message", errorObject, { additional: "context" });
+
+// Performance tracking
+const timer = logger.startTimer("Operation name");
+// ... do work ...
+timer(); // logs duration
+
+// API call logging
+logger.logApiCall("GET", "/api/endpoint", 200, 150);
+
+// User action tracking
+logger.logUserAction("user_logged_in", userId, { source: "email" });
+```
+
+**Benefits:**
+- Clean code - no scattered console.log statements
+- Easy debugging - all logs go through one system
+- Environment-aware - production logs only errors
+- Structured - context makes debugging faster
+- Performance monitoring - built-in timer utilities
+
 ## Recent Fixes (December 16, 2025)
 
 ### Authentication Flow - Complete Rewrite

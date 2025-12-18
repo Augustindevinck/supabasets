@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/libs/supabase/server";
 import { createAdminClient } from "@/libs/supabase/admin";
 import { isAdmin } from "@/libs/admin";
+import { createModuleLogger } from "@/lib/logger";
+
+const adminLogger = createModuleLogger("Admin-Users");
 
 export const dynamic = "force-dynamic";
 
@@ -48,14 +51,16 @@ export async function GET() {
         : "0",
     };
 
+    adminLogger.info("Users fetched successfully", { count: formattedUsers.length });
     return NextResponse.json({ users: formattedUsers, stats });
   } catch (error) {
-    console.error("Error fetching users:", error);
+    adminLogger.error("Error fetching users", error as Error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
 export async function DELETE(request: Request) {
+  let userId: string | null = null;
   try {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
@@ -64,7 +69,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { userId } = await request.json();
+    ({ userId } = await request.json());
 
     if (!userId) {
       return NextResponse.json({ error: "User ID required" }, { status: 400 });
@@ -81,9 +86,10 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
+    adminLogger.info("User deleted successfully", { userId });
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error deleting user:", error);
+    adminLogger.error("Error deleting user", error as Error, { userId });
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

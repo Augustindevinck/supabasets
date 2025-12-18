@@ -1,6 +1,9 @@
 import { createCheckout } from "@/libs/stripe";
 import { createClient } from "@/libs/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
+import { createModuleLogger } from "@/lib/logger";
+
+const checkoutLogger = createModuleLogger("Stripe-Checkout");
 
 // This function is used to create a Stripe Checkout Session (one-time payment or subscription)
 // It's called by the <ButtonCheckout /> component
@@ -59,9 +62,12 @@ export async function POST(req: NextRequest) {
       // couponId: body.couponId,
     });
 
+    checkoutLogger.info("Checkout session created", { priceId: body.priceId });
     return NextResponse.json({ url: stripeSessionURL });
   } catch (e) {
-    console.error(e);
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+    checkoutLogger.error("Checkout creation failed", e as Error, {
+      priceId: body.priceId,
+    });
+    return NextResponse.json({ error: e instanceof Error ? e.message : "Unknown error" }, { status: 500 });
   }
 }

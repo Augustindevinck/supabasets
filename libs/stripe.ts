@@ -1,4 +1,7 @@
 import Stripe from "stripe";
+import { createModuleLogger } from "@/lib/logger";
+
+const stripeLogger = createModuleLogger("Stripe");
 
 interface CreateCheckoutParams {
   priceId: string;
@@ -80,9 +83,10 @@ export const createCheckout = async ({
       ...extraParams,
     });
 
+    stripeLogger.info("Checkout session created", { priceId });
     return stripeSession.url;
   } catch (e) {
-    console.error(e);
+    stripeLogger.error("Checkout creation error", e as Error, { priceId });
     return null;
   }
 };
@@ -117,9 +121,12 @@ export const findCheckoutSession = async (sessionId: string) => {
       expand: ["line_items"],
     });
 
+    stripeLogger.debug("Checkout session retrieved", { sessionId });
     return session;
   } catch (e) {
-    console.error(e);
+    stripeLogger.error("Checkout session retrieval failed", e as Error, {
+      sessionId,
+    });
     return null;
   }
 };
