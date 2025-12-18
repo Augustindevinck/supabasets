@@ -17,7 +17,7 @@ const SIDEBAR_WIDTH_EXPANDED = 220;
 const SIDEBAR_WIDTH_COLLAPSED = 64;
 const TRANSITION_DURATION = 0.2;
 
-interface SidebarLink {
+interface SidebarLinkData {
   label: string;
   href: string;
   icon: React.ReactNode;
@@ -316,7 +316,7 @@ function MobileSidebar({ children }: { children: React.ReactNode }) {
 }
 
 interface SidebarLinkProps {
-  link: SidebarLink;
+  link: SidebarLinkData;
   className?: string;
 }
 
@@ -411,5 +411,5 @@ export function SidebarDivider({ className }: SidebarDividerProps) {
   );
 }
 
-export { type SidebarLink as SidebarLinkType };
+export { type SidebarLinkData as SidebarLinkType };
 export { SIDEBAR_WIDTH_EXPANDED, SIDEBAR_WIDTH_COLLAPSED };

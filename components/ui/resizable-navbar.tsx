@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect, useCallback, memo } from "react";
+import Link from "next/link";
 
 // ========================================
 // Types & Interfaces
@@ -142,12 +143,12 @@ export const NavItems = memo(({ items, className, onItemClick }: NavItemsProps) 
       )}
     >
       {items.map((item, idx) => (
-        <a
+        <Link
           key={item.link}
+          href={item.link}
           onMouseEnter={() => handleMouseEnter(idx)}
           onClick={onItemClick}
           className="relative px-4 py-2 rounded-full transition-colors hover:text-blue-600"
-          href={item.link}
           aria-label={item.name}
         >
           {hovered === idx && (
@@ -161,7 +162,7 @@ export const NavItems = memo(({ items, className, onItemClick }: NavItemsProps) 
             />
           )}
           <span className="relative z-10">{item.name}</span>
-        </a>
+        </Link>
       ))}
     </div>
   );
@@ -272,7 +273,7 @@ MobileNavToggle.displayName = "MobileNavToggle";
 
 export const NavbarLogo = memo(({ className }: NavbarLogoProps) => {
   return (
-    <a
+    <Link
       href="/"
       className={cn(
         "relative z-20 flex items-center space-x-2 px-2 py-1 text-lg font-extrabold tracking-tight",
@@ -283,7 +284,7 @@ export const NavbarLogo = memo(({ className }: NavbarLogoProps) => {
       aria-label="Go to homepage"
     >
       Template
-    </a>
+    </Link>
   );
 });
 
