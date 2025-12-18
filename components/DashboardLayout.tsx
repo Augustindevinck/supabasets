@@ -1,11 +1,16 @@
 "use client";
 
-import { ReactNode, useState, useMemo } from "react";
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
+import { ReactNode, useMemo } from "react";
+import {
+  SidebarLayout,
+  SidebarBody,
+  SidebarLink,
+  SidebarSection,
+} from "@/components/ui/sidebar";
 import SidebarProfile from "@/components/SidebarProfile";
 import SidebarLogo from "@/components/SidebarLogo";
-import { IconLayoutDashboard } from "@tabler/icons-react";
 import AdminLinks from "@/components/AdminLinks";
+import { IconLayoutDashboard } from "@tabler/icons-react";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -13,49 +18,50 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children, pageTitle }: DashboardLayoutProps) {
-  const [open, setOpen] = useState(false);
+  const links = useMemo(
+    () => [
+      {
+        label: "Home",
+        href: "/dashboard",
+        icon: (
+          <IconLayoutDashboard className="h-5 w-5 shrink-0 text-gray-500" />
+        ),
+      },
+    ],
+    []
+  );
 
-  const links = useMemo(() => [
-    {
-      label: "Home",
-      href: "/dashboard",
-      icon: (
-        <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-  ], []);
+  const sidebarContent = (
+    <SidebarBody className="justify-between h-full">
+      <div className="flex flex-col flex-1 min-h-0">
+        <SidebarLogo href="/dashboard" logoText="Template" />
+
+        <SidebarSection className="mt-6">
+          {links.map((link) => (
+            <SidebarLink key={link.href} link={link} />
+          ))}
+        </SidebarSection>
+
+        <AdminLinks />
+      </div>
+
+      <SidebarProfile />
+    </SidebarBody>
+  );
 
   return (
-    <div className="flex flex-col md:flex-row h-screen w-full bg-base-100">
-      <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between gap-10">
-          <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
-            <SidebarLogo href="/dashboard" />
-            <nav className="mt-8 flex flex-col gap-2" aria-label="Main navigation">
-              {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
-            </nav>
-            
-            <AdminLinks open={open} />
-          </div>
-          <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4">
-            <SidebarProfile />
-          </div>
-        </SidebarBody>
-      </Sidebar>
+    <SidebarLayout sidebar={sidebarContent} defaultExpanded={true}>
+      <header className="sticky top-14 lg:top-0 z-30 border-b border-gray-200 bg-white">
+        <div className="px-4 md:px-6 lg:px-8 py-4 md:py-5 lg:py-6">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">
+            {pageTitle}
+          </h1>
+        </div>
+      </header>
 
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="sticky top-0 z-40 border-b border-base-200 bg-base-100">
-          <div className="px-4 md:px-8 py-4 md:py-6">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold">{pageTitle}</h1>
-          </div>
-        </header>
-
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
-      </div>
-    </div>
+      <main className="flex-1 overflow-y-auto">
+        <div className="p-4 md:p-6 lg:p-8">{children}</div>
+      </main>
+    </SidebarLayout>
   );
 }

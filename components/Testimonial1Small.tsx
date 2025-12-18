@@ -6,13 +6,13 @@ const Testimonial1Small = () => {
   return (
     <section className="bg-base-100">
       <div className="space-y-6 md:space-y-8 max-w-lg mx-auto px-8 py-16 md:py-32 ">
-        <div className="rating !flex justify-center">
+        <div className="flex justify-center gap-0.5">
           {[...Array(5)].map((_, i) => (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="w-5 h-5 text-warning"
+              className="w-5 h-5 text-yellow-500"
               key={i}
             >
               <path
@@ -25,7 +25,7 @@ const Testimonial1Small = () => {
         </div>
         <div className="text-base leading-relaxed space-y-2 max-w-md mx-auto text-center">
           <p>
-            <span className="bg-warning/25 px-1.5">
+            <span className="bg-yellow-500/25 px-1.5">
               I don&apos;t want to pay Stripe $2 for every invoice.
             </span>{" "}
             I don&apos;t want to spend 10 minutes manually crafting every

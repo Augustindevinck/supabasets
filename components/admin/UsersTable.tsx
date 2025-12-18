@@ -137,7 +137,7 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <span className="loading loading-spinner loading-lg"></span>
+        <span className="loading w-8 h-8"></span>
       </div>
     );
   }
@@ -154,49 +154,49 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
     <div className="space-y-4">
       {/* Vue Desktop - Table */}
       <div className="hidden lg:block overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="w-full text-left">
           <thead>
-            <tr className="bg-base-200">
-              <th>Nom</th>
-              <th>Email</th>
-              <th>Statut</th>
-              <th>Provider</th>
-              <th>Inscrit le</th>
-              <th>Dernière connexion</th>
-              <th>Actions</th>
+            <tr className="bg-base-200 border-b border-base-300">
+              <th className="px-4 py-3 text-sm font-semibold">Nom</th>
+              <th className="px-4 py-3 text-sm font-semibold">Email</th>
+              <th className="px-4 py-3 text-sm font-semibold">Statut</th>
+              <th className="px-4 py-3 text-sm font-semibold">Provider</th>
+              <th className="px-4 py-3 text-sm font-semibold">Inscrit le</th>
+              <th className="px-4 py-3 text-sm font-semibold">Dernière connexion</th>
+              <th className="px-4 py-3 text-sm font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {sortedUsers.map((user) => (
-              <tr key={user.id}>
-                <td className="font-medium">{user.name}</td>
-                <td>{user.email}</td>
-                <td>
+            {sortedUsers.map((user, idx) => (
+              <tr key={user.id} className={idx % 2 === 0 ? 'bg-base-100' : 'bg-base-200/50'}>
+                <td className="px-4 py-3 font-medium">{user.name}</td>
+                <td className="px-4 py-3">{user.email}</td>
+                <td className="px-4 py-3">
                   {user.isSubscribed ? (
-                    <span className="badge badge-sm bg-gradient-blue-primary text-white border-0">
+                    <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded bg-gradient-blue-primary text-white">
                       Abonné
                     </span>
                   ) : (
-                    <span className="badge badge-ghost badge-sm">
+                    <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded bg-base-200 text-base-content/70">
                       Non abonné
                     </span>
                   )}
                 </td>
-                <td>
-                  <span className="badge badge-outline badge-sm">
+                <td className="px-4 py-3">
+                  <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded border border-base-300 text-base-content/70">
                     {user.provider}
                   </span>
                 </td>
-                <td className="text-sm">{formatDate(user.createdAt)}</td>
-                <td className="text-sm">{formatDate(user.lastSignIn)}</td>
-                <td>
+                <td className="px-4 py-3 text-sm">{formatDate(user.createdAt)}</td>
+                <td className="px-4 py-3 text-sm">{formatDate(user.lastSignIn)}</td>
+                <td className="px-4 py-3">
                   <button
-                    className="btn btn-error btn-xs"
+                    className="btn btn-error text-xs px-2 py-1"
                     onClick={() => handleDelete(user.id, user.email)}
                     disabled={deletingId === user.id}
                   >
                     {deletingId === user.id ? (
-                      <span className="loading loading-spinner loading-xs"></span>
+                      <span className="loading w-3 h-3"></span>
                     ) : (
                       "Supprimer"
                     )}
@@ -210,28 +210,28 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
 
       {/* Vue Tablette - Tableau compacte */}
       <div className="hidden md:block lg:hidden overflow-x-auto">
-        <table className="table table-zebra w-full table-sm">
+        <table className="w-full text-left text-sm">
           <thead>
-            <tr className="bg-base-200">
-              <th className="p-2">Nom</th>
-              <th className="p-2">Email</th>
-              <th className="p-2">Statut</th>
-              <th className="p-2">Inscrit</th>
-              <th className="p-2">Actions</th>
+            <tr className="bg-base-200 border-b border-base-300">
+              <th className="p-2 font-semibold">Nom</th>
+              <th className="p-2 font-semibold">Email</th>
+              <th className="p-2 font-semibold">Statut</th>
+              <th className="p-2 font-semibold">Inscrit</th>
+              <th className="p-2 font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {sortedUsers.map((user) => (
-              <tr key={user.id} className="text-sm">
+            {sortedUsers.map((user, idx) => (
+              <tr key={user.id} className={`text-sm ${idx % 2 === 0 ? 'bg-base-100' : 'bg-base-200/50'}`}>
                 <td className="font-medium p-2">{user.name}</td>
                 <td className="p-2 text-xs break-all">{user.email}</td>
                 <td className="p-2">
                   {user.isSubscribed ? (
-                    <span className="badge badge-xs bg-gradient-blue-primary text-white border-0">
+                    <span className="inline-flex items-center px-1.5 py-0.5 text-xs font-medium rounded bg-gradient-blue-primary text-white">
                       Abonné
                     </span>
                   ) : (
-                    <span className="badge badge-ghost badge-xs">
+                    <span className="inline-flex items-center px-1.5 py-0.5 text-xs font-medium rounded bg-base-200 text-base-content/70">
                       Non
                     </span>
                   )}
@@ -239,12 +239,12 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
                 <td className="p-2 text-xs">{formatDateShort(user.createdAt)}</td>
                 <td className="p-2">
                   <button
-                    className="btn btn-error btn-xs"
+                    className="btn btn-error text-xs px-2 py-1"
                     onClick={() => handleDelete(user.id, user.email)}
                     disabled={deletingId === user.id}
                   >
                     {deletingId === user.id ? (
-                      <span className="loading loading-spinner loading-xs"></span>
+                      <span className="loading w-3 h-3"></span>
                     ) : (
                       "Supprimer"
                     )}
@@ -259,11 +259,11 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
       {/* Vue Mobile - Cartes */}
       <div className="md:hidden space-y-3">
         {sortedUsers.map((user) => (
-          <div key={user.id} className="card bg-base-200 shadow-sm">
-            <div className="card-body p-4 gap-3">
+          <div key={user.id} className="bg-base-200 rounded-lg shadow-sm">
+            <div className="p-4 space-y-3">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
-                  <h3 className="card-title text-base font-semibold truncate">
+                  <h3 className="text-base font-semibold truncate">
                     {user.name}
                   </h3>
                   <p className="text-sm text-base-content/70 break-all">
@@ -272,21 +272,21 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
                 </div>
                 <div className="flex flex-col gap-1 ml-2 shrink-0">
                   {user.isSubscribed ? (
-                    <span className="badge badge-xs bg-gradient-blue-primary text-white border-0">
+                    <span className="inline-flex items-center px-1.5 py-0.5 text-xs font-medium rounded bg-gradient-blue-primary text-white">
                       Abonné
                     </span>
                   ) : (
-                    <span className="badge badge-ghost badge-xs">
+                    <span className="inline-flex items-center px-1.5 py-0.5 text-xs font-medium rounded bg-base-300 text-base-content/70">
                       Non abonné
                     </span>
                   )}
-                  <span className="badge badge-outline badge-xs">
+                  <span className="inline-flex items-center px-1.5 py-0.5 text-xs font-medium rounded border border-base-300 text-base-content/70">
                     {user.provider}
                   </span>
                 </div>
               </div>
 
-              <div className="divider divider-neutral my-0"></div>
+              <div className="border-t border-gray-800/10 my-0"></div>
 
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div>
@@ -304,13 +304,13 @@ export default function UsersTable({ onStatsLoaded }: UsersTableProps) {
               </div>
 
               <button
-                className="btn btn-error btn-sm w-full"
+                className="btn btn-error text-sm w-full"
                 onClick={() => handleDelete(user.id, user.email)}
                 disabled={deletingId === user.id}
               >
                 {deletingId === user.id ? (
                   <>
-                    <span className="loading loading-spinner loading-xs"></span>
+                    <span className="loading w-3 h-3"></span>
                     Suppression...
                   </>
                 ) : (

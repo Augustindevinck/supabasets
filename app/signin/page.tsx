@@ -116,7 +116,7 @@ export default function Login() {
           disabled={isLoading}
         >
           {isLoading ? (
-            <span className="loading loading-spinner loading-xs"></span>
+            <span className="loading loading-sm"></span>
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +149,7 @@ export default function Login() {
         </div>
 
         <form
-          className="form-control w-full space-y-4"
+          className="w-full space-y-4"
           onSubmit={(e) => handleSignIn(e, { type: "password" })}
         >
           <input
@@ -158,7 +158,7 @@ export default function Login() {
             value={email}
             autoComplete="email"
             placeholder="Email"
-            className="input input-bordered w-full placeholder:opacity-60"
+            className="input w-full placeholder:opacity-60"
             onChange={(e) => setEmail(e.target.value)}
             disabled={isLoading}
           />
@@ -169,7 +169,7 @@ export default function Login() {
             value={password}
             autoComplete="current-password"
             placeholder="Mot de passe"
-            className="input input-bordered w-full placeholder:opacity-60"
+            className="input w-full placeholder:opacity-60"
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
           />
@@ -180,7 +180,7 @@ export default function Login() {
             type="submit"
           >
             {isLoading && (
-              <span className="loading loading-spinner loading-xs"></span>
+              <span className="loading loading-sm"></span>
             )}
             Se connecter
           </button>
@@ -189,7 +189,7 @@ export default function Login() {
         <div className="text-center">
           <p className="text-base-content/70">
             Pas encore de compte ?{" "}
-            <Link href="/signup" className="link link-primary font-semibold">
+            <Link href="/signup" className="text-blue-600 hover:underline font-semibold">
               Créer un compte
             </Link>
           </p>

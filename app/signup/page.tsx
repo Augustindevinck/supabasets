@@ -134,7 +134,7 @@ export default function Signup() {
           disabled={isLoading}
         >
           {isLoading ? (
-            <span className="loading loading-spinner loading-xs"></span>
+            <span className="loading loading-sm"></span>
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +167,7 @@ export default function Signup() {
         </div>
 
         <form
-          className="form-control w-full space-y-4"
+          className="w-full space-y-4"
           onSubmit={(e) => handleSignup(e, { type: "password" })}
         >
           <input
@@ -176,7 +176,7 @@ export default function Signup() {
             value={name}
             autoComplete="name"
             placeholder="Nom"
-            className="input input-bordered w-full placeholder:opacity-60"
+            className="input w-full placeholder:opacity-60"
             onChange={(e) => setName(e.target.value)}
             disabled={isLoading}
           />
@@ -187,7 +187,7 @@ export default function Signup() {
             value={email}
             autoComplete="email"
             placeholder="Email"
-            className="input input-bordered w-full placeholder:opacity-60"
+            className="input w-full placeholder:opacity-60"
             onChange={(e) => setEmail(e.target.value)}
             disabled={isLoading}
           />
@@ -198,7 +198,7 @@ export default function Signup() {
             value={password}
             autoComplete="new-password"
             placeholder="Mot de passe (min. 6 caractères)"
-            className="input input-bordered w-full placeholder:opacity-60"
+            className="input w-full placeholder:opacity-60"
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
           />
@@ -209,7 +209,7 @@ export default function Signup() {
             type="submit"
           >
             {isLoading && (
-              <span className="loading loading-spinner loading-xs"></span>
+              <span className="loading loading-sm"></span>
             )}
             Créer mon compte
           </button>
@@ -218,7 +218,7 @@ export default function Signup() {
         <div className="text-center">
           <p className="text-base-content/70">
             Déjà un compte ?{" "}
-            <Link href="/signin" className="link link-primary font-semibold">
+            <Link href="/signin" className="text-blue-600 hover:underline font-semibold">
               Se connecter
             </Link>
           </p>

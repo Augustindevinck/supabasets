@@ -39,7 +39,7 @@ const features: {
               {item}
             </li>
           ))}
-          <li className="flex items-center gap-3 text-accent font-medium">
+          <li className="flex items-center gap-3 text-blue-500 font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -100,7 +100,7 @@ const features: {
               {item}
             </li>
           ))}
-          <li className="flex items-center gap-3 text-accent font-medium">
+          <li className="flex items-center gap-3 text-blue-500 font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -163,7 +163,7 @@ const features: {
               {item}
             </li>
           ))}
-          <li className="flex items-center gap-3 text-accent font-medium">
+          <li className="flex items-center gap-3 text-blue-500 font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -223,7 +223,7 @@ const features: {
               </li>
             )
           )}
-          <li className="flex items-center gap-3 text-accent font-medium">
+          <li className="flex items-center gap-3 text-blue-500 font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -287,7 +287,7 @@ const features: {
               {item}
             </li>
           ))}
-          <li className="flex items-center gap-3 text-accent font-medium">
+          <li className="flex items-center gap-3 text-blue-500 font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -349,7 +349,7 @@ const features: {
               {item}
             </li>
           ))}
-          <li className="flex items-center gap-3 text-accent font-medium">
+          <li className="flex items-center gap-3 text-blue-500 font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -439,7 +439,7 @@ const FeaturesListicle = () => {
     <section className="py-24" id="features">
       <div className="max-w-3xl mx-auto">
         <div className="bg-base-100 max-md:px-8 max-w-3xl">
-          <p className="text-accent font-medium text-sm font-mono mb-3">
+          <p className="text-blue-500 font-medium text-sm font-mono mb-3">
             {/* Pure decoration, you can remove it */}
             const launch_time = &quot;Today&quot;;
           </p>
@@ -447,7 +447,7 @@ const FeaturesListicle = () => {
             {/* 💡 COPY TIP: Remind visitors about the value of your product. Why do they need it? */}
             Supercharge your app instantly, launch faster, make $
           </h2>
-          <div className="text-base-content/80 leading-relaxed mb-8 lg:text-lg">
+          <div className="text-gray-600 leading-relaxed mb-8 lg:text-lg">
             {/* 💡 COPY TIP: Explain how your product delivers what you promise in the headline. */}
             Login users, process payments and send emails at lightspeed. Spend
             your time building your startup, not integrating APIs. Get everything
@@ -470,8 +470,8 @@ const FeaturesListicle = () => {
               <span
                 className={`duration-100 ${
                   featureSelected === feature.name
-                    ? "text-primary"
-                    : "text-base-content/30 group-hover:text-base-content/50"
+                    ? "text-blue-500"
+                    : "text-gray-400 group-hover:text-gray-500"
                 }`}
               >
                 {feature.svg}
@@ -479,8 +479,8 @@ const FeaturesListicle = () => {
               <span
                 className={`font-semibold text-sm ${
                   featureSelected === feature.name
-                    ? "text-primary"
-                    : "text-base-content/50"
+                    ? "text-blue-500"
+                    : "text-gray-500"
                 }`}
               >
                 {feature.name}
@@ -491,7 +491,7 @@ const FeaturesListicle = () => {
         <div className="bg-base-200">
           <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-center md:justify-start md:items-center gap-12">
             <div
-              className="text-base-content/80 leading-relaxed space-y-4 px-12 md:px-0 py-12 max-w-xl animate-opacity"
+              className="text-gray-600 leading-relaxed space-y-4 px-12 md:px-0 py-12 max-w-xl animate-opacity"
               key={featureSelected}
             >
               <h3 className="font-semibold text-base-content text-lg">

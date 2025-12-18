@@ -1,25 +1,28 @@
 "use client";
+
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/libs/supabase/client";
 import { useSidebar } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const MENU_ITEMS = [
   { label: "Settings", href: "/dashboard/settings" },
   { label: "Logout", action: "logout" as const },
 ] as const;
 
+const TRANSITION_DURATION = 0.2;
+
 export default function SidebarProfile() {
   const [user, setUser] = useState<User | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { open } = useSidebar();
+  const { isExpanded, setIsMobileOpen } = useSidebar();
   const supabase = useMemo(() => createClient(), []);
 
-  // Fetch user data
   useEffect(() => {
     let isMounted = true;
 
@@ -53,7 +56,6 @@ export default function SidebarProfile() {
     };
   }, [supabase]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -67,7 +69,6 @@ export default function SidebarProfile() {
     }
   }, [isOpen]);
 
-  // Close dropdown on Escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isOpen) {
@@ -81,7 +82,7 @@ export default function SidebarProfile() {
     }
   }, [isOpen]);
 
-  const toggleDropdown = useCallback(() => setIsOpen(prev => !prev), []);
+  const toggleDropdown = useCallback(() => setIsOpen((prev) => !prev), []);
 
   const closeDropdown = useCallback(() => setIsOpen(false), []);
 
@@ -93,6 +94,11 @@ export default function SidebarProfile() {
       console.error("Error signing out:", error);
     }
   }, [supabase]);
+
+  const handleMenuClick = useCallback(() => {
+    closeDropdown();
+    setIsMobileOpen(false);
+  }, [closeDropdown, setIsMobileOpen]);
 
   const displayName = useMemo(
     () => user?.user_metadata?.name || user?.email?.split("@")[0] || "Account",
@@ -107,22 +113,27 @@ export default function SidebarProfile() {
   if (isLoading || !user) return null;
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative border-t border-gray-200 pt-3" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
         className={cn(
-          "w-full flex items-center gap-2 group/sidebar py-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors duration-150",
-          open ? "justify-start px-3" : "justify-center"
+          "w-full flex items-center gap-3",
+          "py-2.5 rounded-lg",
+          "text-gray-600 hover:text-gray-900",
+          "hover:bg-gray-100",
+          "transition-colors duration-150",
+          "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1",
+          isExpanded ? "px-3 justify-start" : "px-0 justify-center"
         )}
-        aria-label="User menu"
+        aria-label="Menu utilisateur"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
         {user.user_metadata?.avatar_url ? (
-          <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden" style={{ opacity: 1 }}>
+          <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden">
             <img
               src={user.user_metadata.avatar_url}
-              alt={`${displayName}'s profile picture`}
+              alt={`Photo de profil de ${displayName}`}
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
               width={32}
@@ -131,25 +142,33 @@ export default function SidebarProfile() {
           </div>
         ) : (
           <span
-            className="w-8 h-8 bg-base-100 flex justify-center items-center rounded-full shrink-0 capitalize text-sm font-bold"
+            className="w-8 h-8 bg-gray-200 flex justify-center items-center rounded-full shrink-0 capitalize text-sm font-semibold text-gray-700"
             aria-hidden="true"
-            style={{ opacity: 1 }}
           >
             {avatarInitial}
           </span>
         )}
-        {open && (
-          <span className="text-neutral-700 dark:text-neutral-200 text-sm whitespace-pre truncate">
-            {displayName}
-          </span>
-        )}
+        <motion.span
+          initial={false}
+          animate={{
+            opacity: isExpanded ? 1 : 0,
+            width: isExpanded ? "auto" : 0,
+          }}
+          transition={{
+            duration: TRANSITION_DURATION,
+            ease: "easeInOut",
+          }}
+          className="text-sm font-medium whitespace-nowrap overflow-hidden truncate max-w-[140px]"
+        >
+          {displayName}
+        </motion.span>
       </button>
 
       {isOpen && (
         <nav
-          className="absolute bottom-full left-0 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-lg mb-2 z-50"
+          className="absolute bottom-full left-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg mb-2 z-50"
           role="menu"
-          aria-label="User menu"
+          aria-label="Menu utilisateur"
         >
           {MENU_ITEMS.map((item, index) => {
             const isLast = index === MENU_ITEMS.length - 1;
@@ -160,8 +179,11 @@ export default function SidebarProfile() {
                   key={item.label}
                   onClick={handleLogout}
                   className={cn(
-                    "block w-full text-left px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-700 text-sm text-neutral-700 dark:text-neutral-200",
-                    isLast ? "rounded-b-lg border-t border-neutral-200 dark:border-neutral-700" : ""
+                    "block w-full text-left px-4 py-2.5 text-sm text-gray-700",
+                    "hover:bg-gray-50 hover:text-gray-900",
+                    "transition-colors duration-150",
+                    "focus:outline-none focus:bg-gray-50",
+                    isLast && "rounded-b-lg border-t border-gray-100"
                   )}
                   role="menuitem"
                 >
@@ -175,10 +197,13 @@ export default function SidebarProfile() {
                 key={item.label}
                 href={"href" in item ? item.href : "/"}
                 className={cn(
-                  "block w-full text-left px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-700 text-sm text-neutral-700 dark:text-neutral-200",
-                  index === 0 ? "rounded-t-lg" : ""
+                  "block w-full text-left px-4 py-2.5 text-sm text-gray-700",
+                  "hover:bg-gray-50 hover:text-gray-900",
+                  "transition-colors duration-150",
+                  "focus:outline-none focus:bg-gray-50",
+                  index === 0 && "rounded-t-lg"
                 )}
-                onClick={closeDropdown}
+                onClick={handleMenuClick}
                 role="menuitem"
               >
                 {item.label}
@@ -189,9 +214,4 @@ export default function SidebarProfile() {
       )}
     </div>
   );
-}
-
-// Utility function for className concatenation
-function cn(...classes: (string | boolean | undefined)[]) {
-  return classes.filter(Boolean).join(" ");
 }

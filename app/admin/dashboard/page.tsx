@@ -37,7 +37,7 @@ export default function AdminDashboard() {
                   <div>
                     <h2 className="card-title text-sm opacity-75">Total Utilisateurs</h2>
                     {userCountLoading ? (
-                      <span className="loading loading-spinner loading-sm"></span>
+                      <span className="loading loading-sm"></span>
                     ) : (
                       <p className="text-4xl font-bold mt-4">{userCount}</p>
                     )}

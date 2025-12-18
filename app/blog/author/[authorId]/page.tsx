@@ -56,7 +56,7 @@ export default async function Author({
             height={256}
             alt={author.name}
             priority={true}
-            className="rounded-box w-[12rem] md:w-[16rem] "
+            className="rounded-lg w-[12rem] md:w-[16rem] "
           />
 
           {author.socials?.length > 0 && (
@@ -65,8 +65,7 @@ export default async function Author({
                 <a
                   key={social.name}
                   href={social.url}
-                  className="btn btn-square"
-                  // Using a dark theme? -> className="btn btn-square btn-neutral"
+                  className="btn aspect-square p-2"
                   title={`Go to ${author.name} profile on ${social.name}`}
                   target="_blank"
                 >

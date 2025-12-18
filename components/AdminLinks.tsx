@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { createClient } from "@/libs/supabase/client";
-import { SidebarLink } from "@/components/ui/sidebar";
+import { SidebarLink, SidebarSection, SidebarDivider } from "@/components/ui/sidebar";
 import { IconUsers, IconLayoutDashboard } from "@tabler/icons-react";
 import { ADMIN_EMAILS } from "@/libs/admin";
 
-export default function AdminLinks({ open }: { open: boolean }) {
+export default function AdminLinks() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const supabase = useMemo(() => createClient(), []);
@@ -37,31 +37,26 @@ export default function AdminLinks({ open }: { open: boolean }) {
       label: "Dashboard",
       href: "/admin/dashboard",
       icon: (
-        <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconLayoutDashboard className="h-5 w-5 shrink-0 text-gray-500" />
       ),
     },
     {
       label: "Utilisateurs",
       href: "/admin",
       icon: (
-        <IconUsers className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconUsers className="h-5 w-5 shrink-0 text-gray-500" />
       ),
     },
   ];
 
   return (
     <>
-      <div className="my-4 border-t border-neutral-300 dark:border-neutral-700"></div>
-      <div className="flex flex-col gap-2">
-        <p className={`text-xs font-semibold text-neutral-600 dark:text-neutral-400 ${open ? "px-3" : "text-center"}`}>
-          ADMIN
-        </p>
-        <nav className="flex flex-col gap-2" aria-label="Admin navigation">
-          {adminLinks.map((link, idx) => (
-            <SidebarLink key={idx} link={link} />
-          ))}
-        </nav>
-      </div>
+      <SidebarDivider />
+      <SidebarSection title="Admin">
+        {adminLinks.map((link) => (
+          <SidebarLink key={link.href} link={link} />
+        ))}
+      </SidebarSection>
     </>
   );
 }

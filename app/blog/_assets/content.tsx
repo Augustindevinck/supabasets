@@ -191,9 +191,9 @@ const styles: {
   ul: "list-inside list-disc text-base-content/90 leading-relaxed",
   li: "list-item",
   // Altnernatively, you can use the library react-syntax-highlighter to display code snippets.
-  code: "text-sm font-mono bg-neutral text-neutral-content p-6 rounded-box my-4 overflow-x-scroll select-all",
+  code: "text-sm font-mono bg-gray-900 text-gray-100 p-6 rounded-lg my-4 overflow-x-scroll select-all",
   codeInline:
-    "text-sm font-mono bg-base-300 px-1 py-0.5 rounded-box select-all",
+    "text-sm font-mono bg-base-300 px-1 py-0.5 rounded select-all",
 };
 
 // All the blog articles data display in the /blog/[articleId].js pages.
@@ -230,7 +230,7 @@ export const articles: articleType[] = [
           width={700}
           height={500}
           priority={true}
-          className="rounded-box"
+          className="rounded-lg"
           placeholder="blur"
         />
         <section>
@@ -246,7 +246,7 @@ export const articles: articleType[] = [
           <h3 className={styles.h3}>1. Create a supabase account</h3>
           <p className={styles.p}>
             First, go to{" "}
-            <a href="https://supabase.com/" className="link link-primary">
+            <a href="https://supabase.com/" className="text-blue-600 hover:underline">
               Supabase
             </a>{" "}
             and create an account. It&apos;s free for up to 10,000 rows per

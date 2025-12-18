@@ -29,7 +29,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }: ModalProps) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-neutral-focus bg-opacity-50" />
+          <div className="fixed inset-0 bg-gray-700 bg-opacity-50" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -49,7 +49,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }: ModalProps) => {
                     I&apos;m a modal
                   </Dialog.Title>
                   <button
-                    className="btn btn-square btn-ghost btn-sm"
+                    className="btn btn-ghost btn-sm w-8 h-8 p-0"
                     onClick={() => setIsModalOpen(false)}
                   >
                     <svg

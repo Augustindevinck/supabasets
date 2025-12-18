@@ -90,7 +90,7 @@ export default async function Article({
       <div>
         <Link
           href="/blog"
-          className="link !no-underline text-base-content/80 hover:text-base-content inline-flex items-center gap-1"
+          className="text-base-content/80 hover:text-base-content inline-flex items-center gap-1"
           title="Back to Blog"
         >
           <svg
@@ -117,7 +117,7 @@ export default async function Article({
               <BadgeCategory
                 category={category}
                 key={category.slug}
-                extraStyle="!badge-lg"
+                extraStyle="px-3 py-1.5 text-sm"
               />
             ))}
             <span className="text-base-content/80" itemProp="datePublished">
@@ -157,7 +157,7 @@ export default async function Article({
                       <p className="mb-0.5">
                         <Link
                           href={`/blog/${article.slug}`}
-                          className="link link-hover hover:link-primary font-medium"
+                          className="hover:text-blue-600 hover:underline font-medium"
                           title={article.title}
                           rel="bookmark"
                         >

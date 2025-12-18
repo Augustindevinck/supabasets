@@ -31,15 +31,16 @@ const TestimonialsAvatars = ({ priority }: { priority?: boolean }) => {
   return (
     <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-3">
       {/* AVATARS */}
-      <div className={`-space-x-5 avatar-group justy-start`}>
+      <div className="flex -space-x-3">
         {avatars.map((image, i) => (
-          <div className="avatar w-12 h-12" key={i}>
+          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white" key={i}>
             <Image
               src={image.src}
               alt={image.alt}
               priority={priority}
               width={50}
               height={50}
+              className="w-full h-full object-cover"
             />
           </div>
         ))}
@@ -47,7 +48,7 @@ const TestimonialsAvatars = ({ priority }: { priority?: boolean }) => {
 
       {/* RATING */}
       <div className="flex flex-col justify-center items-center md:items-start gap-1">
-        <div className="rating">
+        <div className="flex gap-0.5">
           {[...Array(5)].map((_, i) => (
             <svg
               xmlns="http://www.w3.org/2000/svg"

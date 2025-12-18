@@ -41,7 +41,7 @@ const WhatAppDoes = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col items-center text-center p-6 rounded-lg bg-base-100 hover:bg-base-200 transition-colors"
+              className="flex flex-col items-center text-center p-6 rounded-lg bg-white hover:bg-gray-100 transition-colors"
             >
               <div className="text-4xl mb-4">{feature.icon}</div>
               <h3 className="text-xl font-bold mb-2">{feature.title}</h3>

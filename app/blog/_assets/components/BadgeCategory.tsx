@@ -12,7 +12,7 @@ const Category = ({
   return (
     <Link
       href={`/blog/category/${category.slug}`}
-      className={`badge badge-sm md:badge-md hover:badge-primary ${
+      className={`badge text-xs md:text-sm hover:bg-blue-500 hover:text-white transition-colors ${
         extraStyle ? extraStyle : ""
       }`}
       title={`Posts in ${category.title}`}

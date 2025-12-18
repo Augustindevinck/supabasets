@@ -22,7 +22,7 @@ const FloatingHeader = () => {
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center py-4">
       <div 
         className={`
-          flex justify-between items-center px-8 py-4 rounded-3xl bg-base-100/80 backdrop-blur-sm
+          flex justify-between items-center px-8 py-4 rounded-3xl bg-white/80 backdrop-blur-sm
           transition-all duration-300 ease-in-out
           ${isScrolled 
             ? 'w-[94%] sm:w-[90%] lg:w-[75%]' 

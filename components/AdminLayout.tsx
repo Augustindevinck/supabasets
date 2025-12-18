@@ -1,8 +1,14 @@
 "use client";
 
-import { ReactNode, useState, useMemo, useEffect } from "react";
+import { ReactNode, useMemo, useEffect, useState } from "react";
 import { redirect } from "next/navigation";
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
+import {
+  SidebarLayout,
+  SidebarBody,
+  SidebarLink,
+  SidebarSection,
+  SidebarDivider,
+} from "@/components/ui/sidebar";
 import SidebarProfile from "@/components/SidebarProfile";
 import SidebarLogo from "@/components/SidebarLogo";
 import { IconLayoutDashboard, IconUsers } from "@tabler/icons-react";
@@ -16,58 +22,62 @@ interface AdminLayoutProps {
 }
 
 export default function AdminLayout({ children, pageTitle, pageSubtitle }: AdminLayoutProps) {
-  const [open, setOpen] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Check if user is admin
   useEffect(() => {
     const checkAdmin = async () => {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      
+
       if (!user || !isAdmin(user.email)) {
         redirect("/dashboard");
       }
-      
+
       setIsAuthorized(true);
       setIsLoading(false);
     };
-    
+
     checkAdmin();
   }, []);
 
-  const links = useMemo(() => [
-    {
-      label: "Home",
-      href: "/dashboard",
-      icon: (
-        <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-  ], []);
+  const links = useMemo(
+    () => [
+      {
+        label: "Home",
+        href: "/dashboard",
+        icon: (
+          <IconLayoutDashboard className="h-5 w-5 shrink-0 text-gray-500" />
+        ),
+      },
+    ],
+    []
+  );
 
-  const adminLinks = useMemo(() => [
-    {
-      label: "Dashboard",
-      href: "/admin/dashboard",
-      icon: (
-        <IconLayoutDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-    {
-      label: "Utilisateurs",
-      href: "/admin",
-      icon: (
-        <IconUsers className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-  ], []);
+  const adminLinks = useMemo(
+    () => [
+      {
+        label: "Dashboard",
+        href: "/admin/dashboard",
+        icon: (
+          <IconLayoutDashboard className="h-5 w-5 shrink-0 text-gray-500" />
+        ),
+      },
+      {
+        label: "Utilisateurs",
+        href: "/admin",
+        icon: (
+          <IconUsers className="h-5 w-5 shrink-0 text-gray-500" />
+        ),
+      },
+    ],
+    []
+  );
 
   if (isLoading) {
     return (
-      <div className="flex h-screen w-full bg-base-100 items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="flex h-screen w-full bg-gray-50 items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-gray-600" />
       </div>
     );
   }
@@ -76,56 +86,48 @@ export default function AdminLayout({ children, pageTitle, pageSubtitle }: Admin
     return null;
   }
 
-  return (
-    <div className="flex flex-col md:flex-row h-screen w-full bg-base-100">
-      <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between gap-10">
-          <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
-            <SidebarLogo href="/dashboard" />
-            
-            {/* User Links */}
-            <nav className="mt-8 flex flex-col gap-2" aria-label="Main navigation">
-              {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
-            </nav>
+  const sidebarContent = (
+    <SidebarBody className="justify-between h-full">
+      <div className="flex flex-col flex-1 min-h-0">
+        <SidebarLogo href="/dashboard" logoText="Template" />
 
-            {/* Admin Section Divider */}
-            <div className="my-4 border-t border-neutral-300 dark:border-neutral-700"></div>
+        <SidebarSection className="mt-6">
+          {links.map((link) => (
+            <SidebarLink key={link.href} link={link} />
+          ))}
+        </SidebarSection>
 
-            {/* Admin Links */}
-            <div className="flex flex-col gap-2">
-              <p className={`text-xs font-semibold text-neutral-600 dark:text-neutral-400 ${open ? "px-3" : "text-center"}`}>
-                ADMIN
-              </p>
-              <nav className="flex flex-col gap-2" aria-label="Admin navigation">
-                {adminLinks.map((link, idx) => (
-                  <SidebarLink key={idx} link={link} />
-                ))}
-              </nav>
-            </div>
-          </div>
+        <SidebarDivider />
 
-          <div className="border-t border-neutral-300 dark:border-neutral-700 pt-4">
-            <SidebarProfile />
-          </div>
-        </SidebarBody>
-      </Sidebar>
-
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="sticky top-0 z-40 border-b border-base-200 bg-base-100">
-          <div className="px-4 md:px-8 py-4 md:py-6">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold">{pageTitle}</h1>
-            {pageSubtitle && (
-              <p className="text-base-content/60 mt-2 text-sm md:text-base">{pageSubtitle}</p>
-            )}
-          </div>
-        </header>
-
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+        <SidebarSection title="Admin">
+          {adminLinks.map((link) => (
+            <SidebarLink key={link.href} link={link} />
+          ))}
+        </SidebarSection>
       </div>
-    </div>
+
+      <SidebarProfile />
+    </SidebarBody>
+  );
+
+  return (
+    <SidebarLayout sidebar={sidebarContent} defaultExpanded={true}>
+      <header className="sticky top-14 lg:top-0 z-30 border-b border-gray-200 bg-white">
+        <div className="px-4 md:px-6 lg:px-8 py-4 md:py-5 lg:py-6">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">
+            {pageTitle}
+          </h1>
+          {pageSubtitle && (
+            <p className="text-gray-500 mt-1 text-sm md:text-base">
+              {pageSubtitle}
+            </p>
+          )}
+        </div>
+      </header>
+
+      <main className="flex-1 overflow-y-auto">
+        <div className="p-4 md:p-6 lg:p-8">{children}</div>
+      </main>
+    </SidebarLayout>
   );
 }

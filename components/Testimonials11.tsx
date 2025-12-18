@@ -254,7 +254,7 @@ const VideoTestimonial = ({ i }: { i: number }) => {
     >
       <div className="relative w-full">
         {isLoading && (
-          <span className="z-40 !h-24 !w-24 !bg-gray-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 loading loading-ring"></span>
+          <span className="z-40 w-24 h-24 bg-gray-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-gray-200 border-t-blue-500 animate-spin"></span>
         )}
         <video
           className="w-full"
@@ -324,13 +324,13 @@ const VideoTestimonial = ({ i }: { i: number }) => {
                 <p className="text-gray-50 font-medium drop-shadow">
                   {testimonial.name}
                 </p>
-                <div className="rating">
+                <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="w-5 h-5 text-accent drop-shadow"
+                      className="w-5 h-5 text-yellow-500 drop-shadow"
                       key={i}
                     >
                       <path
@@ -347,7 +347,7 @@ const VideoTestimonial = ({ i }: { i: number }) => {
         </div>
       </div>
 
-      <div className="relative z-20 bg-accent text-accent-content text-base leading-tight font-medium p-4 select-none">
+      <div className="relative z-20 bg-blue-500 text-white text-base leading-tight font-medium p-4 select-none">
         <p>&quot;{testimonial.text}&quot;</p>
       </div>
     </li>

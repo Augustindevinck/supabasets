@@ -10,7 +10,7 @@ const Pricing = () => {
     <section className="bg-base-200 overflow-hidden" id="pricing">
       <div className="py-24 px-8 max-w-5xl mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
-          <p className="font-medium text-primary mb-8">Pricing</p>
+          <p className="font-medium text-blue-500 mb-8">Pricing</p>
           <h2 className="font-bold text-3xl lg:text-5xl tracking-tight">
             Save hours of repetitive code and ship faster!
           </h2>
@@ -22,7 +22,7 @@ const Pricing = () => {
               {plan.isFeatured && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                   <span
-                    className={`badge text-xs text-primary-content font-semibold border-0 bg-primary`}
+                    className={`badge text-xs text-white font-semibold border-0 bg-blue-500`}
                   >
                     POPULAR
                   </span>
@@ -31,7 +31,7 @@ const Pricing = () => {
 
               {plan.isFeatured && (
                 <div
-                  className={`absolute -inset-[1px] rounded-[9px] bg-primary z-10`}
+                  className={`absolute -inset-[1px] rounded-[9px] bg-blue-500 z-10`}
                 ></div>
               )}
 
@@ -40,7 +40,7 @@ const Pricing = () => {
                   <div>
                     <p className="text-lg lg:text-xl font-bold">{plan.name}</p>
                     {plan.description && (
-                      <p className="text-base-content/80 mt-2">
+                      <p className="text-gray-600 mt-2">
                         {plan.description}
                       </p>
                     )}
@@ -50,8 +50,8 @@ const Pricing = () => {
                   {plan.priceAnchor && (
                     <div className="flex flex-col justify-end mb-[4px] text-lg ">
                       <p className="relative">
-                        <span className="absolute bg-base-content h-[1.5px] inset-x-0 top-[53%]"></span>
-                        <span className="text-base-content/80">
+                        <span className="absolute bg-gray-800 h-[1.5px] inset-x-0 top-[53%]"></span>
+                        <span className="text-gray-600">
                           ${plan.priceAnchor}
                         </span>
                       </p>
@@ -61,7 +61,7 @@ const Pricing = () => {
                     ${plan.price}
                   </p>
                   <div className="flex flex-col justify-end mb-[4px]">
-                    <p className="text-xs text-base-content/60 uppercase font-semibold">
+                    <p className="text-xs text-gray-500 uppercase font-semibold">
                       USD
                     </p>
                   </div>
@@ -91,7 +91,7 @@ const Pricing = () => {
                 <div className="space-y-2">
                   <ButtonCheckout priceId={plan.priceId} />
 
-                  <p className="flex items-center justify-center gap-2 text-sm text-center text-base-content/80 font-medium relative">
+                  <p className="flex items-center justify-center gap-2 text-sm text-center text-gray-600 font-medium relative">
                     Pay once. Access forever.
                   </p>
                 </div>

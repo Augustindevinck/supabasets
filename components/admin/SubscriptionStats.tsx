@@ -17,8 +17,8 @@ export default function SubscriptionStats({ stats, isLoading }: SubscriptionStat
     return (
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {[...Array(4)].map((_, i) => (
-          <div key={i} className="card bg-base-200 animate-pulse">
-            <div className="card-body p-4">
+          <div key={i} className="bg-base-200 rounded-lg animate-pulse">
+            <div className="p-4">
               <div className="h-4 bg-base-300 rounded w-20 mb-2"></div>
               <div className="h-8 bg-base-300 rounded w-16"></div>
             </div>
@@ -40,37 +40,37 @@ export default function SubscriptionStats({ stats, isLoading }: SubscriptionStat
   return (
     <div className="mb-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div className="card bg-base-200">
-          <div className="card-body p-4">
+        <div className="bg-base-200 rounded-lg">
+          <div className="p-4">
             <p className="text-sm text-base-content/60">Total utilisateurs</p>
             <p className="text-2xl font-bold">{stats.total}</p>
           </div>
         </div>
 
-        <div className="card bg-gradient-blue-primary text-white">
-          <div className="card-body p-4">
+        <div className="bg-gradient-blue-primary text-white rounded-lg">
+          <div className="p-4">
             <p className="text-sm text-white/80">Abonnés</p>
             <p className="text-2xl font-bold">{stats.subscribed}</p>
           </div>
         </div>
 
-        <div className="card bg-base-200">
-          <div className="card-body p-4">
+        <div className="bg-base-200 rounded-lg">
+          <div className="p-4">
             <p className="text-sm text-base-content/60">Non abonnés</p>
             <p className="text-2xl font-bold">{stats.nonSubscribed}</p>
           </div>
         </div>
 
-        <div className="card bg-base-200">
-          <div className="card-body p-4">
+        <div className="bg-base-200 rounded-lg">
+          <div className="p-4">
             <p className="text-sm text-base-content/60">Taux de conversion</p>
             <p className="text-2xl font-bold">{stats.conversionRate}%</p>
           </div>
         </div>
       </div>
 
-      <div className="card bg-base-200">
-        <div className="card-body p-6">
+      <div className="bg-base-200 rounded-lg">
+        <div className="p-6">
           <h3 className="text-lg font-semibold mb-4">Répartition des abonnements</h3>
           
           <div className="flex flex-col md:flex-row items-center gap-6">

@@ -71,7 +71,7 @@ export default function Settings() {
     return (
       <DashboardLayout pageTitle="Settings">
         <div className="flex items-center justify-center h-full">
-          <span className="loading loading-spinner loading-lg"></span>
+          <span className="loading loading-lg"></span>
         </div>
       </DashboardLayout>
     );
@@ -87,34 +87,34 @@ export default function Settings() {
                   <h2 className="card-title text-xl mb-6">Profil</h2>
                   
                   <form onSubmit={handleSaveName} className="space-y-4">
-                    <div className="form-control w-full">
-                      <label className="label">
-                        <span className="label-text font-medium">Email</span>
+                    <div className="w-full">
+                      <label className="block py-1">
+                        <span className="text-sm font-medium">Email</span>
                       </label>
                       <input
                         type="email"
                         value={user?.email || ""}
                         disabled
-                        className="input input-bordered w-full bg-base-100"
+                        className="input w-full bg-base-100"
                       />
-                      <label className="label">
-                        <span className="label-text-alt text-base-content/50">Adresse email du compte</span>
+                      <label className="block py-1">
+                        <span className="text-xs text-base-content/50">Adresse email du compte</span>
                       </label>
                     </div>
 
-                    <div className="form-control w-full">
-                      <label className="label">
-                        <span className="label-text font-medium">Nom</span>
+                    <div className="w-full">
+                      <label className="block py-1">
+                        <span className="text-sm font-medium">Nom</span>
                       </label>
                       <input
                         type="text"
                         placeholder="Votre nom"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="input input-bordered w-full"
+                        className="input w-full"
                       />
-                      <label className="label">
-                        <span className="label-text-alt text-base-content/50">Comment vous êtes identifié dans l'app</span>
+                      <label className="block py-1">
+                        <span className="text-xs text-base-content/50">Comment vous êtes identifié dans l'app</span>
                       </label>
                     </div>
 
@@ -124,7 +124,7 @@ export default function Settings() {
                       className="btn btn-primary w-full"
                     >
                       {isSaving ? (
-                        <span className="loading loading-spinner loading-xs"></span>
+                        <span className="loading loading-sm"></span>
                       ) : (
                         "Sauvegarder"
                       )}
@@ -150,8 +150,8 @@ export default function Settings() {
                       Changer le mot de passe
                     </button>
                     
-                    <label className="label">
-                      <span className="label-text-alt text-base-content/50">Un lien de réinitialisation sera envoyé à votre email</span>
+                    <label className="block py-1">
+                      <span className="text-xs text-base-content/50">Un lien de réinitialisation sera envoyé à votre email</span>
                     </label>
                   </div>
                 </div>
@@ -173,8 +173,8 @@ export default function Settings() {
                     Supprimer mon compte
                   </button>
                   
-                  <label className="label">
-                    <span className="label-text-alt text-error/70">Cette action ne peut pas être annulée</span>
+                  <label className="block py-1">
+                    <span className="text-xs text-error/70">Cette action ne peut pas être annulée</span>
                   </label>
                 </div>
               </div>

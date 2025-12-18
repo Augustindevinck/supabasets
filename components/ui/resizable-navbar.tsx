@@ -146,7 +146,7 @@ export const NavItems = memo(({ items, className, onItemClick }: NavItemsProps) 
           key={item.link}
           onMouseEnter={() => handleMouseEnter(idx)}
           onClick={onItemClick}
-          className="relative px-4 py-2 rounded-full transition-colors hover:text-primary"
+          className="relative px-4 py-2 rounded-full transition-colors hover:text-blue-600"
           href={item.link}
           aria-label={item.name}
         >
@@ -250,7 +250,7 @@ export const MobileNavToggle = memo(({ isOpen, onClick }: MobileNavToggleProps) 
   return (
     <button
       onClick={onClick}
-      className="p-2 -mr-2 text-current dark:text-white transition-colors hover:text-primary"
+      className="p-2 -mr-2 text-current dark:text-white transition-colors hover:text-blue-600"
       aria-label={isOpen ? "Close menu" : "Open menu"}
       aria-expanded={isOpen}
       aria-controls="mobile-menu"
@@ -276,7 +276,7 @@ export const NavbarLogo = memo(({ className }: NavbarLogoProps) => {
       href="/"
       className={cn(
         "relative z-20 flex items-center space-x-2 px-2 py-1 text-lg font-extrabold tracking-tight",
-        "transition-colors hover:text-primary",
+        "transition-colors hover:text-blue-600",
         className
       )}
       title="Home"

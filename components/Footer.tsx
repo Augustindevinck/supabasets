@@ -17,7 +17,7 @@ const Lightning = () => (
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 border-t border-base-content/10">
+    <footer className="bg-base-200 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-8 py-24">
         <div className=" flex lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
@@ -32,10 +32,10 @@ const Footer = () => {
               </strong>
             </Link>
 
-            <p className="mt-3 text-sm text-base-content/80">
+            <p className="mt-3 text-sm text-gray-600">
               {config.appDescription}
             </p>
-            <p className="mt-3 text-sm text-base-content/60">
+            <p className="mt-3 text-sm text-gray-500">
               Copyright © {new Date().getFullYear()} - All rights reserved
             </p>
 
@@ -47,19 +47,19 @@ const Footer = () => {
               </div>
 
               <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
-                <Link href="/legal-mentions" className="link link-hover">
+                <Link href="/legal-mentions" className="hover:underline">
                   Mentions légales
                 </Link>
-                <Link href="/privacy-policy" className="link link-hover">
+                <Link href="/privacy-policy" className="hover:underline">
                   Politique de confidentialité
                 </Link>
-                <Link href="/cookie-policy" className="link link-hover">
+                <Link href="/cookie-policy" className="hover:underline">
                   Politique de cookies
                 </Link>
-                <Link href="/cgv" className="link link-hover">
+                <Link href="/cgv" className="hover:underline">
                   Conditions Générales de Vente
                 </Link>
-                <Link href="/tos" className="link link-hover">
+                <Link href="/tos" className="hover:underline">
                   Conditions Générales d'Utilisation
                 </Link>
               </div>
